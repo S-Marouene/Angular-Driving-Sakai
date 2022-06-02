@@ -1,10 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { API } from '../api/appconfig';
 
 import { Product } from '../api/product';
+import { User } from '../model/users';
 
 @Injectable()
-export class ProductService {
+export class UserService {
+
+
 
     constructor(private http: HttpClient) { }
 
@@ -28,6 +33,15 @@ export class ProductService {
         .then(res => res.data as Product[])
         .then(data => data);
     }
+
+    getUsers(): Observable<User[]> {
+        return this.http.get<User[]>(API.ListUsers)
+        /* .toPromise()
+        .then(res => res.data as Product[])
+        .then(data => data);
+ */    }
+
+
 
     getProductsMixed() {
         return this.http.get<any>('assets/demo/data/products-mixed.json')

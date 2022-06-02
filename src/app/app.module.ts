@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -149,6 +149,9 @@ import { ErrorComponent } from './components/error/error.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessComponent } from './components/access/access.component';
 import { TestComponentComponent } from './components/calendrier/test-component.component';
+import { AuthInterceptor } from './shared-auth/auth.interceptor';
+import { UsersComponent } from './components/users/users.component';
+import { UserService } from './service/users.service';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -292,11 +295,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         NotfoundComponent,
         AccessComponent,
         TestComponentComponent,
+        UsersComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MenuService, ConfigService
+        PhotoService, ProductService, MenuService, ConfigService,UserService,
+        {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor,multi: true},
     ],
     bootstrap: [AppComponent]
 

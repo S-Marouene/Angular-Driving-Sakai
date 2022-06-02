@@ -57,12 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
       }}
 
-  ngOnInit(): void {
-    this.config = this.configService.config;
-    this.subscription = this.configService.configUpdate$.subscribe(config => {
-      this.config = config;
-    });
-  }
+
 
   onSubmit() {
     const form=this.loginForm.value ;
@@ -77,15 +72,18 @@ export class LoginComponent implements OnInit, OnDestroy {
         () => {
           this.authState.setAuthState(true);
           this.loginForm.reset();
-          this.router.navigate(['dashboard']).then(() => {
-            window.location.reload();
-          });
+          this.router.navigate(['dashboard']);
         }
       );
   }
+  ngOnInit(): void {
+    this.config = this.configService.config;
+    this.subscription = this.configService.configUpdate$.subscribe(config => {
+      this.config = config;
+    });
+  }
   // Handle response
   responseHandler(data:any) {
-    console.log(data.access_token);
     this.token.handleData(data.access_token);
   }
 

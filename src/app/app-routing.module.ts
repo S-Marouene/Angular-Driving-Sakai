@@ -29,6 +29,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessComponent } from './components/access/access.component';
 import { TestComponentComponent } from './components/calendrier/test-component.component';
+import { UsersComponent } from './components/users/users.component';
 @NgModule({
     imports: [
         RouterModule.forRoot([
@@ -38,7 +39,7 @@ import { TestComponentComponent } from './components/calendrier/test-component.c
                 children: [
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
                     {path: 'dashboard', component: DashboardComponent},
-                    {path: 'uikit/formlayout', component: FormLayoutComponent},
+                    {path: 'uikit/formlayout', component:  UsersComponent},
                     {path: 'uikit/test', component: TestComponentComponent},
                     {path: 'uikit/input', component: InputComponent},
                     {path: 'uikit/floatlabel', component: FloatLabelComponent},
@@ -55,7 +56,7 @@ import { TestComponentComponent } from './components/calendrier/test-component.c
                     {path: 'uikit/misc', component: MiscComponent},
                     {path: 'uikit/charts', component: ChartsComponent},
                     {path: 'uikit/file', component: FileComponent},
-                    {path: 'pages/crud', component: CrudComponent},
+                    {path: 'pages/crud', component:FormLayoutComponent},
                     {path: 'pages/timeline', component: TimelineComponent},
                     {path: 'pages/empty', component: EmptyComponent},
                     {path: 'icons', component: IconsComponent},

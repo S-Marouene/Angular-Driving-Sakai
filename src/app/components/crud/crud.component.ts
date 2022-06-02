@@ -34,7 +34,9 @@ export class CrudComponent implements OnInit {
                 private confirmationService: ConfirmationService) {}
 
     ngOnInit() {
-        this.productService.getProducts().then(data => this.products = data);
+
+
+        this.productService.getFakeUsers().then(data => this.products = data);
 
         this.cols = [
             {field: 'name', header: 'Name'},

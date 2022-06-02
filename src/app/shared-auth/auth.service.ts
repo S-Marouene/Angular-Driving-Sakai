@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API } from 'src/app/api/appconfig';
+import { TokenService } from './token.service';
 
 
 export class User {
@@ -16,7 +17,9 @@ export class User {
 })
 export class AuthService {
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient,
+        private Token:TokenService,
+        ) {}
     // User registration
     register(user: User): Observable<any> {
       return this.http.post(API.usersRegister, user);
@@ -27,6 +30,6 @@ export class AuthService {
     }
     // Access user profile
     profileUser(): Observable<any> {
-      return this.http.get(API.userProfile);
+      return this.http.get('http://127.0.0.1/Driving/backend/api/auth/user-profile');
     }
 }
