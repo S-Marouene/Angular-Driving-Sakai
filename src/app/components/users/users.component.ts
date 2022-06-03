@@ -45,11 +45,7 @@ export class UsersComponent implements OnInit {
 
     submitted = false;
 
-    form: FormGroup = new FormGroup({
-        name: new FormControl(''),
-        firstname: new FormControl(''),
-        email: new FormControl('')
-    });
+    form: FormGroup = new FormGroup({});
 
     constructor(
         private userservice: UserService,
@@ -83,7 +79,7 @@ export class UsersComponent implements OnInit {
             { field: 'price', header: 'Price' },
             { field: 'category', header: 'Category' },
             { field: 'rating', header: 'Reviews' },
-            { field: 'inventoryStatus', header: 'Status' },
+            { field: 'status', header: 'Status' },
         ];
 
         this.statuses = [
@@ -94,11 +90,11 @@ export class UsersComponent implements OnInit {
         this.form = this.fb.group(
             {
                 name: ['', Validators.required],
-                firstname: [
+                fname: [
                     '',
                     [
                         Validators.required,
-                        Validators.minLength(6),
+                        Validators.minLength(2),
                         Validators.maxLength(20),
                     ],
                 ],
@@ -107,12 +103,13 @@ export class UsersComponent implements OnInit {
                     '',
                     [
                         Validators.required,
-                        Validators.minLength(6),
+                        Validators.minLength(2),
                         Validators.maxLength(40),
                     ],
                 ],
                 password_confirmation: ['', Validators.required],
-                role: ['VISITEUR', Validators.required]
+                role: ['VISITEUR', Validators.required],
+                status: ['', Validators.required]
             }  ,
             {
               validators: [Validation.match('password', 'password_confirmation')]
@@ -129,8 +126,9 @@ export class UsersComponent implements OnInit {
             return;
         }
 
+        console.log(this.form['status'].valueOf());
 
-        this.authService.register(this.form.value).subscribe(
+         this.authService.register(this.form.value).subscribe(
             (result) => {
               console.log(result);
             },
@@ -148,7 +146,6 @@ export class UsersComponent implements OnInit {
 
             }
           );
-
 
     }
 
@@ -176,12 +173,6 @@ export class UsersComponent implements OnInit {
         this.submitted = true;
         console.log(this.user);
     }
-
-
-
-
-
-
 
 
 }

@@ -39,6 +39,7 @@ import { UsersComponent } from './components/users/users.component';
                 children: [
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
                     {path: 'dashboard', component: DashboardComponent},
+                    {path: 'uikit/testcrud', component:  CrudComponent},
                     {path: 'uikit/formlayout', component:  UsersComponent},
                     {path: 'uikit/test', component: TestComponentComponent},
                     {path: 'uikit/input', component: InputComponent},

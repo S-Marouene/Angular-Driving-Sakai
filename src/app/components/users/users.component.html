@@ -1,4 +1,4 @@
-<div class="grid" *ngIf="products">
+<!--div class="grid" *ngIf="products">
     <div class="col-12">
         <div class="card">
             <p-toast></p-toast>
@@ -52,7 +52,7 @@
                         </th>
                         <th pSortableColumn="rating">Reviews <p-sortIcon field="rating"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon>
+                        <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon>
                         </th>
                         <th></th>
                     </tr>
@@ -86,7 +86,7 @@
                         </td>
                         <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Status</span>
                             <span
-                                [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span>
+                                [class]="'product-badge status-' + (product.status ? product.status.toLowerCase() : '')">{{product.status}}</span>
                         </td>
                         <td>
                             <div class="flex">
@@ -122,10 +122,10 @@
                 <div class="field">
                     <label for="status">Inventory Status</label>
                     <p-dropdown id="status" [options]="statuses" optionLabel="label"
-                        [(ngModel)]="product.inventoryStatus" placeholder="Select a Status">
+                        [(ngModel)]="product.status" placeholder="Select a Status">
                         <ng-template pTemplate="selectedItem">
-                            <span *ngIf="product && product.inventoryStatus"
-                                [class]="'product-badge status-' + product.inventoryStatus.value">{{product.inventoryStatus.label}}</span>
+                            <span *ngIf="product && product.status"
+                                [class]="'product-badge status-' + product.status.value">{{product.status.label}}</span>
                         </ng-template>
                         <ng-template let-status pTemplate="status">
                             <span [class]="'product-badge status-' + status.value.toLowerCase()">{{status.label}}</span>
@@ -206,7 +206,7 @@
             </ng-template>
         </p-dialog>
     </div>
-</div>
+</div-->
 
 
 
@@ -235,9 +235,9 @@
             </p-toolbar>
 
             <p-table #dt [value]="users" [columns]="cols" responsiveLayout="scroll" [rows]="10"
-                [globalFilterFields]="['name','country.name','representative.name','status']" [rows]="10"
+                [globalFilterFields]="['name','fname','role','email','status']" [rows]="10"
                 [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                currentPageReportTemplate="Afficher {first} à {last} de {totalRecords} records"
                 [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
@@ -245,7 +245,7 @@
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                                placeholder="Search..." />
+                                placeholder="Recherche..." />
                         </span>
                     </div>
                 </ng-template>
@@ -255,7 +255,9 @@
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
 
-                        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon>
+                        <th pSortableColumn="name">Nom <p-sortIcon field="name"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="name">Prénom <p-sortIcon field="fname"></p-sortIcon>
                         </th>
                         <!-- <th>Image</th> -->
                         <th pSortableColumn="email">E-mail <p-sortIcon field="email"></p-sortIcon>
@@ -264,7 +266,7 @@
                         </th>
                         <th pSortableColumn="rating">Reviews <p-sortIcon field="rating"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon>
+                        <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon>
                         </th>
                         <th></th>
                     </tr>
@@ -272,29 +274,38 @@
                 <ng-template pTemplate="body" let-actualUser>
                     <tr>
                         <td>
-                            <p-tableCheckbox [value]="user"></p-tableCheckbox>
+                            <p-tableCheckbox [value]="actualUser"></p-tableCheckbox>
                         </td>
 
-                        <td style="width:14%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
+                        <td style="width:18%; min-width:10rem;">
+                            <span class="p-column-title">Nom</span>
                             {{actualUser?.name}}
                         </td>
-                        <!-- <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
+                        <td style="width:18%; min-width:10rem;">
+                            <span class="p-column-title">Prénom</span>
+                            {{actualUser?.fname}}
+                        </td>
+                        <!--td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
                             <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name" width="100" class="shadow-4" />
-                        </td> -->
-                        <td style="width:14%; min-width:8rem;">
+                        </td-->
+                        <td style="width:18%; min-width:8rem;">
                             <span class="p-column-title">E-mail</span>
                             {{actualUser?.email }}
                         </td>
-                        <td style="width:14%; min-width:10rem;">
+                        <td style="width:18%; min-width:10rem;">
                             <span class="p-column-title">Role</span>
                             {{actualUser?.role}}
                         </td>
-                        <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Reviews</span>
+                        <td style="width:18%; min-width: 10rem;"><span class="p-column-title">Reviews</span>
                             <p-rating [ngModel]="actualUser?.id" [readonly]="true" [cancel]="false"></p-rating>
                         </td>
+                        <td style="width:18%; min-width:10rem;">
+                            <span class="p-column-title">status</span>
+                            {{actualUser?.status}}
+                        </td>
+
                         <!-- <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Status</span>
-                            <span [class]="'product-badge status-' + (actualUser?.id ? product.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span>
+                            <span [class]="'product-badge status-' + (actualUser?.id ? product.status.toLowerCase() : '')">{{product.status}}</span>
                         </td> -->
                         <td>
                             <div class="flex">
@@ -327,12 +338,12 @@
                         </div>
                     </div>
                     <div class="field">
-                        <label>Nom </label>
-                        <input class="form-control" type="text" formControlName="firstname"
-                            [ngClass]="{ 'is-invalid': submitted && f['firstname'].errors }" />
-                        <div *ngIf="submitted && f['firstname'].errors" class="invalid-feedback">
-                            <div *ngIf="f['firstname'].errors['required']">Firstname is required</div>
-                            <div *ngIf="f['firstname'].errors['minlength']">
+                        <label>Prénom </label>
+                        <input class="form-control" type="text" formControlName="fname"
+                            [ngClass]="{ 'is-invalid': submitted && f['fname'].errors }" />
+                        <div *ngIf="submitted && f['fname'].errors" class="invalid-feedback">
+                            <div *ngIf="f['fname'].errors['required']">fname is required</div>
+                            <div *ngIf="f['fname'].errors['minlength']">
                                 Username must be at least 6 characters
                             </div>
                         </div>
@@ -347,6 +358,22 @@
                             <div *ngIf="f['email'].errors['email']">Email is invalid</div>
                         </div>
                     </div>
+
+                    <div class="field">
+                        <label for="status">User Status</label>
+                        <p-dropdown [options]="statuses" optionLabel="label"
+                        formControlName="status" placeholder="Select Status">
+                            <!-- <ng-template pTemplate="selectedItem">
+                                <span *ngIf="user && user.status"
+                                    [class]="'user-badge status-' + user.status.value">{{user.status.label}}</span>
+                            </ng-template> -->
+                            <ng-template let-status pTemplate="status">
+                                <span [class]="'user-badge status-' + status.value.toLowerCase()" formControlName="status">{{status.label}}</span>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+
+
 
                     <div class="field">
                         <label>Mot de passe</label>
@@ -376,6 +403,8 @@
                             </div>
                         </div>
                     </div>
+
+
 
 
                 </ng-template>

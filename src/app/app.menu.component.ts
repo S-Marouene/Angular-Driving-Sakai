@@ -37,6 +37,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Auto-Ecole',
                 items: [
                     {label: 'Calendrier', icon: 'pi pi-fw pi-calendar', routerLink: ['/uikit/test']},
+                    {label: 'test Crud', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/testcrud']},
                     {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout']},
                     {label: 'Code', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
                     {label: 'Conduite', icon: 'pi pi-fw pi-bookmark', routerLink: ['/pages/crud']},
