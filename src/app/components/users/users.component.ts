@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../api/product';
-import { ProductService } from '../../service/productservice';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { UserService } from '../../service/users.service';
 import { User } from 'src/app/model/users';
@@ -22,20 +20,12 @@ import Validation from 'src/app/utils/validation';
 })
 export class UsersComponent implements OnInit {
     errors: any = null;
-
     UserDialog: boolean;
+    updateUserDialog:boolean;
 
-    deleteProductDialog: boolean = false;
-
-    deleteProductsDialog: boolean = false;
-
-    products: Product[];
-
-    product: Product;
+    deleteUserDialog: boolean = false;
 
     user: User;
-
-    selectedProducts: Product[];
 
     cols: any[];
     statuses: any[];
@@ -50,7 +40,6 @@ export class UsersComponent implements OnInit {
     constructor(
         private userservice: UserService,
         private messageService: MessageService,
-        private confirmationService: ConfirmationService,
         private userService: UserService,
         public authService: AuthService,
         public fb: FormBuilder,
@@ -58,21 +47,7 @@ export class UsersComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.userService.getUsers().subscribe({
-            next: (listUser) => {
-                this.users = listUser;
-
-            },
-            error: () => {
-                console.log(
-                    `Problème au niveau du serveur, attention les données sont fake `
-                );
-
-                this.userservice
-                    .getFakeUsers()
-                    .then((data) => (this.products = data));
-            },
-        });
+        this.refreshListUser();
 
         this.cols = [
             { field: 'name', header: 'Name' },
@@ -117,18 +92,34 @@ export class UsersComponent implements OnInit {
         );
     }
 
+    refreshListUser(){
+        this.userService.getUsers().subscribe({
+            next: (listUser) => {
+                this.users = listUser;
+
+            },
+            error: () => {
+                console.log(
+                    `Problème au niveau du serveur, attention les données sont fake `
+                );
+
+                this.userservice
+                    .getFakeUsers()
+                    //.then((data) => (this.users = data));
+            },
+        });
+    }
 
     onSubmit() {
 
         this.submitted = true;
-
         if (this.form.invalid) {
+            console.log("form invalid");
             return;
         }
 
-        console.log(this.form['status'].valueOf());
-
-         this.authService.register(this.form.value).subscribe(
+        this.form.value.status=this.form.value.status['value'];
+        this.authService.register(this.form.value).subscribe(
             (result) => {
               console.log(result);
             },
@@ -137,17 +128,45 @@ export class UsersComponent implements OnInit {
               this.messageService.add({severity: 'error', summary: 'danger', detail: 'The form is not valid, please check the fields' , life: 3000});
             },
             () => {
-
-              this.users.push(this.form.value);
-              this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Users Created', life: 3000});
-              this.users = [...this.users];
-              this.UserDialog = false;
-              this.user = {};
-
+                this.refreshListUser();
+                this.UserDialog = false;
+                this.user = {};
             }
           );
-
     }
+
+    deleteUser(user: User) {
+        this.deleteUserDialog = true;
+        this.user = {...user};
+    }
+
+    confirmDelete(){
+        this.deleteUserDialog = false;
+        this.userService.deleteUserService(this.user).subscribe(
+            data => {
+              console.log("deleted");
+              this.refreshListUser();
+            }
+          );
+    }
+
+    editUser(user: User) {
+        this.user = {...user};
+        this.updateUserDialog = true;
+    }
+
+    UpdateUser() {
+        this.submitted = true;
+        this.user.status=this.user.status['value'];
+
+        this.userService.updateUser(this.user).subscribe(
+            data => {
+              this.updateUserDialog = false;
+              this.refreshListUser();
+            }
+        );
+    }
+
 
     get f(): { [key: string]: AbstractControl } {
         return this.form.controls;
@@ -166,13 +185,11 @@ export class UsersComponent implements OnInit {
 
     hideDialog() {
         this.UserDialog = false;
+        this.updateUserDialog =false;
         this.submitted = false;
     }
 
-    saveProduct() {
-        this.submitted = true;
-        console.log(this.user);
-    }
+
 
 
 }

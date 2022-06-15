@@ -9,9 +9,31 @@ import { User } from '../model/users';
 @Injectable()
 export class UserService {
 
-
-
     constructor(private http: HttpClient) { }
+
+    getFakeUsers() {
+        return this.http.get<any>('assets/demo/data/products.json')
+        .toPromise()
+        .then(res => res.data as Product[])
+        .then(data => data);
+    }
+
+    getUsers(): Observable<User[]> {
+        return this.http.get<User[]>(API.ListUsers)
+    }
+
+    deleteUserService(user:any)
+    {
+      return this.http.delete(API.DeleteUser+user.id);
+    }
+
+
+    updateUser(user:any)
+    {
+      return this.http.put(API.UpdateUser+user.id,user);
+    }
+
+
 
     getProductsSmall() {
         return this.http.get<any>('assets/demo/data/products-small.json')
@@ -27,19 +49,7 @@ export class UserService {
         .then(data => data);
     }
 
-    getFakeUsers() {
-        return this.http.get<any>('assets/demo/data/products.json')
-        .toPromise()
-        .then(res => res.data as Product[])
-        .then(data => data);
-    }
 
-    getUsers(): Observable<User[]> {
-        return this.http.get<User[]>(API.ListUsers)
-        /* .toPromise()
-        .then(res => res.data as Product[])
-        .then(data => data);
- */    }
 
 
 
