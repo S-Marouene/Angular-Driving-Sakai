@@ -30,6 +30,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessComponent } from './components/access/access.component';
 import { TestComponentComponent } from './components/calendrier/test-component.component';
 import { UsersComponent } from './components/users/users.component';
+import { AuthGuard } from './shared-auth/guard/auth.guard';
 @NgModule({
     imports: [
         RouterModule.forRoot([
@@ -38,7 +39,7 @@ import { UsersComponent } from './components/users/users.component';
                 path: '', component: AppMainComponent,
                 children: [
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-                    {path: 'dashboard', component: DashboardComponent},
+                    {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
                     {path: 'uikit/testcrud', component:  CrudComponent},
                     {path: 'uikit/formlayout', component:  UsersComponent},
                     {path: 'uikit/test', component: TestComponentComponent},
