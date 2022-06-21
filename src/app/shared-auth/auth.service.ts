@@ -2,15 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API } from 'src/app/api/appconfig';
+import { User } from '../model/users.model';
 import { TokenService } from './token.service';
 
 
-export class User {
+/* export class User {
     name!: String;
     email!: String;
     password!: String;
     password_confirmation!: String;
-  }
+  } */
 
 @Injectable({
   providedIn: 'root'

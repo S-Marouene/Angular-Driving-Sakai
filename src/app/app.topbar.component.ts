@@ -6,12 +6,7 @@ import { Router } from '@angular/router';
 import { AuthStateService } from './shared-auth/auth-state.service';
 import { TokenService } from './shared-auth/token.service';
 import { AuthService} from './shared-auth/auth.service';
-
-export class User {
-    name: any;
-    email: any;
-    role : any;
-  }
+import { User } from './model/users.model';
 
 @Component({
     selector: 'app-topbar',

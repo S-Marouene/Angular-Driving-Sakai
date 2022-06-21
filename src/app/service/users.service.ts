@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { API } from '../api/appconfig';
 
 import { Product } from '../api/product';
-import { User } from '../model/users';
+import { User } from '../model/users.model';
 
 @Injectable()
 export class UserService {
@@ -32,8 +32,6 @@ export class UserService {
     {
       return this.http.put(API.UpdateUser+user.id,user);
     }
-
-
 
     getProductsSmall() {
         return this.http.get<any>('assets/demo/data/products-small.json')

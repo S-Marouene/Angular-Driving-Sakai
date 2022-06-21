@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { UserService } from '../../service/users.service';
-import { User } from 'src/app/model/users';
+import { User } from 'src/app/model/users.model';
 import { AuthService } from 'src/app/shared-auth/auth.service';
 import {
     AbstractControl,

@@ -152,6 +152,7 @@ import { TestComponentComponent } from './components/calendrier/test-component.c
 import { AuthInterceptor } from './shared-auth/auth.interceptor';
 import { UsersComponent } from './components/users/users.component';
 import { UserService } from './service/users.service';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -250,7 +251,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         VirtualScrollerModule,
         AppCodeModule,
         StyleClassModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxPermissionsModule.forRoot()
     ],
     declarations: [
         AppComponent,

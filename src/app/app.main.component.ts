@@ -4,6 +4,11 @@ import { AppComponent } from './app.component';
 import { ConfigService } from './service/app.config.service';
 import { AppConfig } from './api/appconfig';
 import { Subscription } from 'rxjs';
+import { NgxPermissionsService } from 'ngx-permissions';
+import { HttpClient } from '@angular/common/http';
+
+import { AuthService } from './shared-auth/auth.service';
+import { User } from './model/users.model';
 
 @Component({
     selector: 'app-main',
@@ -53,12 +58,42 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
 
     subscription: Subscription;
 
-    constructor(public renderer: Renderer2, public app: AppComponent, public configService: ConfigService) { }
+    UserProfile!: User;
+
+
+    constructor(public renderer: Renderer2, public app: AppComponent,
+        public configService: ConfigService,
+        private permissionsService: NgxPermissionsService,
+        private http: HttpClient,
+        public authService: AuthService
+        ) { }
 
     ngOnInit() {
+
+
         this.config = this.configService.config;
         this.subscription = this.configService.configUpdate$.subscribe(config => this.config = config);
+
+
+        this.authService.profileUser().subscribe((data: any) => {
+            this.UserProfile = data;
+
+            const perm = [this.UserProfile.role];
+            console.log(perm);
+
+            this.permissionsService.loadPermissions(perm);
+
+        })
+
+
+
+        /* this.http.get('dashboard').subscribe((permissions) => {
+        this.permissionsService.loadPermissions(permissions);
+        }) */
+
+
     }
+
 
     ngAfterViewInit() {
         // hides the overlay menu and top menu if outside is clicked
