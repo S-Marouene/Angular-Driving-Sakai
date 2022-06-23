@@ -7,6 +7,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/shared-auth/auth.service';
 import { TokenService } from 'src/app/shared-auth/token.service';
 import { AuthStateService } from 'src/app/shared-auth/auth-state.service';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
+import { diffDates } from '@fullcalendar/angular';
 
 
 @Component({
@@ -56,7 +59,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           password: [],
         });
       }}
-
+    user:any;
 
 
   onSubmit() {
@@ -65,6 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.authService.signin(this.loginForm.value).subscribe(
         (result) => {
           this.responseHandler(result);
+
         },
         (error) => {
           this.errors = error.error;
@@ -72,11 +76,20 @@ export class LoginComponent implements OnInit, OnDestroy {
         () => {
           this.authState.setAuthState(true);
           this.loginForm.reset();
+          this.authService.updatemenu.next();
           this.router.navigate(['dashboard']);
         }
       );
   }
+
+
+
   ngOnInit(): void {
+
+    if(this.authState.userState.value){
+        this.router.navigate(['dashboard']);
+    }
+
     this.config = this.configService.config;
     this.subscription = this.configService.configUpdate$.subscribe(config => {
       this.config = config;
@@ -96,4 +109,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   Signin(){
       this.router.navigate(['dashboard']);
   }
+
+
 }

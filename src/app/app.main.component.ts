@@ -61,6 +61,8 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
     UserProfile!: User;
 
 
+
+
     constructor(public renderer: Renderer2, public app: AppComponent,
         public configService: ConfigService,
         private permissionsService: NgxPermissionsService,
@@ -69,31 +71,9 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
         ) { }
 
     ngOnInit() {
-
-
         this.config = this.configService.config;
         this.subscription = this.configService.configUpdate$.subscribe(config => this.config = config);
-
-
-        this.authService.profileUser().subscribe((data: any) => {
-            this.UserProfile = data;
-
-            const perm = [this.UserProfile.role];
-            console.log(perm);
-
-            this.permissionsService.loadPermissions(perm);
-
-        })
-
-
-
-        /* this.http.get('dashboard').subscribe((permissions) => {
-        this.permissionsService.loadPermissions(permissions);
-        }) */
-
-
     }
-
 
     ngAfterViewInit() {
         // hides the overlay menu and top menu if outside is clicked

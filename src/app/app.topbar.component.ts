@@ -25,12 +25,12 @@ export class AppTopBarComponent implements OnInit  {
         public authService: AuthService
     ) { }
     ngOnInit() {
-            this.authService.profileUser().subscribe((data: any) => {
+
+        this.authService.profileUser().subscribe((data: any) => {
             this.UserProfile = data;
-          });
+        });
 
-
-          this.tieredItems = [
+        this.tieredItems = [
             {
                 label: 'Customers',
                 icon: 'pi pi-fw pi-table',

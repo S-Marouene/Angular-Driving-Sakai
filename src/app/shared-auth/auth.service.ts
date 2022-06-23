@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { API } from 'src/app/api/appconfig';
 import { User } from '../model/users.model';
 import { TokenService } from './token.service';
@@ -29,8 +29,19 @@ export class AuthService {
     signin(user: User): Observable<any> {
       return this.http.post<any>(API.login, user);
     }
+
+    me(token:any): Observable<any> {
+        return this.http.post<any>('http://127.0.0.1/Driving/backend/api/auth/me',token);
+    }
+
     // Access user profile
     profileUser(): Observable<any> {
       return this.http.get('http://127.0.0.1/Driving/backend/api/auth/user-profile');
+    }
+
+    private _updatemenu = new Subject<void>();
+
+    get updatemenu() {
+        return this._updatemenu;
     }
 }

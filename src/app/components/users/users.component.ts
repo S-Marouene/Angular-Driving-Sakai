@@ -83,7 +83,7 @@ export class UsersComponent implements OnInit {
                     ],
                 ],
                 password_confirmation: ['', Validators.required],
-                role: ['VISITEUR', Validators.required],
+                role: ['user', Validators.required],
                 status: ['', Validators.required]
             }  ,
             {

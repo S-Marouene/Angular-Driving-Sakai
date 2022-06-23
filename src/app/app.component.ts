@@ -32,9 +32,7 @@ export class AppComponent {
 
         });
 
-        console.log(this.isSignedIn);
-        
-          this.primengConfig.ripple = true;
+        this.primengConfig.ripple = true;
         document.documentElement.style.fontSize = '14px';
     }
 }

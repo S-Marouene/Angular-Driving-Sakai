@@ -1,5 +1,8 @@
+import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AppMainComponent } from './app.main.component';
+import { AuthService } from './shared-auth/auth.service';
+import { TokenService } from './shared-auth/token.service';
 
 @Component({
     selector: 'app-menu',
@@ -9,7 +12,9 @@ import { AppMainComponent } from './app.main.component';
                 <li app-menu class="layout-menuitem-category" *ngFor="let item of model; let i = index;" [item]="item" [index]="i" [root]="true" role="none">
                     <div class="layout-menuitem-root-text" [attr.aria-label]="item.label">{{item.label}}</div>
                     <ul role="menu">
-                        <li app-menuitem *ngFor="let child of item.items" [item]="child" [index]="i" role="none"></li>
+                        <li app-menuitem *ngFor="let child of item.items" [item]="child" [index]="i" role="none" >
+
+                        </li>
                     </ul>
                 </li>
                 <!--a href="https://www.primefaces.org/primeblocks-ng/#/">
@@ -20,12 +25,41 @@ import { AppMainComponent } from './app.main.component';
     `
 })
 export class AppMenuComponent implements OnInit {
-
     model: any[];
+    displaySuperAdmin=false;
+    displayAdmin=false;
+    displayUser=false;
+    currentrole: any;
 
-    constructor(public appMain: AppMainComponent) { }
+    constructor(public appMain: AppMainComponent,
+        public authService: AuthService,
+        public tokenService:TokenService) { }
 
     ngOnInit() {
+        this.MenuDisplaybyRole()
+
+    }
+
+    onKeydown(event: KeyboardEvent) {
+        const nodeElement = (<HTMLDivElement> event.target);
+        if (event.code === 'Enter' || event.code === 'Space') {
+            nodeElement.click();
+            event.preventDefault();
+        }
+    }
+
+    MenuDisplaybyRole(){
+        this.authService.me(this.tokenService.getToken()).subscribe((data: any) => {
+            console.log("from me "+data['role'])
+            this.currentrole = data['role'];
+            this.displaySuperAdmin = (this.currentrole == 'super-admin');
+            this.displayAdmin = (this.currentrole == 'admin' || this.currentrole == 'super-admin');
+            this.displayUser = (this.currentrole == 'user' || this.currentrole == 'admin' || this.currentrole == 'super-admin')
+            this.GenerateMenu();
+        })
+    }
+
+    GenerateMenu(){
         this.model = [
             {
                 label: 'Accueil',
@@ -36,9 +70,9 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Auto-Ecole',
                 items: [
-                    {label: 'Calendrier', icon: 'pi pi-fw pi-calendar', routerLink: ['/uikit/test']},
-                    {label: 'test Crud', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/testcrud']},
-                    {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout']},
+                    {label: 'Calendrier', icon: 'pi pi-fw pi-calendar', routerLink: ['/uikit/test'],visible : this.displaySuperAdmin},
+                    {label: 'test Crud', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/testcrud'],visible :this.displayAdmin},
+                    {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout'],visible : this.displayUser},
                     {label: 'Code', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
                     {label: 'Conduite', icon: 'pi pi-fw pi-bookmark', routerLink: ['/pages/crud']},
                     {label: 'Recherche', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate']},
@@ -127,11 +161,4 @@ export class AppMenuComponent implements OnInit {
         ];
     }
 
-    onKeydown(event: KeyboardEvent) {
-        const nodeElement = (<HTMLDivElement> event.target);
-        if (event.code === 'Enter' || event.code === 'Space') {
-            nodeElement.click();
-            event.preventDefault();
-        }
-    }
 }
