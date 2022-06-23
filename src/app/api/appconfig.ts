@@ -13,6 +13,6 @@ export const API = {
     'ListUsers' : 'http://127.0.0.1/Driving/backend/api/auth/user-get',
     'DeleteUser' : 'http://127.0.0.1/Driving/backend/api/auth/delete-user/',
     'UpdateUser' : 'http://127.0.0.1/Driving/backend/api/auth/update-user/',
-
+    'me' : 'http://127.0.0.1/Driving/backend/api/auth/me',
 
 }

@@ -5,7 +5,6 @@ import { API } from 'src/app/api/appconfig';
 import { User } from '../model/users.model';
 import { TokenService } from './token.service';
 
-
 /* export class User {
     name!: String;
     email!: String;
@@ -14,34 +13,40 @@ import { TokenService } from './token.service';
   } */
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class AuthService {
+    constructor(private http: HttpClient, private Token: TokenService) {}
 
-    constructor(private http: HttpClient,
-        private Token:TokenService,
-        ) {}
-    // User registration
+    tokenresp: any;
+
     register(user: User): Observable<any> {
-      return this.http.post(API.usersRegister, user);
+        return this.http.post(API.usersRegister, user);
     }
-    // Login
+
     signin(user: User): Observable<any> {
-      return this.http.post<any>(API.login, user);
+        return this.http.post<any>(API.login, user);
     }
 
-    me(token:any): Observable<any> {
-        return this.http.post<any>('http://127.0.0.1/Driving/backend/api/auth/me',token);
+    me(token: any): Observable<any> {
+        return this.http.post<any>(API.me, token);
     }
 
-    // Access user profile
     profileUser(): Observable<any> {
-      return this.http.get('http://127.0.0.1/Driving/backend/api/auth/user-profile');
+        return this.http.get(API.userProfile);
     }
 
-    private _updatemenu = new Subject<void>();
-
-    get updatemenu() {
-        return this._updatemenu;
+    GetToken() {
+        return localStorage.getItem("auth_token") || '';
     }
+
+    GetRolebyToken(token: any) {
+        let _token = token.split('.')[1];
+        this.tokenresp = JSON.parse(atob(_token));
+        return this.tokenresp.role;
+    }
+
+    /* GetMenubyrole(role: any) {
+        return this.http.get(this.GetRole + 'GetMenubyRole/' + role)
+    } */
 }

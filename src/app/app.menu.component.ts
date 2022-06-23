@@ -36,7 +36,13 @@ export class AppMenuComponent implements OnInit {
         public tokenService:TokenService) { }
 
     ngOnInit() {
-        this.MenuDisplaybyRole()
+        if (this.authService.GetToken() != '') {
+            this.currentrole = this.authService.GetRolebyToken(this.authService.GetToken());
+            this.displaySuperAdmin = (this.currentrole == 'super-admin');
+            this.displayAdmin = (this.currentrole == 'admin' || this.currentrole == 'super-admin');
+            this.displayUser = (this.currentrole == 'user' || this.currentrole == 'admin' || this.currentrole == 'super-admin')
+          }
+        this.GenerateMenu();
 
     }
 
@@ -46,17 +52,6 @@ export class AppMenuComponent implements OnInit {
             nodeElement.click();
             event.preventDefault();
         }
-    }
-
-    MenuDisplaybyRole(){
-        this.authService.me(this.tokenService.getToken()).subscribe((data: any) => {
-            console.log("from me "+data['role'])
-            this.currentrole = data['role'];
-            this.displaySuperAdmin = (this.currentrole == 'super-admin');
-            this.displayAdmin = (this.currentrole == 'admin' || this.currentrole == 'super-admin');
-            this.displayUser = (this.currentrole == 'user' || this.currentrole == 'admin' || this.currentrole == 'super-admin')
-            this.GenerateMenu();
-        })
     }
 
     GenerateMenu(){
@@ -159,6 +154,21 @@ export class AppMenuComponent implements OnInit {
                 ]
             }
         ];
+    }
+
+
+    LoadMenu() {
+
+
+        /* this.authService.me(this.tokenService.getToken()).subscribe((data: any) => {
+            this.currentrole = data['role'];
+            this.service.GetMenubyrole(this.currentrole).subscribe(result => {
+                this.menulist$ = result;
+              });
+        }) */
+
+
+
     }
 
 }

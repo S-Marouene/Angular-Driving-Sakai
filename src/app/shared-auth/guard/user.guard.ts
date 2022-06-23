@@ -31,19 +31,14 @@ export class UserGuard implements CanActivate {
         | UrlTree {
 
         if (this.tokenService.isLoggedIn()) {
-            this.authService
-                .me(this.tokenService.getToken())
-                .subscribe((data: any) => {
-                    this.currentrole = data['role'];
-                    if (this.currentrole == 'super-admin') {
-                        return true;
-                    }else {
-                        alert('not authorised to visit this URL');
-                        this.router.navigate(['dashboard']);
-                        return false;
-                    }
-                });
-            return true;
+            this.currentrole = this.authService.GetRolebyToken(this.authService.GetToken());
+                if (this.currentrole == 'super-admin') {
+                    return true;
+                }else {
+                    alert('not authorised to visit this URL');
+                    this.router.navigate(['dashboard']);
+                    return false;
+                }
         } else {
             this.router.navigate(['pages/login']);
             return false;

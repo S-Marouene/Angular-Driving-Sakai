@@ -39,8 +39,5 @@ export class TokenService {
   isLoggedIn() {
     return this.isValidToken();
   }
-  // Remove token
-  removeToken() {
-    localStorage.removeItem('auth_token');
-  }
+ 
 }

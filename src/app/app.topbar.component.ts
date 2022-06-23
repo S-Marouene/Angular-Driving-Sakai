@@ -81,7 +81,7 @@ export class AppTopBarComponent implements OnInit  {
 
     signOut() {
         this.auth.setAuthState(false);
-        this.token.removeToken();
+        localStorage.clear();
         this.router.navigate(['pages/login']);
     }
 

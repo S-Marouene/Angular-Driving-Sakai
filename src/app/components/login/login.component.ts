@@ -76,7 +76,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         () => {
           this.authState.setAuthState(true);
           this.loginForm.reset();
-          this.authService.updatemenu.next();
           this.router.navigate(['dashboard']);
         }
       );
