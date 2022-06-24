@@ -46,7 +46,7 @@ export class AuthService {
         return this.tokenresp.role;
     }
 
-    /* GetMenubyrole(role: any) {
-        return this.http.get(this.GetRole + 'GetMenubyRole/' + role)
-    } */
+    GetMenubyrole() {
+        return this.http.get(API.GetRolePermission)
+    }
 }

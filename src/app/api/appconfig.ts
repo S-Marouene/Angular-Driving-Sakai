@@ -14,5 +14,6 @@ export const API = {
     'DeleteUser' : 'http://127.0.0.1/Driving/backend/api/auth/delete-user/',
     'UpdateUser' : 'http://127.0.0.1/Driving/backend/api/auth/update-user/',
     'me' : 'http://127.0.0.1/Driving/backend/api/auth/me',
+    'GetRolePermission' : 'http://127.0.0.1/Driving/backend/api/auth/user-roles',
 
 }

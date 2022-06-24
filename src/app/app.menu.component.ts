@@ -1,5 +1,6 @@
 import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { retry } from 'rxjs';
 import { AppMainComponent } from './app.main.component';
 import { AuthService } from './shared-auth/auth.service';
 import { TokenService } from './shared-auth/token.service';
@@ -30,20 +31,39 @@ export class AppMenuComponent implements OnInit {
     displayAdmin=false;
     displayUser=false;
     currentrole: any;
+    ListPermission: Array<string> = [];
 
     constructor(public appMain: AppMainComponent,
         public authService: AuthService,
         public tokenService:TokenService) { }
 
     ngOnInit() {
+
         if (this.authService.GetToken() != '') {
+            this.authService.GetMenubyrole().subscribe(result => {
+                for (let index = 0; index < result['AllPermission'].length; index++) {
+                    this.ListPermission.push(result['AllPermission'][index].name);
+                }
+                console.log(this.ListPermission);
+                console.log(this.Check_Menu(this.ListPermission,'modifa'));
+                this.GenerateMenu();
+            });
+        }
+
+        /* if (this.authService.GetToken() != '') {
             this.currentrole = this.authService.GetRolebyToken(this.authService.GetToken());
             this.displaySuperAdmin = (this.currentrole == 'super-admin');
             this.displayAdmin = (this.currentrole == 'admin' || this.currentrole == 'super-admin');
             this.displayUser = (this.currentrole == 'user' || this.currentrole == 'admin' || this.currentrole == 'super-admin')
-          }
-        this.GenerateMenu();
+        } */
 
+    }
+
+    Check_Menu(list:Array<string>,menu_name:string):boolean{
+        if (list.indexOf(menu_name) > -1) {
+            return true;
+        }
+        return false;
     }
 
     onKeydown(event: KeyboardEvent) {
@@ -65,9 +85,9 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Auto-Ecole',
                 items: [
-                    {label: 'Calendrier', icon: 'pi pi-fw pi-calendar', routerLink: ['/uikit/test'],visible : this.displaySuperAdmin},
-                    {label: 'test Crud', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/testcrud'],visible :this.displayAdmin},
-                    {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout'],visible : this.displayUser},
+                    {label: 'Calendrier', icon: 'pi pi-fw pi-calendar', routerLink: ['/uikit/test'],visible :this.Check_Menu(this.ListPermission,'calendrier')},
+                    {label: 'test Crud', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/testcrud'],visible :this.Check_Menu(this.ListPermission,'test_crud')},
+                    {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout'],visible : this.Check_Menu(this.ListPermission,'condidat')},
                     {label: 'Code', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
                     {label: 'Conduite', icon: 'pi pi-fw pi-bookmark', routerLink: ['/pages/crud']},
                     {label: 'Recherche', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate']},
@@ -154,21 +174,6 @@ export class AppMenuComponent implements OnInit {
                 ]
             }
         ];
-    }
-
-
-    LoadMenu() {
-
-
-        /* this.authService.me(this.tokenService.getToken()).subscribe((data: any) => {
-            this.currentrole = data['role'];
-            this.service.GetMenubyrole(this.currentrole).subscribe(result => {
-                this.menulist$ = result;
-              });
-        }) */
-
-
-
     }
 
 }
