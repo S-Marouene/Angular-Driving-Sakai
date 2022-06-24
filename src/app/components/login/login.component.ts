@@ -10,11 +10,13 @@ import { AuthStateService } from 'src/app/shared-auth/auth-state.service';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { diffDates } from '@fullcalendar/angular';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  providers: [MessageService],
   styles:[`
     :host ::ng-deep .p-password input {
     width: 100%;
@@ -48,7 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   errors:any = null;
 
   constructor(public configService: ConfigService,
-
+    private  messageService: MessageService,
     public router: Router,
     public fb: FormBuilder,
     public authService: AuthService,
@@ -67,7 +69,19 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       this.authService.signin(this.loginForm.value).subscribe(
         (result) => {
-          this.responseHandler(result);
+            if (result.user['status'] == 'active') {
+                this.responseHandler(result);
+            }else{
+                //this.authState.setAuthState(false);
+                this.messageService.add({severity:'info', summary: 'Record is added successully', detail:'record added'});
+                //alert("inactive user")
+                //this.toastr.success("qsfsdfsfd", "sdsfsdffd")
+                //console.log(result.user['status']);
+
+            }
+
+          console.log(result.user['status']);
+
 
         },
         (error) => {
@@ -81,10 +95,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       );
   }
 
-
-
   ngOnInit(): void {
-
     if(this.authState.userState.value){
         this.router.navigate(['dashboard']);
     }

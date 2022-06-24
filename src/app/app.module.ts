@@ -154,6 +154,9 @@ import { UsersComponent } from './components/users/users.component';
 import { UserService } from './service/users.service';
 import { NgxPermissionsModule } from 'ngx-permissions';
 
+
+
+
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   timeGridPlugin,
@@ -252,7 +255,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         AppCodeModule,
         StyleClassModule,
         ReactiveFormsModule,
-        NgxPermissionsModule.forRoot()
+        NgxPermissionsModule.forRoot(),
     ],
     declarations: [
         AppComponent,

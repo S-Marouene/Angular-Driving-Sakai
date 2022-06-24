@@ -42,7 +42,7 @@ import { UserGuard } from './shared-auth/guard/user.guard';
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
                     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
                     {path: 'uikit/testcrud', component:  CrudComponent, canActivate: [UserGuard]},
-                    {path: 'uikit/formlayout', component:  UsersComponent},
+                    {path: 'uikit/listusers', component:  UsersComponent},
                     {path: 'uikit/test', component: TestComponentComponent},
                     {path: 'uikit/input', component: InputComponent},
                     {path: 'uikit/floatlabel', component: FloatLabelComponent},

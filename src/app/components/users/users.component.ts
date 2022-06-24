@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { UserService } from '../../service/users.service';
 import { User } from 'src/app/model/users.model';
 import { AuthService } from 'src/app/shared-auth/auth.service';
@@ -15,7 +15,7 @@ import Validation from 'src/app/utils/validation';
 
 @Component({
     templateUrl: './users.component.html',
-    providers: [MessageService, ConfirmationService],
+    providers: [MessageService],
     styleUrls: ['../../../assets/demo/badges.scss'],
 })
 export class UsersComponent implements OnInit {
@@ -48,7 +48,6 @@ export class UsersComponent implements OnInit {
 
     ngOnInit() {
         this.refreshListUser();
-
         this.cols = [
             { field: 'name', header: 'Name' },
             { field: 'price', header: 'Price' },
@@ -92,6 +91,12 @@ export class UsersComponent implements OnInit {
         );
     }
 
+    testmessage(){
+        console.log("testt");
+
+        this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
+    }
+
     refreshListUser(){
         this.userService.getUsers().subscribe({
             next: (listUser) => {
@@ -113,11 +118,11 @@ export class UsersComponent implements OnInit {
     onSubmit() {
 
         this.submitted = true;
-        if (this.form.invalid) {
+       /*  if (this.form.invalid) {
             console.log("form invalid");
             return;
         }
-
+ */
         this.form.value.status=this.form.value.status['value'];
         this.authService.register(this.form.value).subscribe(
             (result) => {
@@ -125,7 +130,7 @@ export class UsersComponent implements OnInit {
             },
             (error) => {
               this.errors = error.error;
-              this.messageService.add({severity: 'error', summary: 'danger', detail: 'The form is not valid, please check the fields' , life: 3000});
+              //this.messageService.add({severity: 'error', summary: 'danger', detail: 'The form is not valid, please check the fields' , life: 3000});
             },
             () => {
                 this.refreshListUser();
@@ -134,6 +139,7 @@ export class UsersComponent implements OnInit {
             }
           );
     }
+
 
     deleteUser(user: User) {
         this.deleteUserDialog = true;

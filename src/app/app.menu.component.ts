@@ -87,7 +87,11 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     {label: 'Calendrier', icon: 'pi pi-fw pi-calendar', routerLink: ['/uikit/test'],visible :this.Check_Menu(this.ListPermission,'calendrier')},
                     {label: 'test Crud', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/testcrud'],visible :this.Check_Menu(this.ListPermission,'test_crud')},
-                    {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/formlayout'],visible : this.Check_Menu(this.ListPermission,'condidat')},
+                    {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/listusers'],visible : this.Check_Menu(this.ListPermission,'condidat')},
+
+
+
+
                     {label: 'Code', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
                     {label: 'Conduite', icon: 'pi pi-fw pi-bookmark', routerLink: ['/pages/crud']},
                     {label: 'Recherche', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate']},
