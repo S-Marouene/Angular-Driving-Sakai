@@ -20,7 +20,7 @@ export class AuthService {
 
     tokenresp: any;
 
-    register(user: User): Observable<any> {
+    register(user): Observable<any> {
         return this.http.post(API.usersRegister, user);
     }
 

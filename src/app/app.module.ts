@@ -153,6 +153,7 @@ import { AuthInterceptor } from './shared-auth/auth.interceptor';
 import { UsersComponent } from './components/users/users.component';
 import { UserService } from './service/users.service';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { DefaultProfileUserPipe } from './pipe/default-profile-user.pipe';
 
 
 
@@ -301,6 +302,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         AccessComponent,
         TestComponentComponent,
         UsersComponent,
+        DefaultProfileUserPipe,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

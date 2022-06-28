@@ -12,6 +12,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import Validation from 'src/app/utils/validation';
+import { CONSTANTES } from 'src/app/constantes/constantes';
+import { diffDates } from '@fullcalendar/angular';
 
 @Component({
     templateUrl: './users.component.html',
@@ -36,6 +38,10 @@ export class UsersComponent implements OnInit {
     submitted = false;
 
     form: FormGroup = new FormGroup({});
+    imageSrc: string = '';
+    files:any;
+
+    URLprofilePic=CONSTANTES.URLprofilePic;
 
     constructor(
         private userservice: UserService,
@@ -54,6 +60,8 @@ export class UsersComponent implements OnInit {
             { field: 'category', header: 'Category' },
             { field: 'rating', header: 'Reviews' },
             { field: 'status', header: 'Status' },
+            { field: 'file', header: 'File' },
+            { field: 'image', header: 'image' },
         ];
 
         this.statuses = [
@@ -83,7 +91,11 @@ export class UsersComponent implements OnInit {
                 ],
                 password_confirmation: ['', Validators.required],
                 role: ['user', Validators.required],
-                status: ['', Validators.required]
+                status: ['', Validators.required],
+
+                image: ['', Validators.nullValidator],
+                fileSource: ['', Validators.nullValidator],
+
             }  ,
             {
               validators: [Validation.match('password', 'password_confirmation')]
@@ -91,9 +103,26 @@ export class UsersComponent implements OnInit {
         );
     }
 
+    onFileChange(event:any) {
+        const reader = new FileReader();
+
+        if(event.target.files && event.target.files.length) {
+          const [file] = event.target.files;
+          reader.readAsDataURL(file);
+
+          reader.onload = () => {
+            this.imageSrc = reader.result as string;
+            this.form.patchValue({
+              fileSource: reader.result
+            });
+          };
+        }
+        this.files = event.target.files[0]
+
+    }
+
     testmessage(){
         console.log("testt");
-
         this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
     }
 
@@ -118,13 +147,29 @@ export class UsersComponent implements OnInit {
     onSubmit() {
 
         this.submitted = true;
-       /*  if (this.form.invalid) {
-            console.log("form invalid");
-            return;
+        const formData = new FormData();
+        //this.form.value.status=this.form.value.status['value'];
+
+
+        formData.append('name',this.form.value.name);
+        formData.append('email',this.form.value.email);
+        formData.append('fname',this.form.value.fname);
+        formData.append('password',this.form.value.password);
+        formData.append('password_confirmation',this.form.value.password_confirmation);
+
+        formData.append('role',this.form.value.role);
+        formData.append('status',this.form.value.status['value']);
+        console.log(formData);
+
+        if(this.files){
+            formData.append('fileSource', this.files,this.files.name);
+            formData.append('path',this.files.name);
+        }else{
+            formData.append('fileSource', '');
+            formData.append('path','');
         }
- */
-        this.form.value.status=this.form.value.status['value'];
-        this.authService.register(this.form.value).subscribe(
+
+        this.authService.register(formData).subscribe(
             (result) => {
               console.log(result);
             },
@@ -139,7 +184,6 @@ export class UsersComponent implements OnInit {
             }
           );
     }
-
 
     deleteUser(user: User) {
         this.deleteUserDialog = true;

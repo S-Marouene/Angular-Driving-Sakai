@@ -47,7 +47,7 @@
                         </th>
                         <th pSortableColumn="name">Prénom <p-sortIcon field="fname"></p-sortIcon>
                         </th>
-                        <!-- <th>Image</th> -->
+                        <th>Image</th>
                         <th pSortableColumn="email">E-mail <p-sortIcon field="email"></p-sortIcon>
                         </th>
                         <th pSortableColumn="role">Role <p-sortIcon field="role"></p-sortIcon>
@@ -72,6 +72,9 @@
                         <td style="width:18%; min-width:10rem;">
                             <span class="p-column-title">Prénom</span>
                             {{actualUser?.fname}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
+                            <img src=  "{{URLprofilePic+ (actualUser.path | defaultProfileUser)}}" [alt]="actualUser.name" class="img-fluid" width="45%" />
                         </td>
                         <td style="width:18%; min-width:8rem;">
                             <span class="p-column-title">E-mail</span>
@@ -174,6 +177,22 @@
                                 Confirm Password does not match
                             </div>
                         </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="image">User Photo:</label>
+                        <input
+                            formControlName="image"
+                            id="image"
+                            type="file"
+                            class="form-control"
+                            (change)="onFileChange($event)"
+                            [ngClass]="{ 'is-invalid': submitted && f['image'].errors }">
+
+                        <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
+                            <div *ngIf="f['image'].errors['required']">Image is required</div>
+                        </div>
+                        <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width:150px">
                     </div>
 
                 </ng-template>

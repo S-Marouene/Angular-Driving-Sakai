@@ -72,17 +72,8 @@ export class LoginComponent implements OnInit, OnDestroy {
             if (result.user['status'] == 'active') {
                 this.responseHandler(result);
             }else{
-                //this.authState.setAuthState(false);
                 this.messageService.add({severity:'info', summary: 'Record is added successully', detail:'record added'});
-                //alert("inactive user")
-                //this.toastr.success("qsfsdfsfd", "sdsfsdffd")
-                //console.log(result.user['status']);
-
             }
-
-          console.log(result.user['status']);
-
-
         },
         (error) => {
           this.errors = error.error;
@@ -96,8 +87,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if(this.authState.userState.value){
+    if(this.authState.userState.value==true){
         this.router.navigate(['dashboard']);
+    }else{
+        this.router.navigate(['']);
     }
 
     this.config = this.configService.config;
@@ -105,7 +98,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.config = config;
     });
   }
-  // Handle response
+
   responseHandler(data:any) {
     this.token.handleData(data.access_token);
   }
@@ -119,6 +112,5 @@ export class LoginComponent implements OnInit, OnDestroy {
   Signin(){
       this.router.navigate(['dashboard']);
   }
-
 
 }
