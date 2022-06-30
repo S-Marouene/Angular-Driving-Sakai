@@ -70,6 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.authService.signin(this.loginForm.value).subscribe(
         (result) => {
             if (result.user['status'] == 'active') {
+                
                 this.responseHandler(result);
             }else{
                 this.messageService.add({severity:'info', summary: 'Record is added successully', detail:'record added'});

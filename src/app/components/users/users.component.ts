@@ -148,18 +148,14 @@ export class UsersComponent implements OnInit {
 
         this.submitted = true;
         const formData = new FormData();
-        //this.form.value.status=this.form.value.status['value'];
-
-
         formData.append('name',this.form.value.name);
         formData.append('email',this.form.value.email);
         formData.append('fname',this.form.value.fname);
         formData.append('password',this.form.value.password);
         formData.append('password_confirmation',this.form.value.password_confirmation);
-
         formData.append('role',this.form.value.role);
         formData.append('status',this.form.value.status['value']);
-        console.log(formData);
+       // console.log(formData);
 
         if(this.files){
             formData.append('fileSource', this.files,this.files.name);
@@ -171,14 +167,15 @@ export class UsersComponent implements OnInit {
 
         this.authService.register(formData).subscribe(
             (result) => {
-              console.log(result);
+              //console.log(result);
             },
             (error) => {
               this.errors = error.error;
-              //this.messageService.add({severity: 'error', summary: 'danger', detail: 'The form is not valid, please check the fields' , life: 3000});
             },
             () => {
                 this.refreshListUser();
+                this.imageSrc=null;
+                this.form.reset();
                 this.UserDialog = false;
                 this.user = {};
             }
@@ -208,7 +205,6 @@ export class UsersComponent implements OnInit {
     UpdateUser() {
         this.submitted = true;
         this.user.status=this.user.status['value'];
-
         this.userService.updateUser(this.user).subscribe(
             data => {
               this.updateUserDialog = false;

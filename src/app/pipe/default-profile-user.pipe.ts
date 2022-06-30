@@ -1,3 +1,4 @@
+import { isNull } from '@angular/compiler/src/output/output_ast';
 import { Pipe, PipeTransform } from '@angular/core';
 import { CONSTANTES } from '../constantes/constantes';
 
@@ -7,7 +8,7 @@ import { CONSTANTES } from '../constantes/constantes';
 export class DefaultProfileUserPipe implements PipeTransform {
 
     transform(path: string): string {
-        if (!path.trim().length) {
+        if ( path === null ) {
           return CONSTANTES.defaultImage;
         }
         return path;

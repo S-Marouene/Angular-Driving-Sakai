@@ -44,19 +44,9 @@ export class AppMenuComponent implements OnInit {
                 for (let index = 0; index < result['AllPermission'].length; index++) {
                     this.ListPermission.push(result['AllPermission'][index].name);
                 }
-                console.log(this.ListPermission);
-                console.log(this.Check_Menu(this.ListPermission,'modifa'));
                 this.GenerateMenu();
             });
         }
-
-        /* if (this.authService.GetToken() != '') {
-            this.currentrole = this.authService.GetRolebyToken(this.authService.GetToken());
-            this.displaySuperAdmin = (this.currentrole == 'super-admin');
-            this.displayAdmin = (this.currentrole == 'admin' || this.currentrole == 'super-admin');
-            this.displayUser = (this.currentrole == 'user' || this.currentrole == 'admin' || this.currentrole == 'super-admin')
-        } */
-
     }
 
     Check_Menu(list:Array<string>,menu_name:string):boolean{
@@ -88,10 +78,6 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Calendrier', icon: 'pi pi-fw pi-calendar', routerLink: ['/uikit/test'],visible :this.Check_Menu(this.ListPermission,'calendrier')},
                     {label: 'test Crud', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/testcrud'],visible :this.Check_Menu(this.ListPermission,'test_crud')},
                     {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/listusers'],visible : this.Check_Menu(this.ListPermission,'condidat')},
-
-
-
-
                     {label: 'Code', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
                     {label: 'Conduite', icon: 'pi pi-fw pi-bookmark', routerLink: ['/pages/crud']},
                     {label: 'Recherche', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate']},

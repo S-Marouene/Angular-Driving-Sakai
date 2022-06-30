@@ -8,7 +8,6 @@ import { User } from '../model/users.model';
 
 @Injectable()
 export class UserService {
-
     constructor(private http: HttpClient) { }
 
     getFakeUsers() {
@@ -26,7 +25,6 @@ export class UserService {
     {
       return this.http.delete(API.DeleteUser+user.id);
     }
-
 
     updateUser(user:any)
     {
@@ -46,10 +44,6 @@ export class UserService {
         .then(res => res.data as Product[])
         .then(data => data);
     }
-
-
-
-
 
     getProductsMixed() {
         return this.http.get<any>('assets/demo/data/products-mixed.json')
