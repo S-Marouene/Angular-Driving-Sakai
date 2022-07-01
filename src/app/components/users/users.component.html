@@ -219,8 +219,6 @@
             </ng-template>
         </p-dialog>
 
-
-
         <p-dialog [(visible)]="updateUserDialog" [style]="{width: '450px'}" header="User Details" [modal]="true" class="p-fluid">
             <ng-template pTemplate="content">
 
@@ -240,7 +238,7 @@
                     <label for="status">User Status</label>
                     <p-dropdown [options]="statuses" optionLabel="label" [(ngModel)]="user.status"  placeholder="Select Status">
                         <ng-template let-status pTemplate="status">
-                            <span [class]="'user-badge status-' + status.value.toLowerCase()" >{{status.label}}</span>
+                            <span [class]="'user-badge status-' + status.value.toLowerCase()">{{status.label}}</span>
                         </ng-template>
                     </p-dropdown>
                 </div>
@@ -249,6 +247,22 @@
                     <label for="name">Role</label>
                     <input type="text" pInputText id="role" [(ngModel)]="user.role" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !user.role}"/>
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !user.role">role is required.</small>
+                </div>
+
+                <div class="field">
+                    <label for="image">User Photo:</label>
+                    <input
+
+                        id="image"
+                        type="file"
+                        class="form-control"
+                        (change)="onFileChange($event)"
+                        [ngClass]="{ 'is-invalid': submitted && f['image'].errors }">
+
+                    <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
+                        <div *ngIf="f['image'].errors['required']">Image is required</div>
+                    </div>
+                    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width:150px">
                 </div>
 
             </ng-template>

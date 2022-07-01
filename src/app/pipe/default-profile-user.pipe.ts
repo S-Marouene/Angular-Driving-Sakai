@@ -8,7 +8,7 @@ import { CONSTANTES } from '../constantes/constantes';
 export class DefaultProfileUserPipe implements PipeTransform {
 
     transform(path: string): string {
-        if ( path === null ) {
+        if ( path === null || path ==="") {
           return CONSTANTES.defaultImage;
         }
         return path;

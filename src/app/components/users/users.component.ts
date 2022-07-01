@@ -155,7 +155,7 @@ export class UsersComponent implements OnInit {
         formData.append('password_confirmation',this.form.value.password_confirmation);
         formData.append('role',this.form.value.role);
         formData.append('status',this.form.value.status['value']);
-       // console.log(formData);
+        console.log(formData);
 
         if(this.files){
             formData.append('fileSource', this.files,this.files.name);
@@ -167,7 +167,7 @@ export class UsersComponent implements OnInit {
 
         this.authService.register(formData).subscribe(
             (result) => {
-              //console.log(result);
+              console.log(result);
             },
             (error) => {
               this.errors = error.error;
@@ -204,11 +204,33 @@ export class UsersComponent implements OnInit {
 
     UpdateUser() {
         this.submitted = true;
-        this.user.status=this.user.status['value'];
-        this.userService.updateUser(this.user).subscribe(
+
+        if(this.user.status['value']){
+            this.user.status=this.user.status['value'];
+        }
+
+        const formData = new FormData();
+        formData.append('id',this.user.id);
+        formData.append('name',this.user.name);
+        formData.append('fname',this.user.fname);
+        formData.append('status',this.user.status);
+        formData.append('role',this.user.role);
+
+        if(this.files){
+            formData.append('fileSource', this.files,this.files.name);
+            formData.append('path',this.files.name);
+        }else{
+            formData.append('fileSource', '');
+            formData.append('path','');
+        }
+
+        this.userService.updateUser(formData).subscribe(
             data => {
               this.updateUserDialog = false;
               this.refreshListUser();
+              this.imageSrc=null;
+              this.form.reset();
+              this.user = {};
             }
         );
     }

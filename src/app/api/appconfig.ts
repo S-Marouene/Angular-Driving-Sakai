@@ -12,7 +12,7 @@ export const API = {
     'userProfile' :'http://127.0.0.1/Driving/backend/api/auth/user-profile',
     'ListUsers' : 'http://127.0.0.1/Driving/backend/api/auth/user-get',
     'DeleteUser' : 'http://127.0.0.1/Driving/backend/api/auth/delete-user/',
-    'UpdateUser' : 'http://127.0.0.1/Driving/backend/api/auth/update-user/',
+    'UpdateUser' : 'http://127.0.0.1/Driving/backend/api/auth/update_user',
     'me' : 'http://127.0.0.1/Driving/backend/api/auth/me',
     'GetRolePermission' : 'http://127.0.0.1/Driving/backend/api/auth/user-roles',
 

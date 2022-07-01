@@ -26,9 +26,9 @@ export class UserService {
       return this.http.delete(API.DeleteUser+user.id);
     }
 
-    updateUser(user:any)
+    updateUser(form)
     {
-      return this.http.put(API.UpdateUser+user.id,user);
+      return this.http.post(API.UpdateUser,form);
     }
 
     updateUserPhoto(form)

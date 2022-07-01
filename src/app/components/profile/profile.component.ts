@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
     files:any;
     form_change_profile_picture: FormGroup = new FormGroup({});
     defaultProfileUser=CONSTANTES.defaultImage;
-    param1="1";
+    param1="0";
 
     constructor(private countryService: CountryService,
         public authService: AuthService,
@@ -95,7 +95,8 @@ export class ProfileComponent implements OnInit {
         const formData = new FormData();
         formData.append('fileSource', this.files,this.files.name);
         formData.append('path',this.files.name);
-        formData.append('param1', this.param1);
+        this.param1=this.UserProfile.id;
+        formData.append('id', this.param1);
 
         this.userService.updateUserPhoto(formData).subscribe(
             (result) => {
