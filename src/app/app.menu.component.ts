@@ -75,9 +75,11 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Auto-Ecole',
                 items: [
-                    {label: 'Calendrier', icon: 'pi pi-fw pi-calendar', routerLink: ['/uikit/test'],visible :this.Check_Menu(this.ListPermission,'calendrier')},
+                    {label: 'Calendrier', icon: 'pi pi-fw pi-calendar', routerLink: ['/uikit/calendar'],visible :this.Check_Menu(this.ListPermission,'calendrier')},
                     {label: 'test Crud', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/testcrud'],visible :this.Check_Menu(this.ListPermission,'test_crud')},
                     {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/listusers'],visible : this.Check_Menu(this.ListPermission,'condidat')},
+                    {label: 'Mon profil', icon: 'pi pi-fw pi-user-edit', routerLink: ['/uikit/profile']},
+
                     {label: 'Code', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
                     {label: 'Conduite', icon: 'pi pi-fw pi-bookmark', routerLink: ['/pages/crud']},
                     {label: 'Recherche', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate']},
@@ -111,7 +113,7 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Pages',
                 items: [
-                    {label: 'floatlabel', icon: 'pi pi-fw pi-user-edit', routerLink: ['/uikit/floatlabel']},
+
                     {label: 'Timeline', icon: 'pi pi-fw pi-calendar', routerLink: ['/pages/timeline']},
                     {label: 'Landing', icon: 'pi pi-fw pi-globe', routerLink: ['pages/landing']},
                     {label: 'Login', icon: 'pi pi-fw pi-sign-in', routerLink: ['pages/login']},

@@ -36,7 +36,8 @@ export class UserGuard implements CanActivate {
                     return true;
                 }else {
                     alert('not authorised to visit this URL');
-                    this.router.navigate(['dashboard']);
+                    this.router.navigate(['pages/access']);
+                    //this.router.navigate(['dashboard']);
                     return false;
                 }
         } else {

@@ -16,4 +16,6 @@ export const API = {
     'me' : 'http://127.0.0.1/Driving/backend/api/auth/me',
     'GetRolePermission' : 'http://127.0.0.1/Driving/backend/api/auth/user-roles',
 
+    'updateImgProfile' : 'http://127.0.0.1/Driving/backend/api/auth/ImgProfil_update',
+
 }

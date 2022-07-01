@@ -16,7 +16,7 @@
 
         <span class="badge bg-primary" style="margin:auto; font-size: larger;">{{UserProfile?.name}} {{UserProfile?.fname}} : {{UserProfile?.role}}</span>
 
-        <a href="#" class="p-link layout-topbar-button">
+        <a [routerLink]="['uikit/calendar']" class="p-link layout-topbar-button">
             <i class="pi pi-calendar"></i>
             <span>Calendar</span>
         </a>
@@ -24,7 +24,7 @@
             <i class="pi pi-cog"></i>
             <span>Settings</span>
         </a>
-        <a href="#" class="p-link layout-topbar-button">
+        <a [routerLink]="['uikit/profile']" class="p-link layout-topbar-button">
             <i class="pi pi-user"></i>
             <span>Profile</span>
         </a>

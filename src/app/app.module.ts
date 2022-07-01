@@ -108,7 +108,7 @@ import { AppMenuitemComponent } from './app.menuitem.component';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormLayoutComponent } from './components/formlayout/formlayout.component';
-import { FloatLabelComponent } from './components/floatlabel/floatlabel.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { InvalidStateComponent } from './components/invalidstate/invalidstate.component';
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -268,7 +268,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         AppMenuitemComponent,
         DashboardComponent,
         FormLayoutComponent,
-        FloatLabelComponent,
+        ProfileComponent,
         InvalidStateComponent,
         InputComponent,
         ButtonComponent,

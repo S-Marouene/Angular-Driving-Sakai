@@ -31,6 +31,11 @@ export class UserService {
       return this.http.put(API.UpdateUser+user.id,user);
     }
 
+    updateUserPhoto(form)
+    {
+      return this.http.post(API.updateImgProfile,form);
+    }
+
     getProductsSmall() {
         return this.http.get<any>('assets/demo/data/products-small.json')
         .toPromise()

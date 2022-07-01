@@ -19,7 +19,7 @@ import { ListComponent } from './components/list/list.component';
 import { TreeComponent } from './components/tree/tree.component';
 import { CrudComponent } from './components/crud/crud.component';
 import { BlocksComponent } from './components/blocks/blocks.component';
-import { FloatLabelComponent } from './components/floatlabel/floatlabel.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { InvalidStateComponent } from './components/invalidstate/invalidstate.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { IconsComponent } from './components/icons/icons.component';
@@ -42,10 +42,11 @@ import { UserGuard } from './shared-auth/guard/user.guard';
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
                     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
                     {path: 'uikit/testcrud', component:  CrudComponent, canActivate: [UserGuard]},
-                    {path: 'uikit/listusers', component:  UsersComponent},
-                    {path: 'uikit/test', component: TestComponentComponent},
+                    {path: 'uikit/listusers', component:  UsersComponent ,canActivate: [AuthGuard] },
+                    {path: 'uikit/calendar', component: TestComponentComponent,canActivate: [AuthGuard] },
+                    {path: 'uikit/profile', component: ProfileComponent,canActivate: [AuthGuard] },
                     {path: 'uikit/input', component: InputComponent},
-                    {path: 'uikit/floatlabel', component: FloatLabelComponent},
+
                     {path: 'uikit/invalidstate', component: InvalidStateComponent},
                     {path: 'uikit/button', component: ButtonComponent},
                     {path: 'uikit/table', component: TableComponent},
