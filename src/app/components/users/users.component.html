@@ -245,14 +245,16 @@
 
                 <div class="field">
                     <label for="name">Role</label>
-                    <input type="text" pInputText id="role" [(ngModel)]="user.role" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !user.role}"/>
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !user.role">role is required.</small>
+                    <select class="form-select" #Role [(ngModel)]='user.role'>
+                        <option *ngFor="let Role of roles" [ngValue]="Role">
+                        {{ Role }}
+                        </option>
+                    </select>
                 </div>
 
                 <div class="field">
                     <label for="image">User Photo:</label>
                     <input
-
                         id="image"
                         type="file"
                         class="form-control"
@@ -264,6 +266,8 @@
                     </div>
                     <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width:150px">
                 </div>
+
+
 
             </ng-template>
 

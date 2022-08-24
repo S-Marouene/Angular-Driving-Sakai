@@ -1,6 +1,7 @@
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { CONSTANTES } from 'src/app/constantes/constantes';
 import { User } from 'src/app/model/users.model';
 import { UserService } from 'src/app/service/users.service';
@@ -55,6 +56,7 @@ export class ProfileComponent implements OnInit {
 
     constructor(private countryService: CountryService,
         public authService: AuthService,
+        private toastr: ToastrService,
         public userService:UserService) {
         this.cities = [
             {name: 'New York', code: 'NY'},
@@ -107,6 +109,7 @@ export class ProfileComponent implements OnInit {
             },
             () => {
                 this.form_change_profile_picture.reset();
+                this.toastr.info("Photo de profil modifier avec succèes !", "Mise à jour");
             }
           );
     }

@@ -113,7 +113,7 @@ import { InvalidStateComponent } from './components/invalidstate/invalidstate.co
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
 import { TableComponent } from './components/table/table.component';
-import { ListComponent } from './components/list/list.component';
+import { ListComponent } from './components/list_ecole/list_ecole.component';
 import { TreeComponent } from './components/tree/tree.component';
 import { PanelsComponent } from './components/panels/panels.component';
 import { OverlaysComponent } from './components/overlays/overlays.component';
@@ -154,7 +154,7 @@ import { UsersComponent } from './components/users/users.component';
 import { UserService } from './service/users.service';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { DefaultProfileUserPipe } from './pipe/default-profile-user.pipe';
-
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -257,6 +257,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         StyleClassModule,
         ReactiveFormsModule,
         NgxPermissionsModule.forRoot(),
+        ToastrModule.forRoot(),
     ],
     declarations: [
         AppComponent,

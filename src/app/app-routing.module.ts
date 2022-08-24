@@ -15,7 +15,7 @@ import { AppMainComponent } from './app.main.component';
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
 import { TableComponent } from './components/table/table.component';
-import { ListComponent } from './components/list/list.component';
+import { ListComponent } from './components/list_ecole/list_ecole.component';
 import { TreeComponent } from './components/tree/tree.component';
 import { CrudComponent } from './components/crud/crud.component';
 import { BlocksComponent } from './components/blocks/blocks.component';

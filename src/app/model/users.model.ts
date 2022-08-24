@@ -7,7 +7,7 @@ export interface User {
     path?: string;
     cin?: string;
     email?: string;
-    role?: string;
+    role?: any;
     created_at?: string;
     status?:string;
 }

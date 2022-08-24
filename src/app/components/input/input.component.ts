@@ -101,7 +101,7 @@ export class InputComponent implements OnInit{
             {label: 'Rome', value: {id: 2, name: 'Rome', code: 'RM'}},
             {label: 'London', value: {id: 3, name: 'London', code: 'LDN'}},
             {label: 'Istanbul', value: {id: 4, name: 'Istanbul', code: 'IST'}},
-            {label: 'Paris', value: {id: 5, name: 'Paris', code: 'PRS'}}
+            {label: 'Paris1', value: {id: 5, name: 'Paris', code: 'PRS'}}
         ];
 
         this.paymentOptions = [

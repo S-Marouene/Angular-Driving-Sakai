@@ -75,24 +75,25 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Auto-Ecole',
                 items: [
+                    /* {label: 'Mon profil', icon: 'pi pi-fw pi-user-edit', routerLink: ['/uikit/profile']}, */
                     {label: 'Calendrier', icon: 'pi pi-fw pi-calendar', routerLink: ['/uikit/calendar'],visible :this.Check_Menu(this.ListPermission,'calendrier')},
-                    {label: 'test Crud', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/testcrud'],visible :this.Check_Menu(this.ListPermission,'test_crud')},
                     {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/listusers'],visible : this.Check_Menu(this.ListPermission,'condidat')},
-                    {label: 'Mon profil', icon: 'pi pi-fw pi-user-edit', routerLink: ['/uikit/profile']},
+                    {label: 'Liste des écoles', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list']},
 
-                    {label: 'Code', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
-                    {label: 'Conduite', icon: 'pi pi-fw pi-bookmark', routerLink: ['/pages/crud']},
-                    {label: 'Recherche', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate']},
-                    {label: 'Archive', icon: 'pi pi-fw pi-mobile', routerLink: ['/uikit/button'], class: 'rotated-icon'},
-                    {label: 'Caisse', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table']},
-                    {label: 'Bilans', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list']},
-                    {label: 'Parametre', icon: 'pi pi-fw pi-share-alt', routerLink: ['/uikit/tree']},
-                    {label: 'Calendrier Examen', icon: 'pi pi-fw pi-tablet', routerLink: ['/uikit/panel']},
                 ]
             },
             {
                 label:'Autres ...................',
                 items:[
+                    {label: 'Code', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
+                    {label: 'Conduite', icon: 'pi pi-fw pi-bookmark', routerLink: ['/pages/crud']},
+                    {label: 'Recherche', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['/uikit/invalidstate']},
+                    {label: 'Archive', icon: 'pi pi-fw pi-mobile', routerLink: ['/uikit/button'], class: 'rotated-icon'},
+                    {label: 'Caisse', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table']},
+
+                    {label: 'Parametre', icon: 'pi pi-fw pi-share-alt', routerLink: ['/uikit/tree']},
+                    {label: 'Calendrier Examen', icon: 'pi pi-fw pi-tablet', routerLink: ['/uikit/panel']},
+                    {label: 'test Crud', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/testcrud'],visible :this.Check_Menu(this.ListPermission,'test_crud')},
                     {label: 'Overlay', icon: 'pi pi-fw pi-clone', routerLink: ['/uikit/overlay']},
                     {label: 'Media', icon: 'pi pi-fw pi-image', routerLink: ['/uikit/media']},
                     {label: 'Menu', icon: 'pi pi-fw pi-bars', routerLink: ['/uikit/menu'], preventExact: true},

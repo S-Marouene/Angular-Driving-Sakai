@@ -4,7 +4,7 @@ import { Product } from '../../api/product';
 import { ProductService } from '../../service/productservice';
 
 @Component({
-    templateUrl: './list.component.html',
+    templateUrl: './list_ecole.component.html',
     styleUrls: ['../../../assets/demo/badges.scss']
 })
 export class ListComponent implements OnInit {
@@ -64,4 +64,13 @@ export class ListComponent implements OnInit {
             this.sortField = value;
         }
     }
+
+
+
+    /**By maro  */
+    /* openNew() {
+        this.user = {};
+        this.submitted = false;
+        this.UserDialog = true;
+    } */
 }

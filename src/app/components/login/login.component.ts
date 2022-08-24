@@ -11,6 +11,7 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { diffDates } from '@fullcalendar/angular';
 import { MessageService } from 'primeng/api';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -50,11 +51,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   errors:any = null;
 
   constructor(public configService: ConfigService,
-    private  messageService: MessageService,
     public router: Router,
     public fb: FormBuilder,
     public authService: AuthService,
     private token: TokenService,
+    private toastr: ToastrService,
     private authState: AuthStateService){ {
         this.loginForm = this.fb.group({
           email: [],
@@ -70,10 +71,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.authService.signin(this.loginForm.value).subscribe(
         (result) => {
             if (result.user['status'] == 'active') {
-                
+
                 this.responseHandler(result);
             }else{
-                this.messageService.add({severity:'info', summary: 'Record is added successully', detail:'record added'});
+              this.toastr.warning("Contacter L'administrateur !", "Utilisateur Inactive ");
             }
         },
         (error) => {
@@ -88,7 +89,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if(this.authState.userState.value==true){
+    console.log(this.authState.userState.value);
+
+    if(this.authState.userState.value===true){
         this.router.navigate(['dashboard']);
     }else{
         this.router.navigate(['']);

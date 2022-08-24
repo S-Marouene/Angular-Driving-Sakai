@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
 import { UserService } from '../../service/users.service';
 import { User } from 'src/app/model/users.model';
 import { AuthService } from 'src/app/shared-auth/auth.service';
@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import Validation from 'src/app/utils/validation';
 import { CONSTANTES } from 'src/app/constantes/constantes';
 import { diffDates } from '@fullcalendar/angular';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     templateUrl: './users.component.html',
@@ -24,17 +25,12 @@ export class UsersComponent implements OnInit {
     errors: any = null;
     UserDialog: boolean;
     updateUserDialog:boolean;
-
     deleteUserDialog: boolean = false;
-
     user: User;
-
     cols: any[];
     statuses: any[];
-
     rowsPerPageOptions = [5, 10, 20];
     users: User[] = [];
-
     submitted = false;
 
     form: FormGroup = new FormGroup({});
@@ -43,17 +39,23 @@ export class UsersComponent implements OnInit {
 
     URLprofilePic=CONSTANTES.URLprofilePic;
 
+    private roles: any = ['super-admin', 'admin', 'user'];
+
     constructor(
         private userservice: UserService,
         private messageService: MessageService,
         private userService: UserService,
         public authService: AuthService,
         public fb: FormBuilder,
-        public router: Router
+        public router: Router,
+        private toastr: ToastrService,
     ) {}
+
+
 
     ngOnInit() {
         this.refreshListUser();
+
         this.cols = [
             { field: 'name', header: 'Name' },
             { field: 'price', header: 'Price' },
@@ -61,7 +63,8 @@ export class UsersComponent implements OnInit {
             { field: 'rating', header: 'Reviews' },
             { field: 'status', header: 'Status' },
             { field: 'file', header: 'File' },
-            { field: 'image', header: 'image' },
+            { field: 'image', header: 'image' }
+
         ];
 
         this.statuses = [
@@ -121,11 +124,6 @@ export class UsersComponent implements OnInit {
 
     }
 
-    testmessage(){
-        console.log("testt");
-        this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
-    }
-
     refreshListUser(){
         this.userService.getUsers().subscribe({
             next: (listUser) => {
@@ -155,7 +153,6 @@ export class UsersComponent implements OnInit {
         formData.append('password_confirmation',this.form.value.password_confirmation);
         formData.append('role',this.form.value.role);
         formData.append('status',this.form.value.status['value']);
-        console.log(formData);
 
         if(this.files){
             formData.append('fileSource', this.files,this.files.name);
@@ -171,6 +168,7 @@ export class UsersComponent implements OnInit {
             },
             (error) => {
               this.errors = error.error;
+              console.log(this.errors)
             },
             () => {
                 this.refreshListUser();
@@ -216,7 +214,7 @@ export class UsersComponent implements OnInit {
         formData.append('status',this.user.status);
         formData.append('role',this.user.role);
 
-        if(this.files){
+        if(this.files != null){
             formData.append('fileSource', this.files,this.files.name);
             formData.append('path',this.files.name);
         }else{
@@ -229,8 +227,10 @@ export class UsersComponent implements OnInit {
               this.updateUserDialog = false;
               this.refreshListUser();
               this.imageSrc=null;
+              this.files =null;
               this.form.reset();
               this.user = {};
+              this.toastr.info("Donnée modifier avec succèes !", "Mise à jour");
             }
         );
     }
