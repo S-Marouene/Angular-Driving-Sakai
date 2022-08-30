@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { SelectItem } from 'primeng/api';
+import { CONSTANTES } from 'src/app/constantes/constantes';
+import { School } from 'src/app/model/schools.model';
+import { SchoolService } from 'src/app/service/school/school.service';
 import { Product } from '../../api/product';
 import { ProductService } from '../../service/productservice';
 
@@ -8,6 +13,19 @@ import { ProductService } from '../../service/productservice';
     styleUrls: ['../../../assets/demo/badges.scss']
 })
 export class ListComponent implements OnInit {
+
+    form_school: FormGroup = new FormGroup({});
+
+    SchoolDialog: boolean;
+    school: School;
+    submitted = false;
+    schools: School[] ;
+    status: string[] = ['active', 'inactive'];
+    deleteSchoolDialog: boolean = false;
+
+
+
+
 
     products: Product[];
 
@@ -22,11 +40,23 @@ export class ListComponent implements OnInit {
     targetCities: any[];
 
     orderCities: any[];
+    errors: any = null;
 
-    constructor(private productService: ProductService) {}
+    URLSchholPic=CONSTANTES.URLSchholPic;
+    defaultPicSchool=CONSTANTES.defaultSchoolImage;
+
+    constructor(
+        private productService: ProductService,
+        public fb: FormBuilder,
+        public schoolservice: SchoolService,
+        private toastr: ToastrService,
+        ) {}
 
     ngOnInit() {
         this.productService.getProducts().then(data => this.products = data);
+        this. getListSchool();
+
+
 
         this.sourceCities = [
             {name: 'San Francisco', code: 'SF'},
@@ -48,9 +78,28 @@ export class ListComponent implements OnInit {
             {name: 'Rome', code: 'RM'}];
 
         this.sortOptions = [
-            {label: 'Price High to Low', value: '!price'},
-            {label: 'Price Low to High', value: 'price'}
+            {label: 'Nom Croisson', value: 'Name'},
+            {label: 'Nom Decroisson', value: '!Name'}
         ];
+
+        this.form_school = this.fb.group(
+            {
+                Name: ['', Validators.required],
+                phone: [
+                    '',
+                    [
+                        Validators.required,
+                        Validators.minLength(2),
+                        Validators.maxLength(20),
+                    ],
+                ],
+                email: ['', [Validators.required, Validators.email]],
+                address: ['', Validators.required],
+                status: ['active', Validators.required],
+
+            }
+        );
+
     }
 
     onSortChange(event) {
@@ -68,9 +117,70 @@ export class ListComponent implements OnInit {
 
 
     /**By maro  */
-    /* openNew() {
-        this.user = {};
+
+    getListSchool(){
+        this.schoolservice.getAllSchool().subscribe({
+            next: (listSchool) => {
+                this.schools = listSchool
+            },
+            error: () => {
+                console.log(
+                    `Problème au niveau du serveur, attention les données sont fake `
+                );
+            },
+        });
+    }
+
+    DeleteSchool(school:School){
+        this.deleteSchoolDialog = true;
+        this.school = {...school};
+    }
+
+    confirmDelete(){
+        this.deleteSchoolDialog = false;
+        this.schoolservice.deleteSchoolService(this.school).subscribe(
+            data => {
+              this.getListSchool();
+              this.toastr.info("école supprimer avec succèes !", "Suppression");
+            },
+            (error) => {
+                this.errors = error.error;
+                this.toastr.error(this.errors)
+            },
+          );
+    }
+
+    onSubmit() {
+        this.submitted = true;
+        this.schoolservice.add(this.form_school.value).subscribe(
+            (data) => {
+                this.getListSchool();
+                this.form_school.reset();
+                this.SchoolDialog = false;
+                this.school = {};
+                this.toastr.info("Donnée ajouter avec succée","Info")
+            },
+            (err) => {
+              this.toastr.error("Erreur au niveau serveur","Error")
+              console.log(err.message)
+            }
+
+          );
+    }
+
+    get f(): { [key: string]: AbstractControl } {
+        return this.form_school.controls;
+    }
+
+    openNew() {
+        this.school = {};
         this.submitted = false;
-        this.UserDialog = true;
-    } */
+        this.SchoolDialog = true;
+    }
+
+    hideDialog() {
+        this.SchoolDialog = false;
+        /* this.updateUserDialog =false; */
+        this.submitted = false;
+    }
 }

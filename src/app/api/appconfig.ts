@@ -18,4 +18,8 @@ export const API = {
 
     'updateImgProfile' : 'http://127.0.0.1/Driving/backend/api/auth/ImgProfil_update',
 
+    'add_school' : 'http://127.0.0.1/Driving/backend/api/sudo/CreateSchools',
+    'ListSchool' : 'http://127.0.0.1/Driving/backend/api/sudo/allSchools',
+    'DeleteSchool' : 'http://127.0.0.1/Driving/backend/api/sudo/delete-school/',
+
 }

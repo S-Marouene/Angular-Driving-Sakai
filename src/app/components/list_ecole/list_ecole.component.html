@@ -3,23 +3,23 @@
 		<div class="card">
 			<h5>Liste des écoles :</h5>
 
-			<p-dataView #dv [value]="products" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+			<p-dataView #dv [value]="schools" [paginator]="true" [rows]="9" filterBy="Name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
 				<ng-template pTemplate="header">
 					<div class="grid grid-nogutter flex-column md:flex-row justify-content-between">
 
-                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
+                        <button pButton pRipple label="Nouveau" icon="pi pi-plus" class="p-button-success mr-2"
                             (click)="openNew()"></button>
 
-						<p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="onSortChange($event)"></p-dropdown>
+						<p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Ordre alphabétique" (onChange)="onSortChange($event)"></p-dropdown>
 						<span class="p-input-icon-left mb-2 md:mb-0">
                             <i class="pi pi-search"></i>
-                            <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
+                            <input type="search" pInputText placeholder="Recherche par nom" (input)="dv.filter($event.target.value)">
                         </span>
 						<p-dataViewLayoutOptions></p-dataViewLayoutOptions>
 					</div>
 				</ng-template>
 
-				<ng-template let-product pTemplate="listItem">
+				<!-- <ng-template let-product pTemplate="listItem">
 					<div class="col-12">
 						<div class="flex flex-column md:flex-row align-items-center p-3 w-full">
 							<img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name" class="my-4 md:my-0 w-9 md:w-10rem shadow-2 mr-5"/>
@@ -39,34 +39,141 @@
 							</div>
 						</div>
 					</div>
-				</ng-template>
+				</ng-template> -->
 
-				<ng-template let-product pTemplate="gridItem">
+				<ng-template let-school pTemplate="gridItem">
 					<div class="col-12 md:col-4">
 						<div class="card m-3 border-1 surface-border">
+
 							<div class="flex align-items-center justify-content-between">
 								<div class="flex align-items-center">
 									<i class="pi pi-tag mr-2"></i>
-									<span class="font-semibold">{{product.category}}</span>
+									<span class="font-semibold">{{school?.Name}}</span>
 								</div>
-								<span [class]="'sm:ml-2 product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
+							 	<span [class]="'sm:ml-2 school-badge status-' + school.status.toLowerCase()">{{school.status}}</span>
 							</div>
+
 							<div class="text-center">
-								<img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name" class="w-9 shadow-2 my-3 mx-0"/>
-								<div class="text-2xl font-bold">{{product.name}}</div>
-								<div class="mb-3">{{product.description}}</div>
-								<p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
+                                <img src=  "{{URLSchholPic+ (defaultPicSchool)}}" [alt]="school.Name" class="w-9 shadow-2 my-3 mx-0" />
+
+								<div class="text-2xl font-bold">{{school.email}}</div>
+								<div class="mb-3">{{school.address}}</div>
+                                <div class="mb-3">{{school.phone}}</div>
+								<!-- <p-rating [ngModel]="school.id" [readonly]="true" [cancel]="false"></p-rating> -->
 							</div>
-							<div class="flex align-items-center justify-content-between">
-								<span class="text-2xl font-semibold">${{product.price}}</span>
-								<p-button icon="pi pi-shopping-cart" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></p-button>
-							</div>
+
+                            <div class="text-center">
+                                <button pButton pRipple icon="pi pi-search" class="mr-2 p-button-rounded p-button-info"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="mr-2 p-button-rounded p-button-danger" (click)="DeleteSchool(school)"></button>
+                                <button pButton pRipple icon="pi pi-cog" class="p-button-rounded p-button-success"></button>
+                            </div>
+
 						</div>
 					</div>
 				</ng-template>
+
+
+
+
+
 			</p-dataView>
 		</div>
 	</div>
 
+
+
+
+   <form [formGroup]="form_school" (ngSubmit)="onSubmit()">
+        <p-dialog [(visible)]="SchoolDialog" [style]="{width: '450px'}" header="Détails de l'école" [modal]="true"
+            class="p-fluid">
+
+            <ng-template pTemplate="content">
+
+                <div class="field">
+                    <label>Nom : </label>
+                    <input class="form-control" type="text" formControlName="Name"
+                        [ngClass]="{ 'is-invalid': submitted && f['Name'].errors }" />
+                    <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback">
+                        <div *ngIf="f['Name'].errors['required']">Name is required</div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>E-mail :</label>
+                    <input type="text" formControlName="email" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                        <div *ngIf="f['email'].errors['required']">Email is required</div>
+                        <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Numéro de téléphone :</label>
+                    <input class="form-control" type="text" formControlName="phone"
+                        [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }" />
+                    <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                        <div *ngIf="f['phone'].errors['required']">phone is required</div>
+                        <div *ngIf="f['phone'].errors['minlength']">
+                            Username must be at least 6 characters
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Adresse :</label>
+                    <input class="form-control" type="text" formControlName="address"
+                        [ngClass]="{ 'is-invalid': submitted && f['address'].errors }" />
+                    <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+                        <div *ngIf="f['address'].errors['required']">address is required</div>
+                        <div *ngIf="f['address'].errors['minlength']">
+                            Username must be at least 6 characters
+                        </div>
+                    </div>
+                </div>
+
+               <!--  <div class="field">
+                    <label for="status">Satatus</label>
+                    <select class="form-select" formControlName="status">
+                        <option [ngValue]="active" >Active</option>
+                        <option [ngValue]="inactive" >Inctive</option>
+                    </select>
+                </div> -->
+
+                <div class="field">
+                    <label for="status">Satatus</label>
+                    <select id="status" class="form-select" formControlName="status">
+                        <option *ngFor="let s of status" [ngValue]="s">{{ s }}</option>
+                    </select>
+                </div>
+
+
+
+
+
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                    (click)="hideDialog()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+                    type="submit"></button>
+            </ng-template>
+
+        </p-dialog>
+    </form>
+
+    <p-dialog [(visible)]="deleteSchoolDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+        <div class="flex align-items-center justify-content-center">
+            <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+            <span *ngIf="school">Are you sure you want to delete <b>{{school.Name}}</b>?</span>
+        </div>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
+                (click)="deleteSchoolDialog = false"></button>
+            <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes"
+                (click)="confirmDelete()"></button>
+        </ng-template>
+    </p-dialog>
 
 </div>
