@@ -1,6 +1,6 @@
 export interface School {
     id?: string;
-    name?: string;
+    Name?: string;
     email?: string;
     phone?: string;
     adress?: string;

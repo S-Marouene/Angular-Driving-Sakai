@@ -60,9 +60,6 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
 
     UserProfile!: User;
 
-
-
-
     constructor(public renderer: Renderer2, public app: AppComponent,
         public configService: ConfigService,
         private permissionsService: NgxPermissionsService,
@@ -71,6 +68,10 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
         ) { }
 
     ngOnInit() {
+        this.authService.profileUser().subscribe((data: any) => {
+            this.UserProfile = data;
+        });
+
         this.config = this.configService.config;
         this.subscription = this.configService.configUpdate$.subscribe(config => this.config = config);
     }

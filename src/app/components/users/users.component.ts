@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MessageService, SelectItem } from 'primeng/api';
 import { UserService } from '../../service/users.service';
 import { User } from 'src/app/model/users.model';
@@ -13,13 +13,16 @@ import {
 import { Router } from '@angular/router';
 import Validation from 'src/app/utils/validation';
 import { CONSTANTES } from 'src/app/constantes/constantes';
-import { diffDates } from '@fullcalendar/angular';
 import { ToastrService } from 'ngx-toastr';
+import { SchoolService } from 'src/app/service/school/school.service';
+import { School } from 'src/app/model/schools.model';
 
 @Component({
     templateUrl: './users.component.html',
+    selector: 'app-users',
     providers: [MessageService],
     styleUrls: ['../../../assets/demo/badges.scss'],
+
 })
 export class UsersComponent implements OnInit {
     errors: any = null;
@@ -32,29 +35,40 @@ export class UsersComponent implements OnInit {
     rowsPerPageOptions = [5, 10, 20];
     users: User[] = [];
     submitted = false;
-
+    school:School;
+    schools: School[] ;
     form: FormGroup = new FormGroup({});
     imageSrc: string = '';
     files:any;
+
+    @Input() UserProfile!:User;
 
     URLprofilePic=CONSTANTES.URLprofilePic;
 
     private roles: any = ['super-admin', 'admin', 'user'];
 
+    filteredSchool: any[];
+
     constructor(
-        private userservice: UserService,
-        private messageService: MessageService,
         private userService: UserService,
         public authService: AuthService,
         public fb: FormBuilder,
         public router: Router,
         private toastr: ToastrService,
+        public schoolservice: SchoolService,
     ) {}
 
 
 
     ngOnInit() {
         this.refreshListUser();
+
+        this.authService.profileUser().subscribe((data: any) => {
+            this.UserProfile = data;
+            if(this.UserProfile.role=="super-admin"){
+                this.getListeSchool();
+            }
+        });
 
         this.cols = [
             { field: 'name', header: 'Name' },
@@ -63,8 +77,8 @@ export class UsersComponent implements OnInit {
             { field: 'rating', header: 'Reviews' },
             { field: 'status', header: 'Status' },
             { field: 'file', header: 'File' },
-            { field: 'image', header: 'image' }
-
+            { field: 'image', header: 'image' },
+            { field: 'school_name', header: 'school_name' }
         ];
 
         this.statuses = [
@@ -95,6 +109,7 @@ export class UsersComponent implements OnInit {
                 password_confirmation: ['', Validators.required],
                 role: ['user', Validators.required],
                 status: ['', Validators.required],
+                school_name: ['', Validators.required],
 
                 image: ['', Validators.nullValidator],
                 fileSource: ['', Validators.nullValidator],
@@ -103,7 +118,22 @@ export class UsersComponent implements OnInit {
             {
               validators: [Validation.match('password', 'password_confirmation')]
             }
+
         );
+
+    }
+
+    getListeSchool(){
+        this.schoolservice.getAllSchool().subscribe({
+            next: (list) => {
+                this.schools = list
+            },
+            error: () => {
+                console.log(
+                    `Problème au niveau du serveur, attention les données sont fake `
+                );
+            },
+        });
     }
 
     onFileChange(event:any) {
@@ -128,16 +158,13 @@ export class UsersComponent implements OnInit {
         this.userService.getUsers().subscribe({
             next: (listUser) => {
                 this.users = listUser;
-
             },
             error: () => {
                 console.log(
                     `Problème au niveau du serveur, attention les données sont fake `
                 );
-
-                this.userservice
+                this.userService
                     .getFakeUsers()
-                    //.then((data) => (this.users = data));
             },
         });
     }
@@ -151,8 +178,19 @@ export class UsersComponent implements OnInit {
         formData.append('fname',this.form.value.fname);
         formData.append('password',this.form.value.password);
         formData.append('password_confirmation',this.form.value.password_confirmation);
-        formData.append('role',this.form.value.role);
+        formData.append('role','user');
         formData.append('status',this.form.value.status['value']);
+
+
+        if(this.UserProfile.role=="super-admin"){
+            formData.append('school_id',this.form.value.school_name['id']);
+            formData.append('school_name',this.form.value.school_name['Name']);
+        }else{
+            formData.append('school_id',this.UserProfile.school_id.toString());
+            formData.append('school_name',this.UserProfile.school_name);
+        }
+
+
 
         if(this.files){
             formData.append('fileSource', this.files,this.files.name);
@@ -176,6 +214,7 @@ export class UsersComponent implements OnInit {
                 this.form.reset();
                 this.UserDialog = false;
                 this.user = {};
+                this.toastr.info("Utilisateur ajouter avec succée","Info")
             }
           );
     }
@@ -189,7 +228,7 @@ export class UsersComponent implements OnInit {
         this.deleteUserDialog = false;
         this.userService.deleteUserService(this.user).subscribe(
             data => {
-              console.log("deleted");
+              this.toastr.info("Donnée supprimer avec succèes !", "Suppression");
               this.refreshListUser();
             }
           );
@@ -213,6 +252,7 @@ export class UsersComponent implements OnInit {
         formData.append('fname',this.user.fname);
         formData.append('status',this.user.status);
         formData.append('role',this.user.role);
+
 
         if(this.files != null){
             formData.append('fileSource', this.files,this.files.name);
@@ -257,7 +297,16 @@ export class UsersComponent implements OnInit {
         this.submitted = false;
     }
 
-
-
+    filterSchool(event) {
+        const filtered: any[] = [];
+        const query = event.query;
+        for (let i = 0; i < this.schools.length; i++) {
+            const schooll = this.schools[i];
+            if (schooll.Name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                filtered.push(schooll);
+            }
+        }
+        this.filteredSchool = filtered;
+    }
 
 }

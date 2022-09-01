@@ -6,7 +6,8 @@
                                 'layout-static-sidebar-inactive': staticMenuInactive,
                                 'layout-mobile-sidebar-active':menuActiveMobile,
                                 'p-ripple-disabled': !config.ripple, 'p-input-filled': config.inputStyle === 'filled'}">
-    <app-topbar></app-topbar>
+    <app-topbar
+    [UserProfile]="UserProfile"></app-topbar>
     <div class="layout-sidebar">
         <app-menu></app-menu>
     </div>

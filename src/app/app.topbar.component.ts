@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit,Input } from '@angular/core';
 import { AppMainComponent } from './app.main.component';
 import { Subscription } from 'rxjs';
 import { MenuItem } from 'primeng/api';
@@ -16,7 +16,7 @@ export class AppTopBarComponent implements OnInit  {
 
     items: MenuItem[];
     tieredItems: MenuItem[];
-    UserProfile!: User;
+    /* UserProfile!: User; */
 
     constructor(public appMain: AppMainComponent,
         private auth: AuthStateService,
@@ -24,12 +24,10 @@ export class AppTopBarComponent implements OnInit  {
         public token: TokenService,
         public authService: AuthService
     ) { }
+
+    @Input() UserProfile!:User;
+
     ngOnInit() {
-
-        this.authService.profileUser().subscribe((data: any) => {
-            this.UserProfile = data;
-        });
-
         this.tieredItems = [
             {
                 label: 'Customers',
@@ -76,7 +74,6 @@ export class AppTopBarComponent implements OnInit  {
                 icon: 'pi pi-fw pi-sign-out'
             }
         ];
-
     }
 
     signOut() {
@@ -84,6 +81,5 @@ export class AppTopBarComponent implements OnInit  {
         localStorage.clear();
         this.router.navigate(['pages/login']);
     }
-
 
 }

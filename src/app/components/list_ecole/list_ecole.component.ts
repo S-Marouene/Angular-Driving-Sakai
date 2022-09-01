@@ -15,35 +15,24 @@ import { ProductService } from '../../service/productservice';
 export class ListComponent implements OnInit {
 
     form_school: FormGroup = new FormGroup({});
-
     SchoolDialog: boolean;
     school: School;
     submitted = false;
     schools: School[] ;
     status: string[] = ['active', 'inactive'];
     deleteSchoolDialog: boolean = false;
-
-
-
+    errors: any = null;
+    URLSchholPic=CONSTANTES.URLSchholPic;
+    defaultPicSchool=CONSTANTES.defaultSchoolImage;
 
 
     products: Product[];
-
     sortOptions: SelectItem[];
-
     sortOrder: number;
-
     sortField: string;
-
     sourceCities: any[];
-
     targetCities: any[];
-
     orderCities: any[];
-    errors: any = null;
-
-    URLSchholPic=CONSTANTES.URLSchholPic;
-    defaultPicSchool=CONSTANTES.defaultSchoolImage;
 
     constructor(
         private productService: ProductService,
@@ -55,8 +44,6 @@ export class ListComponent implements OnInit {
     ngOnInit() {
         this.productService.getProducts().then(data => this.products = data);
         this. getListSchool();
-
-
 
         this.sourceCities = [
             {name: 'San Francisco', code: 'SF'},
@@ -150,22 +137,22 @@ export class ListComponent implements OnInit {
           );
     }
 
-    onSubmit() {
+    SaveSchool() {
         this.submitted = true;
-        this.schoolservice.add(this.form_school.value).subscribe(
-            (data) => {
-                this.getListSchool();
-                this.form_school.reset();
-                this.SchoolDialog = false;
-                this.school = {};
-                this.toastr.info("Donnée ajouter avec succée","Info")
-            },
-            (err) => {
-              this.toastr.error("Erreur au niveau serveur","Error")
-              console.log(err.message)
-            }
+            this.schoolservice.add(this.form_school.value).subscribe(
+                (data) => {
+                    this.getListSchool();
+                    this.form_school.reset();
+                    this.SchoolDialog = false;
+                    this.school = {};
+                    this.toastr.info("Donnée ajouter avec succée","Info")
+                },
+                (err) => {
+                  this.toastr.error(err.message,"Error")
+                  console.log(err.message)
+                }
+            );
 
-          );
     }
 
     get f(): { [key: string]: AbstractControl } {
@@ -179,8 +166,7 @@ export class ListComponent implements OnInit {
     }
 
     hideDialog() {
-        this.SchoolDialog = false;
-        /* this.updateUserDialog =false; */
         this.submitted = false;
+        this.SchoolDialog = false;
     }
 }

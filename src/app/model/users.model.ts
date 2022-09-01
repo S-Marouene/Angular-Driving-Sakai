@@ -10,5 +10,7 @@ export interface User {
     role?: any;
     created_at?: string;
     status?:string;
+    school_id?:Number;
+    school_name?:string;
 }
 
