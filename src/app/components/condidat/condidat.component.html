@@ -1,0 +1,492 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Details-->
+<!-- <div class="content-section introduction">
+    <div class="feature-intro">
+        <h1>Détails Condidat :</h1>
+    </div>
+    <br>
+</div>
+
+
+<div class="content-section documentation">
+    <p-tabView>
+
+        <p-tabPanel header="Fiche Candidat" leftIcon="pi pi-user">
+            <app-details-condidat></app-details-condidat>
+
+            <div class="card">
+                <h5>Renseignements Personnels</h5>
+
+                <div class="row">
+                    <div class="col-6" style="padding-right: 2%;">
+                        <div class="p-fluid p-formgrid grid">
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Catégorie</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-select" #categorie>
+                                            <option *ngFor="let categorie of categories" [ngValue]="categorie">
+                                                {{ categorie }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Nom</label>
+                                    <div class="col-sm-6">
+                                        <input id="address" pInputText />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> CIN</label>
+                                    <div class="col-sm-6">
+                                        <input id="address" pInputText />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Telephone </label>
+                                    <div class="col-sm-6">
+                                        <input id="address" pInputText />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Bureau </label>
+                                    <div class="col-sm-6">
+                                        <select class="form-select" #bureau>
+                                            <option *ngFor="let bureau of bureaux" [ngValue]="bureau">
+                                                {{ bureau }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Pièces fournies </label>
+                                    <div class="col-sm-6">
+                                        <div class="grid">
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-checkbox mb-0">
+                                                    <p-checkbox name="group1" value="Photos" id="Ph" [(ngModel)]="valPieceFournie"></p-checkbox>
+                                                    <label for="Ph">Photos</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-checkbox mb-0">
+                                                    <p-checkbox name="group1" value="Certificat médical" id="CM" [(ngModel)]="valPieceFournie">
+                                                    </p-checkbox>
+                                                    <label for="CM">Certificat médical</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-checkbox mb-0">
+                                                    <p-checkbox name="group1" value="Quittance Paiement" id="QP" [(ngModel)]="valPieceFournie">
+                                                    </p-checkbox>
+                                                    <label for="QP">Quittance Paiement</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-checkbox mb-0">
+                                                    <p-checkbox name="group1" value="CIN" id="CIN" [(ngModel)]="valPieceFournie"></p-checkbox>
+                                                    <label for="CIN">CIN</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-6" style="padding-left: 2%;">
+                        <div class="p-fluid p-formgrid grid">
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Examen</label>
+                                    <div class="col-sm-6">
+                                        <div class="grid">
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-radiobutton mb-0">
+                                                    <p-radioButton name="Conduite" value="Conduite" [(ngModel)]="valExamen" id="Conduite"></p-radioButton>
+                                                    <label for="Conduite">Conduite</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-radiobutton">
+                                                    <p-radioButton name="code" value="code" [(ngModel)]="valExamen" id="code"></p-radioButton>
+                                                    <label for="code">Code</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Prénom</label>
+                                    <div class="col-sm-6">
+                                        <input id="address" pInputText />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Date_naissance</label>
+                                    <div class="col-sm-6">
+                                        <p-calendar [showIcon]="true" [showButtonBar]="true" [(ngModel)]="selectedDatenaiss"></p-calendar>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Adresse </label>
+                                    <div class="col-sm-6">
+                                        <input id="address" pInputText />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Bureau </label>
+                                    <div class="col-sm-6">
+                                        <select class="form-select" #bureau>
+                                            <option *ngFor="let bureau of bureaux" [ngValue]="bureau">
+                                                {{ bureau }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"> Photo
+                                        </label>
+                                    <div class="col-sm-6">
+                                        <input
+                                    formControlName="image"
+                                    id="image"
+                                    type="file"
+                                    class="form-control"
+                                    (change)="onFileChange($event)"
+                                    [ngClass]="{ 'is-invalid': submitted && f['image'].errors }">
+
+                                <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['image'].errors['required']">Image est obligatoir</div>
+                                </div>
+                                <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width:150px">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <h5>Contrat Code</h5>
+                        <div class="p-fluid p-formgrid grid">
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Type Contrat</label>
+                                    <div class="col-sm-6">
+                                        <div class="grid">
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-radiobutton mb-0">
+                                                    <p-radioButton name="Forfaitaire" value="Forfaitaire" [(ngModel)]="valTypeContrat" id="Forfaitaire"></p-radioButton>
+                                                    <label for="Forfaitaire">Forfaitaire</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-radiobutton">
+                                                    <p-radioButton name="ParHr" value="Par heure" [(ngModel)]="valTypeContrat" id="ParHr"></p-radioButton>
+                                                    <label for="ParHr">Par heure</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Prix Heure Code</label>
+                                    <div class="col-sm-6">
+                                        <input id="" pInputText />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Montant Forfaitaire </label>
+                                    <div class="col-sm-6">
+                                        <input id="" pInputText />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <h5>Contrat Conduite</h5>
+                        <div class="p-fluid p-formgrid grid">
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Type Contrat</label>
+                                    <div class="col-sm-6">
+                                        <div class="grid">
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-radiobutton mb-0">
+                                                    <p-radioButton name="CondForfaitaire" value="CondForfaitaire" [(ngModel)]="valTContratCond" id="CondForfaitaire"></p-radioButton>
+                                                    <label for="CondForfaitaire">Forfaitaire</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-radiobutton">
+                                                    <p-radioButton name="CondParHr" value="Par heure" [(ngModel)]="valTContratCond" id="CondParHr"></p-radioButton>
+                                                    <label for="CondParHr">Par heure</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Prix Heure Conduite</label>
+                                    <div class="col-sm-6">
+                                        <input id="" pInputText />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Montant Forfaitaire </label>
+                                    <div class="col-sm-6">
+                                        <input id="" pInputText />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="card">
+                    <h5>Historique Avant le Système</h5>
+                    <div class="row">
+                        <div class="col-6" style="padding-right: 2%;">
+                            <div class="p-fluid p-formgrid grid">
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                                class="text-danger">*</span> Avant Le</label>
+                                        <div class="col-sm-6">
+                                            <p-calendar [showIcon]="true" [showButtonBar]="true" [(ngModel)]="selectedDateAvSys"></p-calendar>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                                class="text-danger">*</span> Montant Total Payé</label>
+                                        <div class="col-sm-6">
+                                            <input id="address" pInputText />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"> Historique Nb Heures Codes
+                                            </label>
+                                        <div class="col-sm-6">
+                                            <input id="address" pInputText />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"> Historique Nb Heures Conduites
+                                            </label>
+                                        <div class="col-sm-6">
+                                            <input id="address" pInputText />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"> Hist Nb Réinscription Conduite
+                                            </label>
+                                        <div class="col-sm-6">
+                                            <input id="address" pInputText />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-6" style="padding-left: 2%;">
+                            <div class="p-fluid p-formgrid grid">
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"><span
+                                                class="text-danger">*</span> Caisse</label>
+                                        <div class="col-sm-6">
+                                            <select class="form-select" #bureau>
+                                                <option *ngFor="let bureau of bureaux" [ngValue]="bureau">
+                                                    {{ bureau }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"> Historique Nb Examens Codes
+                                            </label>
+                                        <div class="col-sm-6">
+                                            <input id="address" pInputText />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"> Historique Nb Examens Conduites
+                                            </label>
+                                        <div class="col-sm-6">
+                                            <input id="address" pInputText />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"> Hist Nb Réinscription Code
+                                            </label>
+                                        <div class="col-sm-6">
+                                            <input id="address" pInputText />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label htmlFor="address" class="col-sm-6 col-form-label fw-bold"> Hist Nb Droit Examen
+                                            </label>
+                                        <div class="col-sm-6">
+                                            <input id="address" pInputText />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="text-right">
+                <button pButton pRipple label="Supprimer" icon="pi pi-trash" iconPos="right"
+                    class="mr-2 mb-2 p-button-danger"></button>
+                <button pButton pRipple label="Modifier" icon="pi pi-user-edit" iconPos="right"
+                    class="mr-2 mb-2 p-button-primary"></button>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Examens" leftIcon="pi pi-calendar-minus">
+            <app-details-condidat></app-details-condidat>
+            <div class="text-right">
+                <button pButton pRipple label="Examen" icon="pi pi-plus-circle" iconPos="right"
+                    class="mr-2 mb-2 p-button-info"></button>
+
+                    sssss
+            </div>
+
+        </p-tabPanel>
+
+        <p-tabPanel header="Paiement" leftIcon="pi pi-euro">
+            <app-details-condidat></app-details-condidat>
+            Paiement
+            Paiement
+        </p-tabPanel>
+
+        <p-tabPanel header="Conduite" leftIcon="pi pi-car">
+            <app-details-condidat></app-details-condidat>
+            Conduite
+        </p-tabPanel>
+
+        <p-tabPanel header="Code" leftIcon="pi pi-book">
+            <app-details-condidat></app-details-condidat>
+            Code
+        </p-tabPanel>
+
+
+    </p-tabView>
+</div> -->

@@ -3,7 +3,8 @@ import {
   HttpRequest,
   HttpHandler,
   HttpInterceptor,
-  HttpEvent
+  HttpEvent,
+  HttpErrorResponse
 } from '@angular/common/http';
 import { TokenService } from './token.service';
 import { catchError, NEVER, Observable, throwError } from 'rxjs';

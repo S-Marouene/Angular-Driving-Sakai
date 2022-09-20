@@ -30,6 +30,7 @@ export class CrudComponent implements OnInit {
 
     rowsPerPageOptions = [5, 10, 20];
 
+
     constructor(private productService: ProductService, private messageService: MessageService,
                 private confirmationService: ConfirmationService) {}
 
@@ -58,6 +59,17 @@ export class CrudComponent implements OnInit {
         this.submitted = false;
         this.productDialog = true;
     }
+
+
+    show(product: Product) {
+        this.product = {...product};
+
+       /*  const url = this.router.serializeUrl(
+          this.router.createUrlTree(['/list'])
+        ); */
+
+       // window.open(url, '_blank');
+      }
 
     deleteSelectedProducts() {
         this.deleteProductsDialog = true;

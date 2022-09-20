@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input} from '@angular/core';
 import { AppMainComponent } from './app.main.component';
 import { Subscription } from 'rxjs';
 import { MenuItem } from 'primeng/api';
@@ -26,6 +26,7 @@ export class AppTopBarComponent implements OnInit  {
     ) { }
 
     @Input() UserProfile!:User;
+
 
     ngOnInit() {
         this.tieredItems = [

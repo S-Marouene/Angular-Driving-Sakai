@@ -155,6 +155,8 @@ import { UserService } from './service/users.service';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { DefaultProfileUserPipe } from './pipe/default-profile-user.pipe';
 import { ToastrModule } from 'ngx-toastr';
+import { CondidatComponent } from './components/condidat/condidat.component';
+import { DetailsCondidatComponent } from './components/details-condidat/details-condidat.component';
 
 
 
@@ -304,6 +306,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         TestComponentComponent,
         UsersComponent,
         DefaultProfileUserPipe,
+        CondidatComponent,
+        DetailsCondidatComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

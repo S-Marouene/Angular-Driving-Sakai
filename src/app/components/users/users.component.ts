@@ -6,11 +6,10 @@ import { AuthService } from 'src/app/shared-auth/auth.service';
 import {
     AbstractControl,
     FormBuilder,
-    FormControl,
     FormGroup,
     Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Validation from 'src/app/utils/validation';
 import { CONSTANTES } from 'src/app/constantes/constantes';
 import { ToastrService } from 'ngx-toastr';
@@ -56,10 +55,11 @@ export class UsersComponent implements OnInit {
         public router: Router,
         private toastr: ToastrService,
         public schoolservice: SchoolService,
+        private activatedroute:ActivatedRoute,
     ) {}
 
 
-
+    product:any;
     ngOnInit() {
         this.refreshListUser();
 
@@ -181,7 +181,6 @@ export class UsersComponent implements OnInit {
         formData.append('role','user');
         formData.append('status',this.form.value.status['value']);
 
-
         if(this.UserProfile.role=="super-admin"){
             formData.append('school_id',this.form.value.school_name['id']);
             formData.append('school_name',this.form.value.school_name['Name']);
@@ -189,8 +188,6 @@ export class UsersComponent implements OnInit {
             formData.append('school_id',this.UserProfile.school_id.toString());
             formData.append('school_name',this.UserProfile.school_name);
         }
-
-
 
         if(this.files){
             formData.append('fileSource', this.files,this.files.name);
@@ -275,7 +272,6 @@ export class UsersComponent implements OnInit {
         );
     }
 
-
     get f(): { [key: string]: AbstractControl } {
         return this.form.controls;
     }
@@ -310,3 +306,7 @@ export class UsersComponent implements OnInit {
     }
 
 }
+function queryParams(queryParams: any) {
+    throw new Error('Function not implemented.');
+}
+

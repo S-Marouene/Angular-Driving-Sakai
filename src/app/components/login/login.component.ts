@@ -12,6 +12,7 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { diffDates } from '@fullcalendar/angular';
 import { MessageService } from 'primeng/api';
 import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -71,14 +72,16 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.authService.signin(this.loginForm.value).subscribe(
         (result) => {
             if (result.user['status'] == 'active') {
-
                 this.responseHandler(result);
             }else{
               this.toastr.warning("Contacter L'administrateur !", "Utilisateur Inactive ");
             }
         },
         (error) => {
-          this.errors = error.error;
+            /* this.errors = error.mess;
+            this.toastr.error(this.errors) */
+            console.log('Error: ', error.data);
+
         },
         () => {
           this.authState.setAuthState(true);
