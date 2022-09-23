@@ -1,0 +1,650 @@
+<p-table #dt1 [value]="condidats" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
+    styleClass="p-datatable-gridlines" [paginator]="true"
+    [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll">
+    <ng-template pTemplate="caption" class="text-right">
+        <div class="flex justify-content-between flex-column sm:flex-row">
+
+            <button pButton label="Nouveau Condidat" class="p-button-outlined mb-2" icon="pi pi-user-plus"
+                (click)="openNew()"></button>
+            <span class="p-input-icon-left mb-2">
+
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" #filter (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Recherche" class="w-full" />
+            </span>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Nom
+                    <p-columnFilter type="text" field="name" display="menu" placeholder="Recherche par nom">
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Télephone
+                    <p-columnFilter type="text" field="country.name" display="menu" placeholder="Search by country">
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Contrat Code
+                    <p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false"
+                        [showOperator]="false" [showAddButton]="false">
+                        <ng-template pTemplate="header">
+                            <div class="px-3 pt-3 pb-0">
+                                <span class="font-bold">Agent Picker</span>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect [ngModel]="value" [options]="representatives" placeholder="Any"
+                                (onChange)="filter($event.value)" optionLabel="name">
+                                <ng-template let-option pTemplate="item">
+                                    <div class="p-multiselect-representative-option">
+                                        <img [alt]="option.label" src="assets/demo/images/avatar/{{option.image}}"
+                                            width="32" style="vertical-align: middle" />
+                                        <span class="ml-2">{{option.name}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Nb H Programmé
+                    <p-columnFilter type="date" field="date" display="menu" placeholder="mm/dd/yyyy">
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Examen
+                    <p-columnFilter type="numeric" field="balance" display="menu" currency="USD">
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Contrat Conduite
+                    <p-columnFilter field="status" matchMode="equals" display="menu">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)"
+                                placeholder="Any" [style]="{'min-width': '12rem'}">
+                                <ng-template let-option pTemplate="item">
+                                    <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                                </ng-template>
+                            </p-dropdown>
+                        </ng-template>
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Nb H Effect
+                    <p-columnFilter field="activity" matchMode="between" display="menu" [showMatchModes]="false"
+                        [showOperator]="false" [showAddButton]="false">
+                        <ng-template pTemplate="filter" let-filter="filterCallback">
+                            <p-slider [ngModel]="activityValues" [range]="true" (onSlideEnd)="filter($event.values)"
+                                styleClass="m-3" [style]="{'min-width': '12rem'}"></p-slider>
+                            <div class="flex align-items-center justify-content-between px-2">
+                                <span>{{activityValues[0]}}</span>
+                                <span>{{activityValues[1]}}</span>
+                            </div>
+                        </ng-template>
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th style="width: 8rem">
+                <div class="flex justify-content-between align-items-center">
+                    Date Examen
+                    <p-columnFilter type="boolean" field="verified" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th style="width: 8rem">
+                <div class="flex justify-content-between align-items-center">
+                    Dû Aujout
+                    <p-columnFilter type="boolean" field="verified" display="menu"></p-columnFilter>
+                </div>
+            </th>
+            <th style="width: 8rem">
+                <div class="flex justify-content-between align-items-center">
+                    Dû Global
+                    <p-columnFilter type="boolean" field="verified" display="menu"></p-columnFilter>
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" ngFor let-actualCondidat [ngForOf]="condidats" >
+            <tr app-item-condidat [condidat]="actualCondidat"></tr>
+    </ng-template>
+
+
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="7">On à pas trouver des condidats.</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="loadingbody">
+        <tr>
+            <td colspan="7">Cahrgement des Condidats , attendez SVP ! </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+
+<form [formGroup]="form_condidat">
+    <p-dialog [(visible)]="CondidatDialog" [style]="{width: '70%'}" header="Dossier Candidats" [modal]="true" class="p-fluid">
+        <ng-template pTemplate="content">
+            <div class="card">
+                <h5>Renseignements Personnels</h5>
+
+                <div class="row">
+                    <div class="col-6" style="padding-right: 2%;">
+                        <div class="p-fluid p-formgrid grid">
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Catégorie</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-select" formControlName="categorie"
+                                            [ngClass]="{ 'is-invalid': submitted && f['categorie'].errors }">
+                                            <option *ngFor="let categorie of categories" [ngValue]="categorie">
+                                                {{ categorie }}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="submitted && f['categorie'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['categorie'].errors['required']">categorie est obligatoir
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span> Nom</label>
+                                    <div class="col-sm-6">
+                                        <input formControlName="nom" pInputText [ngClass]="{ 'is-invalid': submitted && f['nom'].errors }" />
+                                        <div *ngIf="submitted && f['nom'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['nom'].errors['required']">nom est obligatoir
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                        CIN</label>
+                                    <div class="col-sm-6">
+                                        <input formControlName="cin" pInputText [ngClass]="{ 'is-invalid': submitted && f['cin'].errors }"/>
+                                        <div *ngIf="submitted && f['cin'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['cin'].errors['required']">CIN est obligatoir</div>
+                                            <div *ngIf="f['cin'].errors['pattern']">cin est de 8 number</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label fw-bold" ><span class="text-danger">*</span>
+                                        Telephone </label>
+                                    <div class="col-sm-6">
+                                        <input formControlName="phone" pInputText [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }"/>
+                                        <div *ngIf="submitted && f['cin'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['phone'].errors['required']">phone est obligatoir</div>
+                                            <div *ngIf="f['phone'].errors['pattern']">phone est number</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label fw-bold" ><span class="text-danger">*</span>
+                                        Bureau </label>
+                                    <div class="col-sm-6">
+                                        <select class="form-select" formControlName="bureau" [ngClass]="{ 'is-invalid': submitted && f['bureau'].errors }">
+                                            <option *ngFor="let bureau of bureaux" [ngValue]="bureau">
+                                                {{ bureau }}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="submitted && f['bureau'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['bureau'].errors['required']">bureau est obligatoir</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                        Pièces fournies </label>
+                                    <div class="col-sm-6">
+                                        <div class="grid">
+                                            <div *ngFor="let piece of pieces" class="field-checkbox" [ngClass]="{ 'is-invalid': submitted && f['piece'].errors }">
+                                                <p-checkbox name="group2" [value]="piece" [inputId]="piece"
+                                                    [formControl]="form_condidat.controls['piece']" ></p-checkbox>
+                                                <label [for]="piece">{{piece}}</label>
+                                            </div>
+                                            <div *ngIf="submitted && f['piece'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['piece'].errors['required']">piece est obligatoir</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-6" style="padding-left: 2%;">
+                        <div class="p-fluid p-formgrid grid">
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Examen</label>
+                                    <div class="col-sm-6">
+                                        <div class="grid"  [ngClass]="{ 'is-invalid': submitted && f['exam'].errors }">
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-radiobutton mb-0">
+                                                    <p-radioButton name="exam" value="Conduite" formControlName="exam"
+                                                       ></p-radioButton>
+                                                    <label for="code3">Conduite</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-radiobutton mb-0">
+                                                    <p-radioButton name="exam" value="Code" formControlName="exam"
+                                                        ></p-radioButton>
+                                                    <label for="code4">Code</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="submitted && f['exam'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['exam'].errors['required']">exam est obligatoir</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                        Prénom</label>
+                                    <div class="col-sm-6">
+                                        <input formControlName="prenom" pInputText [ngClass]="{ 'is-invalid': submitted && f['prenom'].errors }" />
+                                        <div *ngIf="submitted && f['prenom'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['prenom'].errors['required']">prenom est obligatoir</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                        Date_naissance</label>
+                                    <div class="col-sm-6" [ngClass]="{ 'is-invalid': submitted && f['date_naiss'].errors }">
+                                        <p-calendar formControlName="date_naiss" dateFormat="yy-mm-dd" [showIcon]="true"
+                                            [showButtonBar]="true" ></p-calendar>
+                                    </div>
+                                    <div *ngIf="submitted && f['date_naiss'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['date_naiss'].errors['required']">date_naiss est obligatoir</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                        Adresse </label>
+                                    <div class="col-sm-6">
+                                        <input formControlName="address" pInputText [ngClass]="{ 'is-invalid': submitted && f['address'].errors }"/>
+                                        <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['address'].errors['required']">address est obligatoir</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                        Email </label>
+                                    <div class="col-sm-6">
+                                        <input formControlName="email" pInputText
+                                            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+                                        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['email'].errors['required']">Email est obligatoir</div>
+                                            <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label fw-bold"> Photo
+                                    </label>
+                                    <div class="col-sm-6">
+                                        <input formControlName="image" id="image" type="file" class="form-control" (change)="onFileChange($event)">
+                                        <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width:150px">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <h5>Contrat Code</h5>
+                        <div class="p-fluid p-formgrid grid">
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Type Contrat</label>
+                                    <div class="col-sm-6">
+                                        <div class="grid"  [ngClass]="{ 'is-invalid': submitted && f['type_c_code'].errors }">
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-radiobutton mb-0">
+                                                    <p-radioButton name="type_c_code" [value]="false" label="Forfaitaire" formControlName="type_c_code"
+                                                         [(ngModel)]="selected_t_c_code" ></p-radioButton>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-radiobutton mb-0">
+                                                    <p-radioButton name="type_c_code" [value]="true" [(ngModel)]="selected_t_c_code" formControlName="type_c_code"
+                                                         label="Par heure"></p-radioButton>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="submitted && f['type_c_code'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['type_c_code'].errors['required']">type_c_code est obligatoir</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12" *ngIf="selected_t_c_code">
+                                <div class="form-group row" >
+                                    <label htmlFor="" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Prix Heure Code</label>
+                                    <div class="col-sm-6">
+                                        <input formControlName="prix_h_code" pInputText [ngClass]="{ 'is-invalid': submitted && f['prix_h_code'].errors }" />
+                                        <div *ngIf="submitted && f['prix_h_code'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['prix_h_code'].errors['required']">prix_h_code est obligatoir</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12" *ngIf="!selected_t_c_code">
+                                <div class="form-group row" >
+                                    <label htmlFor="" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Montant Forfaitaire</label>
+                                    <div class="col-sm-6">
+                                        <input formControlName="prix_forfaitaire_code" pInputText [ngClass]="{ 'is-invalid': submitted && f['prix_forfaitaire_code'].errors }" />
+                                        <div *ngIf="submitted && f['prix_forfaitaire_code'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['prix_forfaitaire_code'].errors['required']">prix_forfaitaire_code est obligatoir</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="card">
+                        <h5>Contrat Conduite</h5>
+                        <div class="p-fluid p-formgrid grid">
+                            <div class="field col-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Type Contrat</label>
+                                    <div class="col-sm-6">
+                                        <div class="grid"  [ngClass]="{ 'is-invalid': submitted && f['type_c_cond'].errors }">
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-radiobutton mb-0">
+                                                    <p-radioButton name="type_c_cond" [value]="false" label="Forfaitaire" formControlName="type_c_cond"
+                                                         [(ngModel)]="selected_t_c_cond" ></p-radioButton>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 md:col-4">
+                                                <div class="field-radiobutton mb-0">
+                                                    <p-radioButton name="type_c_cond" [value]="true" [(ngModel)]="selected_t_c_cond" formControlName="type_c_cond"
+                                                         label="Par heure"></p-radioButton>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="submitted && f['type_c_cond'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['type_c_cond'].errors['required']">type_c_cond est obligatoir</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12" *ngIf="selected_t_c_cond">
+                                <div class="form-group row" >
+                                    <label htmlFor="" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Prix Heure Conduite</label>
+                                    <div class="col-sm-6">
+                                        <input formControlName="prix_h_cond" pInputText [ngClass]="{ 'is-invalid': submitted && f['prix_h_cond'].errors }" />
+                                        <div *ngIf="submitted && f['prix_h_cond'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['prix_h_cond'].errors['required']">prix_h_cond est obligatoir</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field col-12" *ngIf="!selected_t_c_cond">
+                                <div class="form-group row" >
+                                    <label htmlFor="" class="col-sm-6 col-form-label fw-bold"><span
+                                            class="text-danger">*</span> Montant Forfaitaire</label>
+                                    <div class="col-sm-6">
+                                        <input formControlName="prix_forfaitaire_cond" pInputText [ngClass]="{ 'is-invalid': submitted && f['prix_forfaitaire_cond'].errors }" />
+                                        <div *ngIf="submitted && f['prix_forfaitaire_cond'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['prix_forfaitaire_cond'].errors['required']">prix_forfaitaire_cond est obligatoir</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="card">
+                    <h5>Historique Avant le Système</h5>
+                    <div class="row">
+                        <div class="col-6" style="padding-right: 2%;">
+                            <div class="p-fluid p-formgrid grid">
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                            Avant Le</label>
+                                        <div class="col-sm-6" [ngClass]="{ 'is-invalid': submitted && f['hist_av_date'].errors }">
+                                            <p-calendar formControlName="hist_av_date" dateFormat="yy-mm-dd" [showIcon]="true"
+                                                [showButtonBar]="true" ></p-calendar>
+                                        </div>
+                                        <div *ngIf="submitted && f['hist_av_date'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['hist_av_date'].errors['required']">hist_av_date est obligatoir</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                            Montant Total Payé </label>
+                                        <div class="col-sm-6">
+                                            <input formControlName="hist_montant_paye" pInputText [ngClass]="{ 'is-invalid': submitted && f['hist_montant_paye'].errors }"/>
+                                            <div *ngIf="submitted && f['hist_montant_paye'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['hist_montant_paye'].errors['required']">hist_montant_paye est obligatoir</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                            Historique Nb
+                                            Heures Codes </label>
+                                        <div class="col-sm-6">
+                                            <input formControlName="hist_nb_hr_code" pInputText [ngClass]="{ 'is-invalid': submitted && f['hist_nb_hr_code'].errors }"/>
+                                            <div *ngIf="submitted && f['hist_nb_hr_code'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['hist_nb_hr_code'].errors['required']">hist_nb_hr_code est obligatoir</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                            Historique Nb
+                                            Heures Conduites </label>
+                                        <div class="col-sm-6">
+                                            <input formControlName="hist_nb_hr_cond" pInputText [ngClass]="{ 'is-invalid': submitted && f['hist_nb_hr_cond'].errors }"/>
+                                            <div *ngIf="submitted && f['hist_nb_hr_cond'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['hist_nb_hr_cond'].errors['required']">hist_nb_hr_cond est obligatoir</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                            Hist Nb
+                                            Réinscription Conduite </label>
+                                        <div class="col-sm-6">
+                                            <input formControlName="hist_nb_reinsc_cond" pInputText [ngClass]="{ 'is-invalid': submitted && f['hist_nb_reinsc_cond'].errors }"/>
+                                            <div *ngIf="submitted && f['hist_nb_reinsc_cond'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['hist_nb_reinsc_cond'].errors['required']">hist_nb_reinsc_cond est obligatoir</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-6" style="padding-left: 2%;">
+                            <div class="p-fluid p-formgrid grid">
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-6 col-form-label fw-bold"><span
+                                                class="text-danger">*</span> Caisse</label>
+                                        <div class="col-sm-6">
+                                            <select class="form-select" formControlName="hist_caisse" [ngClass]="{ 'is-invalid': submitted && f['hist_caisse'].errors }">
+                                                <option *ngFor="let bureau of bureaux" [ngValue]="bureau">
+                                                    {{ bureau }}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && f['hist_caisse'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['hist_caisse'].errors['required']">hist_caisse est obligatoir
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                            Historique Nb
+                                            Examens Codes </label>
+                                        <div class="col-sm-6">
+                                            <input formControlName="hist_nb_exam_code" pInputText [ngClass]="{ 'is-invalid': submitted && f['hist_nb_exam_code'].errors }"/>
+                                            <div *ngIf="submitted && f['hist_nb_exam_code'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['hist_nb_exam_code'].errors['required']">hist_nb_exam_code est obligatoir</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                            Historique Nb
+                                            Examens Conduites </label>
+                                        <div class="col-sm-6">
+                                            <input formControlName="hist_nb_exam_cond" pInputText [ngClass]="{ 'is-invalid': submitted && f['hist_nb_exam_cond'].errors }"/>
+                                            <div *ngIf="submitted && f['hist_nb_exam_cond'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['hist_nb_exam_cond'].errors['required']">hist_nb_exam_cond est obligatoir</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                            Hist Nb
+                                            Réinscription Code </label>
+                                        <div class="col-sm-6">
+                                            <input formControlName="hist_nb_reinsc_code" pInputText [ngClass]="{ 'is-invalid': submitted && f['hist_nb_reinsc_code'].errors }"/>
+                                            <div *ngIf="submitted && f['hist_nb_reinsc_code'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['hist_nb_reinsc_code'].errors['required']">hist_nb_reinsc_code est obligatoir</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                            Hist Nb Droit
+                                            Examen</label>
+                                        <div class="col-sm-6">
+                                            <input formControlName="hist_nb_droit_exam" pInputText [ngClass]="{ 'is-invalid': submitted && f['hist_nb_droit_exam'].errors }"/>
+                                            <div *ngIf="submitted && f['hist_nb_droit_exam'].errors" class="invalid-feedback">
+                                                <div *ngIf="f['hist_nb_droit_exam'].errors['required']">hist_nb_droit_exam est obligatoir</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="onSubmit()"></button>
+        </ng-template>
+
+    </p-dialog>
+</form>

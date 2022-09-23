@@ -33,6 +33,8 @@ import { UsersComponent } from './components/users/users.component';
 import { AuthGuard } from './shared-auth/guard/auth.guard';
 import { UserGuard } from './shared-auth/guard/user.guard';
 import { CondidatComponent } from './components/condidat/condidat.component';
+import { DetailsCondidatComponent } from './components/condidat/details-condidat/details-condidat.component';
+
 
 @NgModule({
     imports: [
@@ -43,18 +45,23 @@ import { CondidatComponent } from './components/condidat/condidat.component';
                 children: [
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
                     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-                    {path: 'uikit/testcrud', component:  CrudComponent, canActivate: [UserGuard]},
-                    {path: 'uikit/listusers', component:  UsersComponent ,canActivate: [AuthGuard] },
-                    {path: 'uikit/condidat', component:  CondidatComponent ,canActivate: [AuthGuard] },
-                    {path: 'uikit/calendar', component: TestComponentComponent,canActivate: [AuthGuard] },
-                    {path: 'uikit/profile', component: ProfileComponent,canActivate: [AuthGuard] },
+                    {path: 'testcrud', component:  CrudComponent, canActivate: [UserGuard]},
+                    {path: 'listusers', component:  UsersComponent ,canActivate: [AuthGuard] },
+                    {path: 'condidat', component:  CondidatComponent ,canActivate: [AuthGuard] },
+                    {path: 'condidat/:id', component:  DetailsCondidatComponent },
+                    {path: 'listSchool', component: ListComponent},
+
+
+
+                    {path: 'calendar', component: TestComponentComponent,canActivate: [AuthGuard] },
+                    {path: 'profile', component: ProfileComponent,canActivate: [AuthGuard] },
 
                     {path: 'uikit/input', component: InputComponent},
 
                     {path: 'uikit/invalidstate', component: InvalidStateComponent},
                     {path: 'uikit/button', component: ButtonComponent},
                     {path: 'uikit/table', component: TableComponent},
-                    {path: 'uikit/list', component: ListComponent},
+
                     {path: 'uikit/tree', component: TreeComponent},
                     {path: 'uikit/panel', component: PanelsComponent},
                     {path: 'uikit/overlay', component: OverlaysComponent},

@@ -26,6 +26,7 @@ export const API = {
     'add_condidat' : 'http://127.0.0.1/Driving/backend/api/auth/CreateCondidat',
     'ListCondidat' : 'http://127.0.0.1/Driving/backend/api/auth/allCondidats',
     'DeleteCondidat' : 'http://127.0.0.1/Driving/backend/api/auth/delete-condidat/',
+    'getCondidatByID':'http://127.0.0.1/Driving/backend/api/auth/GetCondByID/',
 
 
 }

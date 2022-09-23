@@ -156,7 +156,9 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { DefaultProfileUserPipe } from './pipe/default-profile-user.pipe';
 import { ToastrModule } from 'ngx-toastr';
 import { CondidatComponent } from './components/condidat/condidat.component';
-import { DetailsCondidatComponent } from './components/details-condidat/details-condidat.component';
+import { ListCondidatComponent } from './components/condidat/list_condidat/list-condidat/list-condidat.component';
+import { ItemCondidatComponent } from './components/condidat/item_condidat/item-condidat/item-condidat.component';
+import { DetailsCondidatComponent } from './components/condidat/details-condidat/details-condidat.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -306,7 +308,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         UsersComponent,
         DefaultProfileUserPipe,
         CondidatComponent,
-        DetailsCondidatComponent,
+        ListCondidatComponent,
+        ItemCondidatComponent,
+        DetailsCondidatComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
