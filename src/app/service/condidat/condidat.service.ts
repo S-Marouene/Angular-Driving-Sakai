@@ -15,6 +15,10 @@ export class CondidatService {
         return this.http.get<Condidat[]>(API.ListCondidat)
     }
 
+    getCondidatsByID(id: number): Observable<Condidat> {
+        return this.http.get<Condidat>(API.getCondidatByID + id)
+    }
+
     register(condidat): Observable<any> {
         return this.http.post(API.add_condidat, condidat);
     }

@@ -1,15 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Condidat } from 'src/app/model/condidat.model';
+import { CondidatService } from 'src/app/service/condidat/condidat.service';
 
 @Component({
   selector: 'app-details-condidat',
   templateUrl: './details-condidat.component.html'
 })
 export class DetailsCondidatComponent implements OnInit {
-
-  constructor() { }
+    condidat : Condidat | null=null;
+    constructor(
+        private condidatService :CondidatService,
+        private activatedRoute: ActivatedRoute,
+        private router: Router
+    ){}
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params) => {
+        this.condidatService.getCondidatsByID(params.id).subscribe({
+            next: (condidat) => { this.condidat = condidat;
+            },
+            error: (e) => {this.router.navigate(['condidat']);}
+        });
+    });
   }
-  
 }

@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
+import { Condidat } from 'src/app/model/condidat.model';
 
 @Component({
   selector: 'app-renseingement-condidat',
   templateUrl: './renseingement-condidat.component.html'
 })
 export class RenseingementCondidatComponent implements OnInit {
-
+  @Input() condidat:Condidat;
   constructor() { }
 
   ngOnInit(): void {

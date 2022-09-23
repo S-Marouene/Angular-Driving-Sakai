@@ -4,7 +4,7 @@
     <a [routerLink]="['/condidat']" class="text-blue-500">Liste Condidat</a>
 </div>
 
-<app-card-condidat></app-card-condidat>
+<app-card-condidat [condidat]="condidat"></app-card-condidat>
 
 <div class="content-section introduction">
     <div class="feature-intro">
@@ -13,9 +13,10 @@
 </div>
 
 <div class="content-section documentation">
+
     <p-tabView>
         <p-tabPanel header="Fiche Candidat" leftIcon="pi pi-user">
-            <app-renseingement-condidat></app-renseingement-condidat>
+            <app-renseingement-condidat [condidat]="condidat"></app-renseingement-condidat>
         </p-tabPanel>
 
         <p-tabPanel header="Examens" leftIcon="pi pi-calendar-minus">
