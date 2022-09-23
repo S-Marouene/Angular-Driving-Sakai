@@ -159,6 +159,12 @@ import { CondidatComponent } from './components/condidat/condidat.component';
 import { ListCondidatComponent } from './components/condidat/list_condidat/list-condidat/list-condidat.component';
 import { ItemCondidatComponent } from './components/condidat/item_condidat/item-condidat/item-condidat.component';
 import { DetailsCondidatComponent } from './components/condidat/details-condidat/details-condidat.component';
+import { CardCondidatComponent } from './components/condidat/details-condidat/card-condidat/card-condidat/card-condidat.component';
+import { ExamcondidatComponent } from './components/condidat/details-condidat/exam-condidat/examcondidat/examcondidat.component';
+import { RenseingementCondidatComponent } from './components/condidat/details-condidat/renseignement-condidat/renseingement-condidat/renseingement-condidat.component';
+import { PaiementCondidatComponent } from './components/condidat/details-condidat/paiement-condidat/paiement-condidat/paiement-condidat.component';
+import { ConduiteCondidatComponent } from './components/condidat/details-condidat/conduite-condidat/conduite-condidat/conduite-condidat.component';
+import { CodeCondidatComponent } from './components/condidat/details-condidat/code-condidat/code-condidat/code-condidat.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -310,7 +316,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         CondidatComponent,
         ListCondidatComponent,
         ItemCondidatComponent,
-        DetailsCondidatComponent
+        DetailsCondidatComponent,
+        CardCondidatComponent,
+        ExamcondidatComponent,
+        RenseingementCondidatComponent,
+        PaiementCondidatComponent,
+        ConduiteCondidatComponent,
+        CodeCondidatComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
