@@ -33,6 +33,7 @@ import { UsersComponent } from './components/users/users.component';
 import { AuthGuard } from './shared-auth/guard/auth.guard';
 import { UserGuard } from './shared-auth/guard/user.guard';
 import { CondidatComponent } from './components/condidat/condidat.component';
+
 @NgModule({
     imports: [
         RouterModule.forRoot([
@@ -47,6 +48,7 @@ import { CondidatComponent } from './components/condidat/condidat.component';
                     {path: 'uikit/condidat', component:  CondidatComponent ,canActivate: [AuthGuard] },
                     {path: 'uikit/calendar', component: TestComponentComponent,canActivate: [AuthGuard] },
                     {path: 'uikit/profile', component: ProfileComponent,canActivate: [AuthGuard] },
+
                     {path: 'uikit/input', component: InputComponent},
 
                     {path: 'uikit/invalidstate', component: InvalidStateComponent},

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy, DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
@@ -159,7 +159,6 @@ import { CondidatComponent } from './components/condidat/condidat.component';
 import { DetailsCondidatComponent } from './components/details-condidat/details-condidat.component';
 
 
-
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   timeGridPlugin,
@@ -312,7 +311,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MenuService, ConfigService,UserService,
+        PhotoService, ProductService, MenuService, ConfigService,UserService,DatePipe,
         {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor,multi: true},
     ],
     bootstrap: [AppComponent]
