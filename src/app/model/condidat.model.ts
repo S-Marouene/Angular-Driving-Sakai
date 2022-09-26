@@ -26,6 +26,11 @@ export interface Condidat {
     created_at?:string;
     updated_at?:string;
     etat?:string;
+    examen?:string;
+    categorie?:string;
+    cin?:string;
+    prix_frf_code?:string;
+    prix_frf_cond?:string;
 
 }
 

@@ -3,7 +3,7 @@
         <h5 class="card-title">{{condidat?.nom}} {{condidat?.prenom}}</h5>
         <div class="row no-gutters">
             <div class="col-md-2">
-                <img [alt]="condidat.nom" src="{{URLcondidatPic+ (condidat.photo | defaultProfileUser)}}" class="img-fluid rounded"
+                <img [alt]="condidat?.nom" src="{{URLcondidatPic+ (condidat?.photo | defaultProfileUser)}}" class="img-fluid rounded"
                     style="width: 150px;">
             </div>
 
@@ -17,7 +17,7 @@
                             <p class="fw-bold">Télephone :</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="font-italic text-left">26354263</p>
+                            <p class="font-italic text-left">{{condidat?.num_tel}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -25,7 +25,8 @@
                             <p class="fw-bold">Contrat Code :</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="font-italic text-left">Forfait: 100 d</p>
+                            <p class="font-italic text-left" *ngIf="condidat?.type_c_code == 'Forfaitaire'">{{condidat?.type_c_code}} : {{condidat?.prix_frf_code}} dt</p>
+                            <p class="font-italic text-left" *ngIf="condidat?.type_c_code == 'Par heure'">{{condidat?.type_c_code}} : {{condidat?.prix_frf_code}} dt</p>
                         </div>
                     </div>
                     <div class="row">
@@ -33,7 +34,7 @@
                             <p class="fw-bold">Nb H programmé :</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="font-italic text-left">10</p>
+                            <p class="font-italic text-left">en cours...</p>
                         </div>
                     </div>
                 </div>
@@ -43,26 +44,27 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="fw-bold">Télephone :</p>
+                            <p class="fw-bold">Examen :</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="font-italic text-left">26354263</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p class="fw-bold">Contrat Code :</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="font-italic text-left">Forfait: 100 d</p>
+                            <p class="font-italic text-left">{{condidat?.examen}}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="fw-bold">Nb H programmé :</p>
+                            <p class="fw-bold">Contrat Conduite :</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="font-italic text-left">10</p>
+                            <p class="font-italic text-left" *ngIf="condidat?.type_c_cond == 'Forfaitaire'">{{condidat?.type_c_cond}} : {{condidat?.prix_frf_cond}} dt</p>
+                            <p class="font-italic text-left" *ngIf="condidat?.type_c_cond == 'Par heure'">{{condidat?.type_c_cond}} : {{condidat?.prix_frf_cond}} dt</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="fw-bold">Nb H Effect :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="font-italic text-left">En cours...</p>
                         </div>
                     </div>
                 </div>
@@ -72,26 +74,26 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="fw-bold">Télephone :</p>
+                            <p class="fw-bold">Date Examen :</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="font-italic text-left">26354263</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p class="fw-bold">Contrat Code :</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="font-italic text-left">Forfait: 100 d</p>
+                            <p class="font-italic text-left">en cours...</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="fw-bold">Nb H programmé :</p>
+                            <p class="fw-bold">Dû Aujour :</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="font-italic text-left">10</p>
+                            <p class="font-italic text-left">en cours...</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="fw-bold">Du Global :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="font-italic text-left">en cours...</p>
                         </div>
                     </div>
                 </div>

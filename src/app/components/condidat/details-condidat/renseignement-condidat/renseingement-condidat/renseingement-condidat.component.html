@@ -9,7 +9,13 @@
                         <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Catégorie</label>
                         <div class="col-sm-6">
-                            <select class="form-select" #categorie>
+                            <div class="field">
+                                <label for="name">Nom</label>
+                                <input type="text" pInputText id="nom" [(ngModel)]="condidat.nom" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !condidat.nom}"/>
+                                <small class="ng-dirty ng-invalid" *ngIf="submitted && !condidat.nom">Name est obligatoir.</small>
+                            </div>
+
+                            <select class="form-select" [(ngModel)]="condidat.categorie">
                                 <option *ngFor="let categorie of categories" [ngValue]="categorie">
                                     {{ categorie }}
                                 </option>
@@ -23,7 +29,7 @@
                         <label   class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Nom</label>
                         <div class="col-sm-6">
-                            <input id="address" pInputText value={{condidat.nom}} />
+                            <input id="address" pInputText [(ngModel)]="condidat.nom"/>
                         </div>
                     </div>
                 </div>
@@ -33,7 +39,7 @@
                         <label   class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> CIN</label>
                         <div class="col-sm-6">
-                            <input id="address" pInputText />
+                            <input id="address" pInputText [(ngModel)]="condidat.cin"/>
                         </div>
                     </div>
                 </div>
@@ -42,7 +48,7 @@
                         <label   class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Telephone </label>
                         <div class="col-sm-6">
-                            <input id="address" pInputText />
+                            <input id="address" pInputText [(ngModel)]="condidat.num_tel"/>
                         </div>
                     </div>
                 </div>
@@ -52,7 +58,7 @@
                         <label   class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Bureau </label>
                         <div class="col-sm-6">
-                            <select class="form-select" #bureau>
+                            <select class="form-select" [(ngModel)]="condidat.bureau">
                                 <option *ngFor="let bureau of bureaux" [ngValue]="bureau">
                                     {{ bureau }}
                                 </option>
@@ -69,27 +75,27 @@
                             <div class="grid">
                                 <div class="col-12 md:col-4">
                                     <div class="field-checkbox mb-0">
-                                        <p-checkbox name="group1" value="Photos" id="Ph" [(ngModel)]="valPieceFournie"></p-checkbox>
+                                        <p-checkbox name="group1" value="Photos"  [ngModel]="selectedpiece_fournit" ></p-checkbox>
                                         <label for="Ph">Photos</label>
                                     </div>
                                 </div>
                                 <div class="col-12 md:col-4">
                                     <div class="field-checkbox mb-0">
-                                        <p-checkbox name="group1" value="Certificat médical" id="CM" [(ngModel)]="valPieceFournie">
+                                        <p-checkbox name="group1" value="Certificat médical" [(ngModel)]="selectedpiece_fournit">
                                         </p-checkbox>
                                         <label for="CM">Certificat médical</label>
                                     </div>
                                 </div>
                                 <div class="col-12 md:col-4">
                                     <div class="field-checkbox mb-0">
-                                        <p-checkbox name="group1" value="Quittance Paiement" id="QP" [(ngModel)]="valPieceFournie">
+                                        <p-checkbox name="group1" value="Quittance Paiement" [(ngModel)]="selectedpiece_fournit">
                                         </p-checkbox>
                                         <label for="QP">Quittance Paiement</label>
                                     </div>
                                 </div>
                                 <div class="col-12 md:col-4">
                                     <div class="field-checkbox mb-0">
-                                        <p-checkbox name="group1" value="CIN" id="CIN" [(ngModel)]="valPieceFournie"></p-checkbox>
+                                        <p-checkbox name="group1" value="CIN" [(ngModel)]="selectedpiece_fournit"></p-checkbox>
                                         <label for="CIN">CIN</label>
                                     </div>
                                 </div>
@@ -112,13 +118,13 @@
                             <div class="grid">
                                 <div class="col-12 md:col-4">
                                     <div class="field-radiobutton mb-0">
-                                        <p-radioButton name="Conduite" value="Conduite" [(ngModel)]="valExamen" id="Conduite"></p-radioButton>
+                                        <p-radioButton name="Conduite" value="Conduite" [(ngModel)]="condidat.examen" id="Conduite"></p-radioButton>
                                         <label for="Conduite">Conduite</label>
                                     </div>
                                 </div>
                                 <div class="col-12 md:col-4">
                                     <div class="field-radiobutton">
-                                        <p-radioButton name="code" value="code" [(ngModel)]="valExamen" id="code"></p-radioButton>
+                                        <p-radioButton name="code" value="Code" [(ngModel)]="condidat.examen" id="code"></p-radioButton>
                                         <label for="code">Code</label>
                                     </div>
                                 </div>
@@ -133,7 +139,7 @@
                         <label   class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Prénom</label>
                         <div class="col-sm-6">
-                            <input id="address" pInputText />
+                            <input id="address" pInputText [(ngModel)]="condidat.prenom" />
                         </div>
                     </div>
                 </div>
@@ -143,7 +149,7 @@
                         <label   class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Date_naissance</label>
                         <div class="col-sm-6">
-                            <p-calendar [showIcon]="true" [showButtonBar]="true" [(ngModel)]="selectedDatenaiss"></p-calendar>
+                            <p-calendar [showIcon]="true" [showButtonBar]="true" [(ngModel)]="condidat.date_naiss" dateFormat="yy-mm-dd"></p-calendar>
                         </div>
                     </div>
                 </div>
@@ -152,7 +158,7 @@
                         <label   class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Adresse </label>
                         <div class="col-sm-6">
-                            <input id="address" pInputText />
+                            <input id="address" pInputText [(ngModel)]="condidat.adresse">
                         </div>
                     </div>
                 </div>
@@ -162,8 +168,8 @@
                         <label   class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Bureau </label>
                         <div class="col-sm-6">
-                            <select class="form-select" #bureau>
-                                <option *ngFor="let bureau of bureaux" [ngValue]="bureau">
+                            <select class="form-select" [(ngModel)]="condidat.bureau">
+                                <option *ngFor="let bureau of bureaux" [ngValue]="bureau" >
                                     {{ bureau }}
                                 </option>
                             </select>
@@ -176,8 +182,9 @@
                         <label   class="col-sm-6 col-form-label fw-bold"> Photo
                             </label>
                         <div class="col-sm-6">
+                            <!-- na9ssa formControlName="image" -->
                             <input
-                        formControlName="image"
+
                         id="image"
                         type="file"
                         class="form-control"
@@ -211,13 +218,13 @@
                             <div class="grid">
                                 <div class="col-12 md:col-4">
                                     <div class="field-radiobutton mb-0">
-                                        <p-radioButton name="Forfaitaire" value="Forfaitaire" [(ngModel)]="valTypeContrat" id="Forfaitaire"></p-radioButton>
+                                        <p-radioButton name="Forfaitaire" value="Forfaitaire" [(ngModel)]="condidat.type_c_code" id="Forfaitaire"></p-radioButton>
                                         <label for="Forfaitaire">Forfaitaire</label>
                                     </div>
                                 </div>
                                 <div class="col-12 md:col-4">
                                     <div class="field-radiobutton">
-                                        <p-radioButton name="ParHr" value="Par heure" [(ngModel)]="valTypeContrat" id="ParHr"></p-radioButton>
+                                        <p-radioButton name="ParHr" value="Par heure" [(ngModel)]="condidat.type_c_code" id="ParHr"></p-radioButton>
                                         <label for="ParHr">Par heure</label>
                                     </div>
                                 </div>
@@ -232,7 +239,7 @@
                         <label htmlFor="" class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Prix Heure Code</label>
                         <div class="col-sm-6">
-                            <input id="" pInputText />
+                            <input  pInputText [(ngModel)]="condidat.prix_hr_code" />
                         </div>
                     </div>
                 </div>
@@ -242,7 +249,7 @@
                         <label   class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Montant Forfaitaire </label>
                         <div class="col-sm-6">
-                            <input id="" pInputText />
+                            <input [(ngModel)]="condidat.prix_frf_code"  pInputText />
                         </div>
                     </div>
                 </div>
@@ -262,13 +269,13 @@
                             <div class="grid">
                                 <div class="col-12 md:col-4">
                                     <div class="field-radiobutton mb-0">
-                                        <p-radioButton name="CondForfaitaire" value="CondForfaitaire" [(ngModel)]="valTContratCond" id="CondForfaitaire"></p-radioButton>
-                                        <label for="CondForfaitaire">Forfaitaire</label>
+                                        <p-radioButton name="CondForfaitaire" value="Forfaitaire" [(ngModel)]="condidat.type_c_cond" id="CondForfaitaire"></p-radioButton>
+                                        <label for="Forfaitaire">Forfaitaire</label>
                                     </div>
                                 </div>
                                 <div class="col-12 md:col-4">
                                     <div class="field-radiobutton">
-                                        <p-radioButton name="CondParHr" value="Par heure" [(ngModel)]="valTContratCond" id="CondParHr"></p-radioButton>
+                                        <p-radioButton name="CondParHr" value="Par heure"  [(ngModel)]="condidat.type_c_cond" id="CondParHr"></p-radioButton>
                                         <label for="CondParHr">Par heure</label>
                                     </div>
                                 </div>
@@ -278,12 +285,13 @@
                     </div>
                 </div>
 
+
                 <div class="field col-12">
                     <div class="form-group row">
                         <label htmlFor="" class="col-sm-6 col-form-label fw-bold"><span
-                                class="text-danger">*</span> Prix Heure Conduite</label>
+                                class="text-danger">*</span> Prix Heure Cond</label>
                         <div class="col-sm-6">
-                            <input id="" pInputText />
+                            <input  pInputText [(ngModel)]="condidat.prix_hr_cond" />
                         </div>
                     </div>
                 </div>
@@ -293,7 +301,7 @@
                         <label   class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Montant Forfaitaire </label>
                         <div class="col-sm-6">
-                            <input id="" pInputText />
+                            <input  [(ngModel)]="condidat.prix_frf_cond" pInputText />
                         </div>
                     </div>
                 </div>
@@ -315,7 +323,7 @@
                             <label   class="col-sm-6 col-form-label fw-bold"><span
                                     class="text-danger">*</span> Avant Le</label>
                             <div class="col-sm-6">
-                                <p-calendar [showIcon]="true" [showButtonBar]="true" [(ngModel)]="selectedDateAvSys"></p-calendar>
+                                <p-calendar [showIcon]="true" [showButtonBar]="true" [(ngModel)]="condidat.hist_av_date" dateFormat="yy-mm-dd" ></p-calendar>
                             </div>
                         </div>
                     </div>
@@ -325,7 +333,7 @@
                             <label   class="col-sm-6 col-form-label fw-bold"><span
                                     class="text-danger">*</span> Montant Total Payé</label>
                             <div class="col-sm-6">
-                                <input id="address" pInputText />
+                                <input  [(ngModel)]="condidat.hist_montant_paye" pInputText />
                             </div>
                         </div>
                     </div>
@@ -335,7 +343,7 @@
                             <label   class="col-sm-6 col-form-label fw-bold"> Historique Nb Heures Codes
                                 </label>
                             <div class="col-sm-6">
-                                <input id="address" pInputText />
+                                <input  [(ngModel)]="condidat.hist_nb_hr_code" pInputText />
                             </div>
                         </div>
                     </div>
@@ -345,7 +353,7 @@
                             <label   class="col-sm-6 col-form-label fw-bold"> Historique Nb Heures Conduites
                                 </label>
                             <div class="col-sm-6">
-                                <input id="address" pInputText />
+                                <input  [(ngModel)]="condidat.hist_nb_hr_cond" pInputText />
                             </div>
                         </div>
                     </div>
@@ -354,7 +362,7 @@
                             <label   class="col-sm-6 col-form-label fw-bold"> Hist Nb Réinscription Conduite
                                 </label>
                             <div class="col-sm-6">
-                                <input id="address" pInputText />
+                                <input  [(ngModel)]="condidat.hist_nb_reinsc_cond" pInputText />
                             </div>
                         </div>
                     </div>
@@ -371,7 +379,7 @@
                             <label   class="col-sm-6 col-form-label fw-bold"><span
                                     class="text-danger">*</span> Caisse</label>
                             <div class="col-sm-6">
-                                <select class="form-select" #bureau>
+                                <select class="form-select" [(ngModel)]="condidat.bureau">
                                     <option *ngFor="let bureau of bureaux" [ngValue]="bureau">
                                         {{ bureau }}
                                     </option>
@@ -385,7 +393,7 @@
                             <label   class="col-sm-6 col-form-label fw-bold"> Historique Nb Examens Codes
                                 </label>
                             <div class="col-sm-6">
-                                <input id="address" pInputText />
+                                <input [(ngModel)]="condidat.hist_nb_exam_code" pInputText />
                             </div>
                         </div>
                     </div>
@@ -394,7 +402,7 @@
                             <label   class="col-sm-6 col-form-label fw-bold"> Historique Nb Examens Conduites
                                 </label>
                             <div class="col-sm-6">
-                                <input id="address" pInputText />
+                                <input [(ngModel)]="condidat.hist_nb_exam_cond" pInputText />
                             </div>
                         </div>
                     </div>
@@ -403,7 +411,7 @@
                             <label   class="col-sm-6 col-form-label fw-bold"> Hist Nb Réinscription Code
                                 </label>
                             <div class="col-sm-6">
-                                <input id="address" pInputText />
+                                <input [(ngModel)]="condidat.hist_nb_reinsc_code" pInputText />
                             </div>
                         </div>
                     </div>
@@ -412,7 +420,7 @@
                             <label   class="col-sm-6 col-form-label fw-bold"> Hist Nb Droit Examen
                                 </label>
                             <div class="col-sm-6">
-                                <input id="address" pInputText />
+                                <input [(ngModel)]="condidat.hist_nb_droit_exam" pInputText />
                             </div>
                         </div>
                     </div>
