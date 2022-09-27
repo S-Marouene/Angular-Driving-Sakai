@@ -9,11 +9,7 @@
                         <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Catégorie</label>
                         <div class="col-sm-6">
-                            <div class="field">
-                                <label for="name">Nom</label>
-                                <input type="text" pInputText id="nom" [(ngModel)]="condidat.nom" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !condidat.nom}"/>
-                                <small class="ng-dirty ng-invalid" *ngIf="submitted && !condidat.nom">Name est obligatoir.</small>
-                            </div>
+
 
                             <select class="form-select" [(ngModel)]="condidat.categorie">
                                 <option *ngFor="let categorie of categories" [ngValue]="categorie">
@@ -73,10 +69,12 @@
                                 class="text-danger">*</span> Pièces fournies </label>
                         <div class="col-sm-6">
                             <div class="grid">
+
                                 <div class="col-12 md:col-4">
                                     <div class="field-checkbox mb-0">
-                                        <p-checkbox name="group1" value="Photos"  [ngModel]="selectedpiece_fournit" ></p-checkbox>
-                                        <label for="Ph">Photos</label>
+                                        <p-checkbox name="group1" value="Photos" [(ngModel)]="selectedpiece_fournit">
+                                        </p-checkbox>
+                                        <label for="Photos">Photos</label>
                                     </div>
                                 </div>
                                 <div class="col-12 md:col-4">
@@ -166,34 +164,27 @@
                 <div class="field col-12">
                     <div class="form-group row">
                         <label   class="col-sm-6 col-form-label fw-bold"><span
-                                class="text-danger">*</span> Bureau </label>
+                                class="text-danger">*</span> Email</label>
                         <div class="col-sm-6">
-                            <select class="form-select" [(ngModel)]="condidat.bureau">
-                                <option *ngFor="let bureau of bureaux" [ngValue]="bureau" >
-                                    {{ bureau }}
-                                </option>
-                            </select>
+                            <input id="address" pInputText [(ngModel)]="condidat.email" />
                         </div>
                     </div>
                 </div>
+
 
                 <div class="field col-12">
                     <div class="form-group row">
                         <label   class="col-sm-6 col-form-label fw-bold"> Photo
                             </label>
                         <div class="col-sm-6">
-                            <!-- na9ssa formControlName="image" -->
-                            <input
-
+                        <input
                         id="image"
                         type="file"
                         class="form-control"
                         (change)="onFileChange($event)"
-                        [ngClass]="{ 'is-invalid': submitted && f['image'].errors }">
+                        >
 
-                    <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
-                        <div *ngIf="f['image'].errors['required']">Image est obligatoir</div>
-                    </div>
+
                     <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width:150px">
                         </div>
                     </div>
@@ -232,9 +223,10 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
-                <div class="field col-12">
+                <div class="field col-12" *ngIf="condidat.type_c_code=='Par heure'">
                     <div class="form-group row">
                         <label htmlFor="" class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Prix Heure Code</label>
@@ -244,7 +236,7 @@
                     </div>
                 </div>
 
-                <div class="field col-12">
+                <div class="field col-12" *ngIf="condidat.type_c_code=='Forfaitaire'">
                     <div class="form-group row">
                         <label   class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Montant Forfaitaire </label>
@@ -269,13 +261,13 @@
                             <div class="grid">
                                 <div class="col-12 md:col-4">
                                     <div class="field-radiobutton mb-0">
-                                        <p-radioButton name="CondForfaitaire" value="Forfaitaire" [(ngModel)]="condidat.type_c_cond" id="CondForfaitaire"></p-radioButton>
+                                        <p-radioButton name="CondForfaitaire" value="Forfaitaire" [(ngModel)]="condidat.type_c_cond" ></p-radioButton>
                                         <label for="Forfaitaire">Forfaitaire</label>
                                     </div>
                                 </div>
                                 <div class="col-12 md:col-4">
                                     <div class="field-radiobutton">
-                                        <p-radioButton name="CondParHr" value="Par heure"  [(ngModel)]="condidat.type_c_cond" id="CondParHr"></p-radioButton>
+                                        <p-radioButton name="CondParHr" value="Par heure"  [(ngModel)]="condidat.type_c_cond" ></p-radioButton>
                                         <label for="CondParHr">Par heure</label>
                                     </div>
                                 </div>
@@ -286,7 +278,7 @@
                 </div>
 
 
-                <div class="field col-12">
+                <div class="field col-12" *ngIf="condidat.type_c_cond=='Par heure'">
                     <div class="form-group row">
                         <label htmlFor="" class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Prix Heure Cond</label>
@@ -296,7 +288,7 @@
                     </div>
                 </div>
 
-                <div class="field col-12">
+                <div class="field col-12" *ngIf="condidat.type_c_cond=='Forfaitaire'">
                     <div class="form-group row">
                         <label   class="col-sm-6 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Montant Forfaitaire </label>
@@ -322,9 +314,11 @@
                         <div class="form-group row">
                             <label   class="col-sm-6 col-form-label fw-bold"><span
                                     class="text-danger">*</span> Avant Le</label>
+
                             <div class="col-sm-6">
-                                <p-calendar [showIcon]="true" [showButtonBar]="true" [(ngModel)]="condidat.hist_av_date" dateFormat="yy-mm-dd" ></p-calendar>
+                                <p-calendar [showIcon]="true" [showButtonBar]="true" [(ngModel)]="condidat.hist_av_date" dateFormat="yy-mm-dd"></p-calendar>
                             </div>
+
                         </div>
                     </div>
 
@@ -343,7 +337,7 @@
                             <label   class="col-sm-6 col-form-label fw-bold"> Historique Nb Heures Codes
                                 </label>
                             <div class="col-sm-6">
-                                <input  [(ngModel)]="condidat.hist_nb_hr_code" pInputText />
+                                <input  pInputText [ngModel]="condidat.hist_nb_hr_code !== 'nul' ? condidat.hist_nb_hr_code : ' ' " (ngModelChange)="condidat.hist_nb_hr_code=$event"/>
                             </div>
                         </div>
                     </div>
@@ -353,7 +347,7 @@
                             <label   class="col-sm-6 col-form-label fw-bold"> Historique Nb Heures Conduites
                                 </label>
                             <div class="col-sm-6">
-                                <input  [(ngModel)]="condidat.hist_nb_hr_cond" pInputText />
+                                <input pInputText [ngModel]="condidat?.hist_nb_hr_cond" (ngModelChange)="condidat.hist_nb_hr_cond=$event" />
                             </div>
                         </div>
                     </div>
@@ -433,7 +427,18 @@
 
 <div class="text-right">
     <button pButton pRipple label="Supprimer" icon="pi pi-trash" iconPos="right"
-        class="mr-2 mb-2 p-button-danger"></button>
-    <button pButton pRipple label="Modifier" icon="pi pi-user-edit" iconPos="right"
+        class="mr-2 mb-2 p-button-danger" (click)="deleteCondidat(condidat)"></button>
+    <button pButton pRipple label="Modifier" (click)="UpdateCondidat()" icon="pi pi-user-edit" iconPos="right"
         class="mr-2 mb-2 p-button-primary"></button>
 </div>
+
+<p-dialog [(visible)]="deleteCondidatDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+    <div class="flex align-items-center justify-content-center">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+        <span *ngIf="condidat">Etes-vous sûr que vous voulez supprimer <b>{{condidat?.nom}}</b>?</span>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteCondidatDialog = false"></button>
+        <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+    </ng-template>
+</p-dialog>

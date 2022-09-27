@@ -23,5 +23,13 @@ export class CondidatService {
         return this.http.post(API.add_condidat, condidat);
     }
 
+    destroy(condidat:any) : Observable<any> {
+        return this.http.delete(API.DeleteCondidat + condidat.id );
+    }
+
+    update_cond(form) : Observable<any> {
+        return this.http.post(API.updateCondidat ,form);
+    }
+
 
 }
