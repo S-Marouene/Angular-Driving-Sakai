@@ -25,7 +25,6 @@ export class ListComponent implements OnInit {
     URLSchholPic=CONSTANTES.URLSchholPic;
     defaultPicSchool=CONSTANTES.defaultSchoolImage;
 
-
     products: Product[];
     sortOptions: SelectItem[];
     sortOrder: number;

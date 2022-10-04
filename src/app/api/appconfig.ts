@@ -7,27 +7,29 @@ export interface AppConfig {
 
 
 export const API = {
-    'usersRegister' : 'http://127.0.0.1/Driving/backend/api/auth/register',
-    'login' : 'http://127.0.0.1/Driving/backend/api/auth/login',
-    'userProfile' :'http://127.0.0.1/Driving/backend/api/auth/user-profile',
-    'ListUsers' : 'http://127.0.0.1/Driving/backend/api/auth/user-get',
-    'DeleteUser' : 'http://127.0.0.1/Driving/backend/api/auth/delete-user/',
-    'UpdateUser' : 'http://127.0.0.1/Driving/backend/api/auth/update_user',
-    'me' : 'http://127.0.0.1/Driving/backend/api/auth/me',
-    'GetRolePermission' : 'http://127.0.0.1/Driving/backend/api/auth/user-roles',
+    'usersRegister' : 'http://172.21.11.196/Driving/backend/api/auth/register',
+    'login' : 'http://172.21.11.196/Driving/backend/api/auth/login',
+    'changepaswd' : 'http://172.21.11.196/Driving/backend/api/auth/change-password',
 
-    'updateImgProfile' : 'http://127.0.0.1/Driving/backend/api/auth/ImgProfil_update',
+    'userProfile' :'http://172.21.11.196/Driving/backend/api/auth/user-profile',
+    'ListUsers' : 'http://172.21.11.196/Driving/backend/api/auth/user-get',
+    'DeleteUser' : 'http://172.21.11.196/Driving/backend/api/auth/delete-user/',
+    'UpdateUser' : 'http://172.21.11.196/Driving/backend/api/auth/update_user',
+    'me' : 'http://172.21.11.196/Driving/backend/api/auth/me',
+    'GetRolePermission' : 'http://172.21.11.196/Driving/backend/api/auth/user-roles',
 
-    'add_school' : 'http://127.0.0.1/Driving/backend/api/sudo/CreateSchools',
-    'ListSchool' : 'http://127.0.0.1/Driving/backend/api/sudo/allSchools',
-    'DeleteSchool' : 'http://127.0.0.1/Driving/backend/api/sudo/delete-school/',
+    'updateImgProfile' : 'http://172.21.11.196/Driving/backend/api/auth/ImgProfil_update',
+
+    'add_school' : 'http://172.21.11.196/Driving/backend/api/sudo/CreateSchools',
+    'ListSchool' : 'http://172.21.11.196/Driving/backend/api/sudo/allSchools',
+    'DeleteSchool' : 'http://172.21.11.196/Driving/backend/api/sudo/delete-school/',
 
     /**Condidat API*/
-    'add_condidat' : 'http://127.0.0.1/Driving/backend/api/auth/CreateCondidat',
-    'ListCondidat' : 'http://127.0.0.1/Driving/backend/api/auth/allCondidats',
-    'DeleteCondidat' : 'http://127.0.0.1/Driving/backend/api/auth/delete-condidat/',
-    'getCondidatByID':'http://127.0.0.1/Driving/backend/api/auth/GetCondByID/',
-    'updateCondidat':'http://127.0.0.1/Driving/backend/api/auth/update_condidat',
+    'add_condidat' : 'http://172.21.11.196/Driving/backend/api/auth/CreateCondidat',
+    'ListCondidat' : 'http://172.21.11.196/Driving/backend/api/auth/allCondidats',
+    'DeleteCondidat' : 'http://172.21.11.196/Driving/backend/api/auth/delete-condidat/',
+    'getCondidatByID':'http://172.21.11.196/Driving/backend/api/auth/GetCondByID/',
+    'updateCondidat':'http://172.21.11.196/Driving/backend/api/auth/update_condidat',
 
 
 }

@@ -165,6 +165,16 @@ import { RenseingementCondidatComponent } from './components/condidat/details-co
 import { PaiementCondidatComponent } from './components/condidat/details-condidat/paiement-condidat/paiement-condidat/paiement-condidat.component';
 import { ConduiteCondidatComponent } from './components/condidat/details-condidat/conduite-condidat/conduite-condidat/conduite-condidat.component';
 import { CodeCondidatComponent } from './components/condidat/details-condidat/code-condidat/code-condidat/code-condidat.component';
+import { ParametreComponent } from './components/parametre/parametre.component';
+import { VehiculeComponent } from './components/parametre/vehicule/vehicule.component';
+import { BureauxComponent } from './components/parametre/bureaux/bureaux.component';
+import { CaisseComponent } from './components/parametre/caisse/caisse.component';
+import { SecritaireComponent } from './components/parametre/secritaire/secritaire.component';
+import { GerantComponent } from './components/parametre/gerant/gerant.component';
+import { MoniteurComponent } from './components/parametre/moniteur/moniteur.component';
+import { ExaminateurComponent } from './components/parametre/examinateur/examinateur.component';
+import { CentreExamenComponent } from './components/parametre/centre-examen/centre-examen.component';
+import { ReceveursComponent } from './components/parametre/receveurs/receveurs.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -322,7 +332,17 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         RenseingementCondidatComponent,
         PaiementCondidatComponent,
         ConduiteCondidatComponent,
-        CodeCondidatComponent
+        CodeCondidatComponent,
+        ParametreComponent,
+        VehiculeComponent,
+        BureauxComponent,
+        CaisseComponent,
+        SecritaireComponent,
+        GerantComponent,
+        MoniteurComponent,
+        ExaminateurComponent,
+        CentreExamenComponent,
+        ReceveursComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

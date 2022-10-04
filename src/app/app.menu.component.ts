@@ -80,6 +80,7 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Utilisateur', icon: 'pi pi-fw pi-id-card', routerLink: ['/listusers'],visible : this.Check_Menu(this.ListPermission,'user')},
                     {label: 'Liste des écoles', icon: 'pi pi-fw pi-list', routerLink: ['/listSchool'],visible : this.Check_Menu(this.ListPermission,'liste_ecole')},
                     {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/condidat'],visible : this.Check_Menu(this.ListPermission,'condidat')},
+                    {label: 'Paramètres', icon: 'pi pi-cog', routerLink: ['/parametre']},
 
                 ]
             },

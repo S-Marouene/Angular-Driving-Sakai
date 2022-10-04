@@ -15,28 +15,43 @@
                     </div>
 
                     <div class="w-full md:w-10 mx-auto">
-                        <div *ngIf="errors?.email" class="alert alert-danger mt-3">
-                            {{ errors?.email }}
-                        </div>
-                        <div *ngIf="errors?.password" class="alert alert-danger mt-3">
-                            {{ errors?.password }}
-                        </div>
-                        <div *ngIf="errors?.error" class="alert alert-danger mt-3">
-                            {{ errors?.error }}
+
+                        <div class="field">
+                            <label  class="block text-900 text-xl font-medium mb-2" >Email</label>
+                            <input type="text"  placeholder="Votre Adresse E-mail" formControlName="email" class="form-control" style="padding:1rem;"
+                                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+                            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                <div *ngIf="f['email'].errors['required']">
+                                    Email est obligatoir
+                                </div>
+                                <div *ngIf="f['email'].errors['email']">
+                                    Email n'est pas valide
+                                </div>
+                            </div>
                         </div>
 
-                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-                        <input id="email1" type="text" placeholder="Votre Adresse E-mail" pInputText class="w-full mb-3" style="padding:1rem;" formControlName="email">
+                        <div class="field">
+                            <label  class="block text-900 text-xl font-medium mb-2" >Mot de passe</label>
+                            <input type="password"  placeholder="Mot de Passe" formControlName="password" class="form-control" style="padding:1rem;"
+                                [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+                            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                                <div *ngIf="f['password'].errors['required']">
+                                    password est obligatoir
+                                </div>
 
-                        <label for="Password2" class="block text-900 text-xl font-medium mb-2">Mot de passe</label>
-                        <input id="Password2" type="password" placeholder="Mot de Passe" pInputText class="w-full mb-3" style="padding:1rem;" formControlName="password">
+                            </div>
+                        </div>
 
                         <button pButton pRipple label="Se Connecter" class="w-full p-3 text-xl" type="submit"></button>
+                        <button pButton pRipple label="Super user" class="btn-danger" (click)="getsuper()"></button>
+                        <button pButton pRipple label="fake user" class="btn-danger" (click)="getfakesuper()"></button>
+
                     </div>
 
                 </div>
             </div>
         </div>
+
     </div>
 
 </form>

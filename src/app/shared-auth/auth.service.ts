@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 import { API } from 'src/app/api/appconfig';
 import { User } from '../model/users.model';
 import { TokenService } from './token.service';
@@ -19,13 +19,16 @@ export class AuthService {
     constructor(private http: HttpClient, private Token: TokenService) {}
 
     tokenresp: any;
+    status:JSON;
 
     register(user): Observable<any> {
         return this.http.post(API.usersRegister, user);
     }
 
-    signin(user: User): Observable<any> {
-        return this.http.post<any>(API.login, user);
+    signin(user): Observable<any> {
+        return this.http.post(API.login, user,{responseType:'text', params:user, observe: 'response'}).pipe(map(data => {
+            return JSON.parse(data.body);
+        }));
     }
 
     me(token: any): Observable<any> {
@@ -49,4 +52,11 @@ export class AuthService {
     GetMenubyrole() {
         return this.http.get(API.GetRolePermission)
     }
+
+    changepsw(pwd){
+        return this.http.post(API.changepaswd,pwd,{responseType:'text', params:pwd, observe: 'response'}).pipe(map(data => {
+            return JSON.parse(data.body);
+        }));
+      }
+
 }
