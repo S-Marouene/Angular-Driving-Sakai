@@ -1,0 +1,24 @@
+<td style="min-width: 8rem;">
+    <span class="image-text ml-2">{{bureau.nom}}</span>
+</td>
+<td style="min-width: 8rem;">
+    <span class="image-text ml-2">{{bureau.sequence}}</span>
+</td>
+
+<td style="min-width: 10rem;">
+    {{bureau.mat_fiscal}}
+</td>
+
+<td style="min-width: 10rem;">
+    {{bureau.adresse}}
+</td>
+
+<td style="min-width: 10rem;">
+    {{bureau.nom_comercial}}
+</td>
+
+<td style="min-width: 8rem;">
+    <button [routerLink]="['/bureau', bureau.id]" class="btn btn-dark">
+        Détails
+    </button>
+</td>

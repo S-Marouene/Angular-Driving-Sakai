@@ -31,5 +31,19 @@ export const API = {
     'getCondidatByID':'http://172.21.11.196/Driving/backend/api/auth/GetCondByID/',
     'updateCondidat':'http://172.21.11.196/Driving/backend/api/auth/update_condidat',
 
+    /**vehicule API*/
+    'add_vehicule' : 'http://172.21.11.196/Driving/backend/api/auth/vehicules',
+    'Listvehicule' : 'http://172.21.11.196/Driving/backend/api/auth/vehicules',
+    'Deletevehicule' : 'http://172.21.11.196/Driving/backend/api/auth/vehicules/',
+    'getvehiculeByID':'http://172.21.11.196/Driving/backend/api/auth/vehicules/',
+    'updatevehicule':'http://172.21.11.196/Driving/backend/api/auth/vehicules/',
+
+    /**bureau API*/
+    'add_bureau' : 'http://172.21.11.196/Driving/backend/api/auth/bureaux',
+    'Listbureau' : 'http://172.21.11.196/Driving/backend/api/auth/bureaux',
+    'Deletebureau' : 'http://172.21.11.196/Driving/backend/api/auth/bureaux/',
+    'getbureauByID':'http://172.21.11.196/Driving/backend/api/auth/bureaux/',
+    'updatebureau':'http://172.21.11.196/Driving/backend/api/auth/bureaux/',
+
 
 }

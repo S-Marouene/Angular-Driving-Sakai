@@ -1,0 +1,67 @@
+<div class="modal-header bg-primary">
+    <h5 class="modal-title">{{list[0].value}} Véhicule</h5>
+    <button pButton pRipple icon="pi pi-times" (click)="hideDialog()"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="formaddvehicule">
+
+        <div class="field">
+            <label><span class="text-danger">*</span>Numéro d'immatriculation </label>
+            <input class="form-control" type="text" formControlName="num_imm"
+                [ngClass]="{ 'is-invalid': submitted && f['num_imm'].errors }" />
+            <div *ngIf="submitted && f['num_imm'].errors" class="invalid-feedback">
+                <div *ngIf="f['num_imm'].errors['required']">num_imm est obligatoir</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label><span class="text-danger">*</span>Marque </label>
+            <input class="form-control" type="text" formControlName="marque"
+                [ngClass]="{ 'is-invalid': submitted && f['marque'].errors }" />
+
+            <div *ngIf="submitted && f['marque'].errors" class="invalid-feedback">
+                <div *ngIf="f['marque'].errors['required']">marque est obligatoir</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="col-form-label fw-bold"><span class="text-danger">*</span> En service</label>
+            <div [ngClass]="{ 'is-invalid': submitted && f['etat'].errors }">
+                <div class="field-radiobutton mb-2">
+                    <p-radioButton name="etat" value="Oui" formControlName="etat"></p-radioButton>
+                    <label for="code3">Oui</label>
+                </div>
+                <div class="field-radiobutton mb-2">
+                    <p-radioButton name="etat" value="Non" formControlName="etat"></p-radioButton>
+                    <label for="code4">Non</label>
+                </div>
+            </div>
+            <div *ngIf="submitted && f['etat'].errors" class="invalid-feedback">
+                <div *ngIf="f['etat'].errors['required']">L'état est obligatoir</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label><span class="text-danger">*</span>Couleur</label>
+            <input type="text" formControlName="couleur" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['couleur'].errors }" />
+            <div *ngIf="submitted && f['couleur'].errors" class="invalid-feedback">
+                <div *ngIf="f['couleur'].errors['required']">couleur est obligatoir</div>
+            </div>
+        </div>
+
+        <div *ngIf=" list[0].operation == 'add' ">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="onSubmit()"></button>
+        </div>
+
+        <div *ngIf=" list[0].operation == 'update' ">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+                (click)="onUpdate(list[0].vehicule.id)"></button>
+        </div>
+
+    </form>
+</div>

@@ -235,6 +235,7 @@ export class ListCondidatComponent implements OnInit {
                 this.CondidatDialog = false;
                 this.condidat = {};
                 this.toastr.info('Condidat ajouter avec succée', 'Info');
+                this.getListCondidat();
             }
         );
     }
@@ -272,5 +273,20 @@ export class ListCondidatComponent implements OnInit {
     }
     get f(): { [key: string]: AbstractControl } {
         return this.form_condidat.controls;
+    }
+
+    getListCondidat(){
+        this.condidatservice.getCondidats().subscribe({
+            next: (ListCondidat) => {
+                this.condidats = ListCondidat;
+                console.log(ListCondidat);
+
+            },
+            error: () => {
+                console.log(
+                    `Problème au niveau du serveur, attention les données sont fake `
+                );
+            },
+        });
     }
 }

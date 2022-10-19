@@ -175,7 +175,11 @@ import { MoniteurComponent } from './components/parametre/moniteur/moniteur.comp
 import { ExaminateurComponent } from './components/parametre/examinateur/examinateur.component';
 import { CentreExamenComponent } from './components/parametre/centre-examen/centre-examen.component';
 import { ReceveursComponent } from './components/parametre/receveurs/receveurs.component';
-
+import { ItemVehiculeComponent } from './components/parametre/vehicule/item-vehicule/item-vehicule.component';
+import { ListVehiculeComponent } from './components/parametre/vehicule/list-vehicule/list-vehicule.component';
+import { ItemBureauComponent } from './components/parametre/bureaux/item-bureau/item-bureau.component';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+import { ModalVehComponent } from './components/parametre/vehicule/modal_veh/modal-veh/modal-veh.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -277,6 +281,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         ReactiveFormsModule,
         NgxPermissionsModule.forRoot(),
         ToastrModule.forRoot(),
+        ModalModule.forRoot()
     ],
     declarations: [
         AppComponent,
@@ -342,15 +347,20 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         MoniteurComponent,
         ExaminateurComponent,
         CentreExamenComponent,
-        ReceveursComponent
+        ReceveursComponent,
+        ItemVehiculeComponent,
+        ListVehiculeComponent,
+        ItemBureauComponent,
+        ModalVehComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, MenuService, ConfigService,UserService,DatePipe,
+        PhotoService, ProductService, MenuService, ConfigService,UserService,DatePipe,BsModalService,
         {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor,multi: true},
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [ModalVehComponent],
 
 })
 export class AppModule { }
