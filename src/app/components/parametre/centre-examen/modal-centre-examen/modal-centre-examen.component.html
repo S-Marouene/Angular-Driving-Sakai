@@ -1,0 +1,48 @@
+<div class="modal-header bg-primary">
+    <h5 class="modal-title">{{list[0].value}} Centre Examen</h5>
+    <button pButton pRipple icon="pi pi-times" (click)="hideDialog()"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="formaddcentreExam">
+
+        <div class="field">
+            <label><span class="text-danger">*</span>Libellée</label>
+            <input class="form-control" type="text" formControlName="libelle"
+                [ngClass]="{ 'is-invalid': submitted && f['libelle'].errors }" />
+            <div *ngIf="submitted && f['libelle'].errors" class="invalid-feedback">
+                <div *ngIf="f['libelle'].errors['required']">libelle est obligatoir</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="col-form-label fw-bold"><span class="text-danger">*</span> Type</label>
+            <div [ngClass]="{ 'is-invalid': submitted && f['type'].errors }">
+                <div class="field-radiobutton mb-2">
+                    <p-radioButton name="type" value="conduite" formControlName="type"></p-radioButton>
+                    <label for="code3">Conduite</label>
+                </div>
+                <div class="field-radiobutton mb-2">
+                    <p-radioButton name="type" value="code" formControlName="type"></p-radioButton>
+                    <label for="code4">Code</label>
+                </div>
+            </div>
+            <div *ngIf="submitted && f['type'].errors" class="invalid-feedback">
+                <div *ngIf="f['type'].errors['required']">Le type est obligatoir</div>
+            </div>
+        </div>
+
+        <div *ngIf=" list[0].operation == 'add' ">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="onSubmit()"></button>
+        </div>
+
+        <div *ngIf=" list[0].operation == 'update' ">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+                (click)="onUpdate(list[0].centreExam.id)"></button>
+        </div>
+
+    </form>
+</div>

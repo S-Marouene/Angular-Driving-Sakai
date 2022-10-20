@@ -1,1 +1,93 @@
-<p>moniteur works!</p>
+<hr>
+<h5>Listes Des Moniteur</h5>
+<hr>
+
+<p-table #dt1 [value]="moniteurs" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
+    styleClass="p-datatable-gridlines" [paginator]="true"
+    [globalFilterFields]="['nom','prenom','telephone','adresse','formation','prix_conduite']" responsiveLayout="scroll">
+
+    <ng-template pTemplate="caption" class="text-right">
+        <div class="flex justify-content-between flex-column sm:flex-row">
+            <span class="p-input-icon-left mb-2">
+
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" #filter (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Recherche" class="w-full" />
+            </span>
+
+            <button pButton label="Nouveau" class="p-button-outlined mb-2" icon="pi pi-plus-circle"
+            (click)="openModalveh()"></button>
+
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Nom
+                    <p-columnFilter type="text" field="nom" display="menu" placeholder="Recherche par nom">
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Prénom
+                    <p-columnFilter type="text" field="prenom" display="menu" placeholder="Search by country">
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Telephone
+                    <p-columnFilter type="text" field="telephone" display="menu" >
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    adresse
+                    <p-columnFilter type="text" field="adresse" display="menu" >
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Formation
+                    <p-columnFilter type="text" field="formation" display="menu" >
+                    </p-columnFilter>
+                </div>
+            </th>
+
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Prix Conduite
+                    <p-columnFilter type="text" field="prix_conduite"display="menu" >
+                    </p-columnFilter>
+                </div>
+            </th>
+
+            <th style="width: 8rem">
+                <div class="flex justify-content-between align-items-center">
+                    Config
+                    <p-columnFilter type="boolean" field="verified" display="menu"></p-columnFilter>
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" ngFor let-actualmoniteur [ngForOf]="moniteurs">
+        <tr app-item-moniteur [moniteur]="actualmoniteur" (refresh_list_evnt)="getListmoniteur()"></tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="7">On à pas trouver des données.</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="loadingbody">
+        <tr>
+            <td colspan="7">Chargement des données , attendez SVP ! </td>
+        </tr>
+    </ng-template>
+</p-table>

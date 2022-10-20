@@ -180,6 +180,15 @@ import { ListVehiculeComponent } from './components/parametre/vehicule/list-vehi
 import { ItemBureauComponent } from './components/parametre/bureaux/item-bureau/item-bureau.component';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalVehComponent } from './components/parametre/vehicule/modal_veh/modal-veh/modal-veh.component';
+import { ModelBureauComponent } from './components/parametre/bureaux/model-bureau/model-bureau/model-bureau.component';
+import { ModelMoniteurComponent } from './components/parametre/moniteur/modal-moniteur/modal-moniteur.component';
+import { ItemMoniteurComponent } from './components/parametre/moniteur/item-moniteur/item-moniteur.component';
+import { ItemCaisseComponent } from './components/parametre/caisse/item-caisse/item-caisse.component';
+import { ModalCaisseComponent } from './components/parametre/caisse/modal-caisse/modal-caisse.component';
+import { ModalExaminateurComponent } from './components/parametre/examinateur/modal-examinateur/modal-examinateur.component';
+import { ItemExaminateurComponent } from './components/parametre/examinateur/item-examinateur/item-examinateur.component';
+import { ItemCentreExamenComponent } from './components/parametre/centre-examen/item-centre-examen/item-centre-examen.component';
+import { ModalCentreExamenComponent } from './components/parametre/centre-examen/modal-centre-examen/modal-centre-examen.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -352,6 +361,16 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         ListVehiculeComponent,
         ItemBureauComponent,
         ModalVehComponent,
+        ModelBureauComponent,
+        ModelMoniteurComponent,
+        ItemMoniteurComponent,
+        ItemCaisseComponent,
+        ModalCaisseComponent,
+        ModalExaminateurComponent,
+        ItemExaminateurComponent,
+        ItemCentreExamenComponent,
+        ModalCentreExamenComponent,
+       
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

@@ -1,0 +1,85 @@
+<div class="modal-header bg-primary">
+    <h5 class="modal-title">{{list[0].value}} Moniteur</h5>
+    <button pButton pRipple icon="pi pi-times" (click)="hideDialog()"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="formaddmoniteur">
+
+        <div class="field">
+            <label><span class="text-danger">*</span>Nom</label>
+            <input class="form-control" type="text" formControlName="nom"
+                [ngClass]="{ 'is-invalid': submitted && f['nom'].errors }" />
+            <div *ngIf="submitted && f['nom'].errors" class="invalid-feedback">
+                <div *ngIf="f['nom'].errors['required']">nom est obligatoir</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label><span class="text-danger">*</span>Prenom</label>
+            <input class="form-control" type="text" formControlName="prenom"
+                [ngClass]="{ 'is-invalid': submitted && f['prenom'].errors }" />
+            <div *ngIf="submitted && f['prenom'].errors" class="invalid-feedback">
+                <div *ngIf="f['prenom'].errors['required']">prenom est obligatoir</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label><span class="text-danger">*</span>Telephone</label>
+            <input class="form-control" type="text" formControlName="telephone"
+                [ngClass]="{ 'is-invalid': submitted && f['telephone'].errors }" />
+            <div *ngIf="submitted && f['telephone'].errors" class="invalid-feedback">
+                <div *ngIf="f['telephone'].errors['required']">telephone est obligatoir</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label><span class="text-danger">*</span>Adresse </label>
+            <input class="form-control" type="text" formControlName="adresse"
+                [ngClass]="{ 'is-invalid': submitted && f['adresse'].errors }" />
+
+            <div *ngIf="submitted && f['adresse'].errors" class="invalid-feedback">
+                <div *ngIf="f['adresse'].errors['required']">adresse est obligatoir</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="col-form-label fw-bold"><span class="text-danger">*</span> Formation</label>
+            <div [ngClass]="{ 'is-invalid': submitted && f['formation'].errors }">
+                <div class="field-radiobutton mb-2">
+                    <p-radioButton name="formation" value="Oui" formControlName="formation"></p-radioButton>
+                    <label for="code3">Oui</label>
+                </div>
+                <div class="field-radiobutton mb-2">
+                    <p-radioButton name="formation" value="Non" formControlName="formation"></p-radioButton>
+                    <label for="code4">Non</label>
+                </div>
+            </div>
+            <div *ngIf="submitted && f['formation'].errors" class="invalid-feedback">
+                <div *ngIf="f['formation'].errors['required']">L'état est obligatoir</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label><span class="text-danger">*</span>Prix Conduite</label>
+            <input type="text" formControlName="prix_conduite" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['prix_conduite'].errors }" />
+            <div *ngIf="submitted && f['prix_conduite'].errors" class="invalid-feedback">
+                <div *ngIf="f['prix_conduite'].errors['prix_conduite']">prix_conduite est obligatoir</div>
+            </div>
+        </div>
+
+        <div *ngIf=" list[0].operation == 'add' ">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="onSubmit()"></button>
+        </div>
+
+        <div *ngIf=" list[0].operation == 'update' ">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+                (click)="onUpdate(list[0].moniteur.id)"></button>
+        </div>
+
+    </form>
+</div>

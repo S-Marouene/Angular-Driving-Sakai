@@ -3,20 +3,21 @@ import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { filter, take } from 'rxjs';
-import { Bureau } from 'src/app/model/bureau.model';
-import { BureauService } from 'src/app/service/bureau/bureau.service';
-import { ModelBureauComponent } from '../model-bureau/model-bureau/model-bureau.component';
+import { Moniteur } from 'src/app/model/moniteur.model';
+import { MoniteurService } from 'src/app/service/moniteur/moniteur.service';
+import { ModelMoniteurComponent } from '../modal-moniteur/modal-moniteur.component';
 
 @Component({
-    selector: 'tr[app-item-bureau]',
-    templateUrl: './item-bureau.component.html',
+  selector: 'tr[app-item-moniteur]',
+  templateUrl: './item-moniteur.component.html'
 })
-export class ItemBureauComponent implements OnInit {
-    @Input() bureau: Bureau | null = null;
+export class ItemMoniteurComponent implements OnInit {
+
+    @Input() moniteur: Moniteur | null = null;
     @Output() refresh_list_evnt = new EventEmitter<any>();
 
     editForm: FormGroup;
-    deleteBureauDialog: boolean = false;
+    deleteMoniteurDialog: boolean = false;
     updatevehDialog: boolean;
     submitted: boolean = false;
     id: any;
@@ -24,7 +25,7 @@ export class ItemBureauComponent implements OnInit {
     bsModalRef: BsModalRef;
 
     constructor(
-        private bureauService: BureauService,
+        private moniteurService: MoniteurService,
         private toastr: ToastrService,
         public fb: FormBuilder,
         private modalService: BsModalService
@@ -32,32 +33,32 @@ export class ItemBureauComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    deletebureau(bureau: Bureau) {
-        this.deleteBureauDialog = true;
-        this.bureau = {...bureau};
-        console.log(this.bureau);
+    deletemoniteur(moniteur: Moniteur) {
+        this.deleteMoniteurDialog = true;
+        this.moniteur = {...moniteur};
+        console.log(this.moniteur);
 
     }
 
     confirmDelete() {
-        this.deleteBureauDialog = false;
-        this.bureauService.destroy(this.bureau).subscribe((data) => {
+        this.deleteMoniteurDialog = false;
+        this.moniteurService.destroy(this.moniteur).subscribe((data) => {
             this.toastr.info('Donnée supprimer avec succèes !', 'Suppression');
             this.refresh_list_evnt.emit();
         });
     }
 
-    openModalveh() {
+    openModalMon() {
         const initialState = {
             list: [
                 {
                     operation: 'update',
                     value: 'Modification',
-                    bureau: this.bureau,
+                    moniteur: this.moniteur,
                 },
             ],
         };
-        this.bsModalRef = this.modalService.show(ModelBureauComponent, {
+        this.bsModalRef = this.modalService.show(ModelMoniteurComponent, {
             initialState,
         });
         this.bsModalRef.content.closeBtnName = 'Close';

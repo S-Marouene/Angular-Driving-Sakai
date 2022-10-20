@@ -1,0 +1,31 @@
+<div class="modal-header bg-primary">
+    <h5 class="modal-title">{{list[0].value}} Caisse</h5>
+    <button pButton pRipple icon="pi pi-times" (click)="hideDialog()"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="formaddcaisse">
+
+        <div class="field">
+            <label><span class="text-danger">*</span>Caisse</label>
+            <input class="form-control" type="text" formControlName="caisse"
+                [ngClass]="{ 'is-invalid': submitted && f['caisse'].errors }" />
+            <div *ngIf="submitted && f['caisse'].errors" class="invalid-feedback">
+                <div *ngIf="f['caisse'].errors['required']">caisse est obligatoir</div>
+            </div>
+        </div>
+
+        <div *ngIf=" list[0].operation == 'add' ">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="onSubmit()"></button>
+        </div>
+
+        <div *ngIf=" list[0].operation == 'update' ">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+                (click)="onUpdate(list[0].caisse.id)"></button>
+        </div>
+
+    </form>
+</div>

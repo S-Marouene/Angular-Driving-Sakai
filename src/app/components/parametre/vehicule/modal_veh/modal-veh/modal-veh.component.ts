@@ -74,7 +74,7 @@ export class ModalVehComponent implements OnInit {
                 this.formaddvehicule.reset();
                 this.bsModalRef.hide();
                 this.vehicule = {};
-                this.toastr.info('Utilisateur ajouter avec succée', 'Info');
+                this.toastr.info('Vehicule ajouter avec succée', 'Info');
                 this.modalService.setDismissReason("true");
             }
         );

@@ -45,5 +45,31 @@ export const API = {
     'getbureauByID':'http://172.21.11.196/Driving/backend/api/auth/bureaux/',
     'updatebureau':'http://172.21.11.196/Driving/backend/api/auth/bureaux/',
 
+    /**moniteur API*/
+    'add_moniteur' : 'http://172.21.11.196/Driving/backend/api/auth/moniteur',
+    'Listmoniteur' : 'http://172.21.11.196/Driving/backend/api/auth/moniteur',
+    'Deletemoniteur' : 'http://172.21.11.196/Driving/backend/api/auth/moniteur/',
+    'getmoniteurByID':'http://172.21.11.196/Driving/backend/api/auth/moniteur/',
+    'updatemoniteur':'http://172.21.11.196/Driving/backend/api/auth/moniteur/',
 
+     /**Caisse API*/
+     'add_caisse' : 'http://172.21.11.196/Driving/backend/api/auth/caisse',
+     'Listcaisse' : 'http://172.21.11.196/Driving/backend/api/auth/caisse',
+     'Deletecaisse' : 'http://172.21.11.196/Driving/backend/api/auth/caisse/',
+     'getcaisseByID':'http://172.21.11.196/Driving/backend/api/auth/caisse/',
+     'updatecaisse':'http://172.21.11.196/Driving/backend/api/auth/caisse/',
+
+     /**Caisse API*/
+    'add_examinateur' : 'http://172.21.11.196/Driving/backend/api/auth/examinateur',
+    'Listexaminateur' : 'http://172.21.11.196/Driving/backend/api/auth/examinateur',
+    'Deleteexaminateur' : 'http://172.21.11.196/Driving/backend/api/auth/examinateur/',
+    'getexaminateurByID':'http://172.21.11.196/Driving/backend/api/auth/examinateur/',
+    'updateexaminateur':'http://172.21.11.196/Driving/backend/api/auth/examinateur/',
+
+    /**centre exam API*/
+    'add_centre_exam' : 'http://172.21.11.196/Driving/backend/api/auth/centre_exam',
+    'Listcentre_exam' : 'http://172.21.11.196/Driving/backend/api/auth/centre_exam',
+    'Deletecentre_exam' : 'http://172.21.11.196/Driving/backend/api/auth/centre_exam/',
+    'getcentre_examByID':'http://172.21.11.196/Driving/backend/api/auth/centre_exam/',
+    'updatecentre_exam':'http://172.21.11.196/Driving/backend/api/auth/centre_exam/',
 }

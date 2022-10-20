@@ -27,7 +27,7 @@ export class BureauService {
         return this.http.delete(API.Deletebureau + Bureau.id );
     }
 
-    update_cond(form) : Observable<any> {
-        return this.http.post(API.updatebureau ,form);
+    update_Bur(Bureau:any,id:any) : Observable<any> {
+        return this.http.put(API.updatebureau + id ,Bureau);
     }
 }

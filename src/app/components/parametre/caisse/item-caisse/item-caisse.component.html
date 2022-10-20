@@ -1,40 +1,26 @@
 <td style="min-width: 8rem;">
-    <span class="image-text ml-2">{{bureau.nom}}</span>
-</td>
-<td style="min-width: 8rem;">
-    <span class="image-text ml-2">{{bureau.sequence}}</span>
+    <span class="image-text ml-2">{{caisse.caisse}}</span>
 </td>
 
-<td style="min-width: 10rem;">
-    {{bureau.mat_fiscal}}
-</td>
-
-<td style="min-width: 10rem;">
-    {{bureau.adresse}}
-</td>
-
-<td style="min-width: 10rem;">
-    {{bureau.nom_comercial}}
-</td>
 
 <td style="min-width: 8rem;">
     <div class="flex">
         <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded btn-sm p-button-success mr-2"
             (click)="openModalveh()"></button>
         <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
-            (click)="deletebureau(bureau)"></button>
+            (click)="deletecaisse(caisse)"></button>
     </div>
 </td>
 
 
-<p-dialog [(visible)]="deleteBureauDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+<p-dialog [(visible)]="deleteCaisseDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
     <div class="flex align-items-center justify-content-center">
         <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-        <span *ngIf="bureau">Are you sure you want to delete <b>{{bureau.nom}}</b>?</span>
+        <span *ngIf="caisse">Are you sure you want to delete <b>{{caisse.nom}}</b>?</span>
     </div>
     <ng-template pTemplate="footer">
         <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
-            (click)="deleteBureauDialog = false"></button>
+            (click)="deleteCaisseDialog = false"></button>
         <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
     </ng-template>
 </p-dialog>

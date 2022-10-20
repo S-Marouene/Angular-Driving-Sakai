@@ -3,20 +3,20 @@ import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { filter, take } from 'rxjs';
-import { Bureau } from 'src/app/model/bureau.model';
-import { BureauService } from 'src/app/service/bureau/bureau.service';
-import { ModelBureauComponent } from '../model-bureau/model-bureau/model-bureau.component';
+import { Caisse } from 'src/app/model/caisse.model';
+import { CaisseService } from 'src/app/service/caisse/caisse.service';
+import { ModalCaisseComponent } from '../modal-caisse/modal-caisse.component';
 
 @Component({
-    selector: 'tr[app-item-bureau]',
-    templateUrl: './item-bureau.component.html',
+  selector: 'tr[app-item-caisse]',
+  templateUrl: './item-caisse.component.html'
 })
-export class ItemBureauComponent implements OnInit {
-    @Input() bureau: Bureau | null = null;
+export class ItemCaisseComponent implements OnInit {
+    @Input() caisse: Caisse | null = null;
     @Output() refresh_list_evnt = new EventEmitter<any>();
 
     editForm: FormGroup;
-    deleteBureauDialog: boolean = false;
+    deleteCaisseDialog: boolean = false;
     updatevehDialog: boolean;
     submitted: boolean = false;
     id: any;
@@ -24,7 +24,7 @@ export class ItemBureauComponent implements OnInit {
     bsModalRef: BsModalRef;
 
     constructor(
-        private bureauService: BureauService,
+        private caisseService: CaisseService,
         private toastr: ToastrService,
         public fb: FormBuilder,
         private modalService: BsModalService
@@ -32,16 +32,16 @@ export class ItemBureauComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    deletebureau(bureau: Bureau) {
-        this.deleteBureauDialog = true;
-        this.bureau = {...bureau};
-        console.log(this.bureau);
+    deletecaisse(caisse: Caisse) {
+        this.deleteCaisseDialog = true;
+        this.caisse = {...caisse};
+        console.log(this.caisse);
 
     }
 
     confirmDelete() {
-        this.deleteBureauDialog = false;
-        this.bureauService.destroy(this.bureau).subscribe((data) => {
+        this.deleteCaisseDialog = false;
+        this.caisseService.destroy(this.caisse).subscribe((data) => {
             this.toastr.info('Donnée supprimer avec succèes !', 'Suppression');
             this.refresh_list_evnt.emit();
         });
@@ -53,11 +53,11 @@ export class ItemBureauComponent implements OnInit {
                 {
                     operation: 'update',
                     value: 'Modification',
-                    bureau: this.bureau,
+                    caisse: this.caisse,
                 },
             ],
         };
-        this.bsModalRef = this.modalService.show(ModelBureauComponent, {
+        this.bsModalRef = this.modalService.show(ModalCaisseComponent, {
             initialState,
         });
         this.bsModalRef.content.closeBtnName = 'Close';

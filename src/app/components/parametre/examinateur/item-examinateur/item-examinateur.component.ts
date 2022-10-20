@@ -3,20 +3,20 @@ import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { filter, take } from 'rxjs';
-import { Bureau } from 'src/app/model/bureau.model';
-import { BureauService } from 'src/app/service/bureau/bureau.service';
-import { ModelBureauComponent } from '../model-bureau/model-bureau/model-bureau.component';
+import { Examinateur } from 'src/app/model/examinateur.model';
+import { ExaminateurService } from 'src/app/service/examinateur/examinateur.service';
+import { ModalExaminateurComponent } from '../modal-examinateur/modal-examinateur.component';
 
 @Component({
-    selector: 'tr[app-item-bureau]',
-    templateUrl: './item-bureau.component.html',
+    selector: 'tr[app-item-examinateur]',
+    templateUrl: './item-examinateur.component.html',
 })
-export class ItemBureauComponent implements OnInit {
-    @Input() bureau: Bureau | null = null;
+export class ItemExaminateurComponent implements OnInit {
+    @Input() examinateur: Examinateur | null = null;
     @Output() refresh_list_evnt = new EventEmitter<any>();
 
     editForm: FormGroup;
-    deleteBureauDialog: boolean = false;
+    deleteExaminateurDialog: boolean = false;
     updatevehDialog: boolean;
     submitted: boolean = false;
     id: any;
@@ -24,7 +24,7 @@ export class ItemBureauComponent implements OnInit {
     bsModalRef: BsModalRef;
 
     constructor(
-        private bureauService: BureauService,
+        private examinateurService: ExaminateurService,
         private toastr: ToastrService,
         public fb: FormBuilder,
         private modalService: BsModalService
@@ -32,16 +32,15 @@ export class ItemBureauComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    deletebureau(bureau: Bureau) {
-        this.deleteBureauDialog = true;
-        this.bureau = {...bureau};
-        console.log(this.bureau);
-
+    deleteexaminateur(examinateur: Examinateur) {
+        this.deleteExaminateurDialog = true;
+        this.examinateur = { ...examinateur };
+        console.log(this.examinateur);
     }
 
     confirmDelete() {
-        this.deleteBureauDialog = false;
-        this.bureauService.destroy(this.bureau).subscribe((data) => {
+        this.deleteExaminateurDialog = false;
+        this.examinateurService.destroy(this.examinateur).subscribe((data) => {
             this.toastr.info('Donnée supprimer avec succèes !', 'Suppression');
             this.refresh_list_evnt.emit();
         });
@@ -53,11 +52,11 @@ export class ItemBureauComponent implements OnInit {
                 {
                     operation: 'update',
                     value: 'Modification',
-                    bureau: this.bureau,
+                    examinateur: this.examinateur,
                 },
             ],
         };
-        this.bsModalRef = this.modalService.show(ModelBureauComponent, {
+        this.bsModalRef = this.modalService.show(ModalExaminateurComponent, {
             initialState,
         });
         this.bsModalRef.content.closeBtnName = 'Close';
@@ -75,5 +74,4 @@ export class ItemBureauComponent implements OnInit {
     get f(): { [key: string]: AbstractControl } {
         return this.editForm.controls;
     }
-
 }
