@@ -1,4 +1,3 @@
-
 <div class="grid" *ngIf="users">
     <div class="col-12">
         <div class="card">
@@ -25,8 +24,8 @@
             </p-toolbar>
 
             <p-table #dt [value]="users" [columns]="cols" responsiveLayout="scroll" [rows]="10"
-                [globalFilterFields]="['name','fname','role','email','status']" [rows]="10"
-                [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+                [globalFilterFields]="['name','fname','role','email','status']" [rows]="10" [paginator]="true"
+                [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Afficher {first} à {last} de {totalRecords} records"
                 [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
                 <ng-template pTemplate="caption">
@@ -75,7 +74,8 @@
                             {{actualUser?.fname}}
                         </td>
                         <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
-                            <img src=  "{{URLprofilePic+ (actualUser.path | defaultProfileUser)}}" [alt]="actualUser.name" class="img-fluid" width="45%" />
+                            <img src="{{URLprofilePic+ (actualUser.path | defaultProfileUser)}}" [alt]="actualUser.name"
+                                class="img-fluid" width="45%" />
                         </td>
                         <td style="width:18%; min-width:8rem;">
                             <span class="p-column-title">E-mail</span>
@@ -111,7 +111,7 @@
         </div>
 
 
-        <form [formGroup]="form" >
+        <form [formGroup]="form">
             <p-dialog [(visible)]="UserDialog" [style]="{width: '450px'}" header="Users Details" [modal]="true"
                 class="p-fluid">
 
@@ -149,16 +149,21 @@
 
                     <div class="field">
                         <label for="status">User Status</label>
-                        <p-dropdown [options]="statuses" optionLabel="label" formControlName="status" placeholder="Select Status">
+                        <p-dropdown [options]="statuses" optionLabel="label" formControlName="status"
+                            placeholder="Select Status">
                             <ng-template let-status pTemplate="status">
-                                <span [class]="'user-badge status-' + status.value.toLowerCase()" >{{status.label}}</span>
+                                <span
+                                    [class]="'user-badge status-' + status.value.toLowerCase()">{{status.label}}</span>
                             </ng-template>
                         </p-dropdown>
                     </div>
 
                     <div class="field" *ngIf="UserProfile.role=='super-admin'">
                         <label for="school_name">Auto école</label>
-                        <p-autoComplete formControlName="school_name" [ngClass]="{ 'is-invalid': submitted && f['school_name'].errors }" placeholder="Recherche" [dropdown]="true" [multiple]="false" [suggestions]="filteredSchool" (completeMethod)="filterSchool($event)" field="Name"></p-autoComplete>
+                        <p-autoComplete formControlName="school_name"
+                            [ngClass]="{ 'is-invalid': submitted && f['school_name'].errors }" placeholder="Recherche"
+                            [dropdown]="true" [multiple]="false" [suggestions]="filteredSchool"
+                            (completeMethod)="filterSchool($event)" field="Name"></p-autoComplete>
                         <div *ngIf="submitted && f['school_name'].errors" class="invalid-feedback">
                             <div *ngIf="f['school_name'].errors['required']">Auto école est obligatoir</div>
                         </div>
@@ -195,11 +200,7 @@
 
                     <div class="field">
                         <label for="image">User Photo:</label>
-                        <input
-                            formControlName="image"
-                            id="image"
-                            type="file"
-                            class="form-control"
+                        <input formControlName="image" id="image" type="file" class="form-control"
                             (change)="onFileChange($event)"
                             [ngClass]="{ 'is-invalid': submitted && f['image'].errors }">
 
@@ -233,24 +234,28 @@
             </ng-template>
         </p-dialog>
 
-        <p-dialog [(visible)]="updateUserDialog" [style]="{width: '450px'}" header="User Details" [modal]="true" class="p-fluid">
+        <p-dialog [(visible)]="updateUserDialog" [style]="{width: '450px'}" header="User Details" [modal]="true"
+            class="p-fluid">
             <ng-template pTemplate="content">
 
                 <div class="field">
                     <label for="name">Nom</label>
-                    <input type="text" pInputText id="name" [(ngModel)]="user.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !user.name}"/>
+                    <input type="text" pInputText id="name" [(ngModel)]="user.name" required autofocus
+                        [ngClass]="{'ng-invalid ng-dirty' : submitted && !user.name}" />
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !user.name">Name est obligatoir.</small>
                 </div>
 
                 <div class="field">
                     <label for="name">Prénom</label>
-                    <input type="text" pInputText id="fname" [(ngModel)]="user.fname" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !user.fname}"/>
+                    <input type="text" pInputText id="fname" [(ngModel)]="user.fname" required autofocus
+                        [ngClass]="{'ng-invalid ng-dirty' : submitted && !user.fname}" />
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !user.fname">fname est obligatoir.</small>
                 </div>
 
                 <div class="field">
                     <label for="status">User Status</label>
-                    <p-dropdown [options]="statuses" optionLabel="label" [(ngModel)]="user.status"  placeholder="Select Status">
+                    <p-dropdown [options]="statuses" optionLabel="label" [(ngModel)]="user.status"
+                        placeholder="Select Status">
                         <ng-template let-status pTemplate="status">
                             <span [class]="'user-badge status-' + status.value.toLowerCase()">{{status.label}}</span>
                         </ng-template>
@@ -261,18 +266,14 @@
                     <label for="name">Role</label>
                     <select class="form-select" #Role [(ngModel)]='user.role'>
                         <option *ngFor="let Role of roles" [ngValue]="Role">
-                        {{ Role }}
+                            {{ Role }}
                         </option>
                     </select>
                 </div>
 
                 <div class="field">
                     <label for="image">User Photo:</label>
-                    <input
-                        id="image"
-                        type="file"
-                        class="form-control"
-                        (change)="onFileChange($event)"
+                    <input id="image" type="file" class="form-control" (change)="onFileChange($event)"
                         [ngClass]="{ 'is-invalid': submitted && f['image'].errors }">
 
                     <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
@@ -286,8 +287,10 @@
             </ng-template>
 
             <ng-template pTemplate="footer">
-                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="UpdateUser()"></button>
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                    (click)="hideDialog()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+                    (click)="UpdateUser()"></button>
             </ng-template>
         </p-dialog>
 
