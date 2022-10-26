@@ -160,7 +160,7 @@ import { ListCondidatComponent } from './components/condidat/list_condidat/list-
 import { ItemCondidatComponent } from './components/condidat/item_condidat/item-condidat/item-condidat.component';
 import { DetailsCondidatComponent } from './components/condidat/details-condidat/details-condidat.component';
 import { CardCondidatComponent } from './components/condidat/details-condidat/card-condidat/card-condidat/card-condidat.component';
-import { ExamcondidatComponent } from './components/condidat/details-condidat/exam-condidat/examcondidat/examcondidat.component';
+import { ExamcondidatComponent } from './components/condidat/details-condidat/exam-condidat/examcondidat.component';
 import { RenseingementCondidatComponent } from './components/condidat/details-condidat/renseignement-condidat/renseingement-condidat/renseingement-condidat.component';
 import { PaiementCondidatComponent } from './components/condidat/details-condidat/paiement-condidat/paiement-condidat/paiement-condidat.component';
 import { ConduiteCondidatComponent } from './components/condidat/details-condidat/conduite-condidat/conduite-condidat/conduite-condidat.component';
@@ -189,6 +189,9 @@ import { ModalExaminateurComponent } from './components/parametre/examinateur/mo
 import { ItemExaminateurComponent } from './components/parametre/examinateur/item-examinateur/item-examinateur.component';
 import { ItemCentreExamenComponent } from './components/parametre/centre-examen/item-centre-examen/item-centre-examen.component';
 import { ModalCentreExamenComponent } from './components/parametre/centre-examen/modal-centre-examen/modal-centre-examen.component';
+import { ModalExamComponent } from './components/condidat/details-condidat/exam-condidat/modal/modal-exam/modal-exam.component';
+import { ItemExamenComponent } from './components/condidat/details-condidat/exam-condidat/item-examen/item-examen.component';
+import { ModalResultatComponent } from './components/condidat/details-condidat/exam-condidat/modal/modal-resultat/modal-resultat.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -370,10 +373,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         ItemExaminateurComponent,
         ItemCentreExamenComponent,
         ModalCentreExamenComponent,
+        ModalExamComponent,
+        ItemExamenComponent,
+        ModalResultatComponent,
 
     ],
     providers: [
-        
+
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, MenuService, ConfigService,UserService,DatePipe,BsModalService,
         {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor,multi: true},

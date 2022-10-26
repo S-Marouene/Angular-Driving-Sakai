@@ -1,0 +1,59 @@
+<td style="min-width: 8rem;">
+    <div class="flex">
+        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded btn-sm p-button-success mr-2"
+            (click)="openModalExam()"></button>
+        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+            (click)="deleteexamen(examen)"></button>
+    </div>
+</td>
+
+<td style="min-width: 4rem;">
+    <span class="image-text ml-2">{{examen.num_convocation}}</span>
+</td>
+<td style="min-width: 4rem;">
+    <span class="image-text ml-2">{{examen.num_liste}}</span>
+</td>
+
+<td style="min-width: 8rem;">
+    <span class="image-text ml-2">{{examen.centre_examen}}</span>
+</td>
+
+<td style="min-width: 10rem;">
+    <span [class]="'examen-badge status-proposal'" *ngIf="examen.type_examen=='Code'">{{examen.type_examen}}</span>
+    <span [class]="'examen-badge status-renewal'" *ngIf="examen.type_examen=='Conduite'">{{examen.type_examen}}</span>
+</td>
+<td style="min-width: 10rem;">
+    <span [class]="'examen-badge status-qualified'" *ngIf="examen.resultat=='Réussi'">{{examen.resultat}}</span>
+    <span [class]="'examen-badge status-new'" *ngIf="examen.resultat=='En cours'">{{examen.resultat}}</span>
+    <span [class]="'examen-badge status-unqualified'" *ngIf="examen.resultat=='Ajourné'">{{examen.resultat}}</span>
+    <span [class]="'examen-badge status-unqualified'" *ngIf="examen.resultat=='Excusé'">{{examen.resultat}}</span>
+</td>
+<td style="min-width: 10rem;">
+    {{examen.examinateur}}
+</td>
+<td style="min-width: 10rem;">
+    {{examen.date_examen}}
+</td>
+
+<td style="min-width: 2rem;">
+    <div class="text-center">
+        <button pButton pRipple icon="pi pi-cog" class="p-button-rounded btn-sm p-button-info mr-1"
+        (click)="OpenModalResult()"  ></button>
+    </div>
+</td>
+
+<td style="min-width: 10rem;">
+    {{examen.prestation}}
+</td>
+
+<p-dialog [(visible)]="deleteExamenDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+    <div class="flex align-items-center justify-content-center">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+        <span *ngIf="examen">Voulez vous vraiment supprimer cette examen ?</span>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
+            (click)="deleteExamenDialog = false"></button>
+        <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+    </ng-template>
+</p-dialog>

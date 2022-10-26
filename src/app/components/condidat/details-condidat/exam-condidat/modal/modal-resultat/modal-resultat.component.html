@@ -1,0 +1,95 @@
+<div class="modal-header bg-primary">
+    <h5 class="modal-title">{{list[0].value}} Examen</h5>
+    <button pButton pRipple icon="pi pi-times" (click)="Close()"></button>
+</div>
+<div class="modal-body modal-lg">
+    <form [formGroup]="formaddexamen">
+
+        <div class="field col-12">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label fw-bold">Numéro liste : </label>
+                <div class="col-sm-3">
+                    <input class="hidden" type="text" formControlName="condidat_id" />
+                    <label class="fw-bold  text-decoration-underline">{{this.list[0].examen?.num_liste}}</label>
+                </div>
+
+                <label class="col-sm-3 col-form-label fw-bold">Date examen : </label>
+                <div class="col-sm-3">
+                    <label class="fw-bold  text-decoration-underline">{{this.list[0].examen?.date_examen}}</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="field col-12">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label fw-bold">Numéro Convocation : </label>
+                <div class="col-sm-3">
+                    <label class="fw-bold  text-decoration-underline">{{this.list[0].examen?.num_convocation}}</label>
+                </div>
+
+                <label class="col-sm-3 col-form-label fw-bold">Type Examen : </label>
+                <div class="col-sm-3">
+                    <label class="fw-bold  text-decoration-underline">{{this.list[0].examen?.type_examen}}</label>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-3 col-form-label fw-bold"><span
+                    class="text-danger">*</span>Résultat</label>
+            <div class="col-sm-4">
+                <div class="grid">
+                    <div class="col-12">
+                        <div class="field-radiobutton mb-0">
+                            <p-radioButton value="Réussi" formControlName="resultat"></p-radioButton>
+                            <label>Réussi</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="field-radiobutton mb-0">
+                            <p-radioButton value="Ajourné" formControlName="resultat"></p-radioButton>
+                            <label>Ajourné</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="field-radiobutton mb-0">
+                            <p-radioButton value="En cours" formControlName="resultat"></p-radioButton>
+                            <label>En cours</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="field-radiobutton mb-0">
+                            <p-radioButton value="Excusé" formControlName="resultat"></p-radioButton>
+                            <label>Excusé</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="field col-12" *ngIf="this.list[0].examen?.type_examen == 'Conduite'">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label fw-bold"><span class="text-danger">*</span>Examinateur </label>
+                <div class="col-sm-4">
+                    <select class="form-select" formControlName="examinateur"
+                        [ngClass]="{ 'is-invalid': submitted && f['examinateur'].errors }">
+                        <option *ngFor="let examinateur of examinateurs"
+                            [ngValue]="examinateur.nom + examinateur.prenom">
+                            {{ examinateur.nom}} {{ examinateur.prenom}}
+                        </option>
+                    </select>
+                    <div *ngIf="submitted && f['examinateur'].errors" class="invalid-feedback">
+                        <div *ngIf="f['examinateur'].errors['required']">examinateur est obligatoir</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+<div class="modal-footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="Close()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="onUpdate(this.list[0].examen?.id)"></button>
+</div>

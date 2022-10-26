@@ -72,4 +72,12 @@ export const API = {
     'Deletecentre_exam' : 'http://172.21.11.196/Driving/backend/api/auth/centre_exam/',
     'getcentre_examByID':'http://172.21.11.196/Driving/backend/api/auth/centre_exam/',
     'updatecentre_exam':'http://172.21.11.196/Driving/backend/api/auth/centre_exam/',
+
+    /**Examen */
+    'add_Examen' : 'http://172.21.11.196/Driving/backend/api/auth/examen',
+    'ListExamen' : 'http://172.21.11.196/Driving/backend/api/auth/examen',
+    'DeleteExamen' : 'http://172.21.11.196/Driving/backend/api/auth/examen/',
+    'getExamenByID':'http://172.21.11.196/Driving/backend/api/auth/examen/',
+    'updateExamen':'http://172.21.11.196/Driving/backend/api/auth/examen/',
+    'updateResultExamen':'http://172.21.11.196/Driving/backend/api/auth/examen/update_resulat/',
 }

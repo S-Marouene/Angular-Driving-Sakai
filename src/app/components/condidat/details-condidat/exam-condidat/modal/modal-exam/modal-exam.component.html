@@ -1,0 +1,174 @@
+<div class="modal-header bg-primary">
+    <h5 class="modal-title">{{list[0].value}} Examen</h5>
+    <button pButton pRipple icon="pi pi-times" (click)="hideDialog()"></button>
+</div>
+<div class="modal-body modal-lg">
+    <form [formGroup]="formaddexamen">
+
+        <div class="field col-12">
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                    Numéro liste</label>
+                <div class="col-sm-6">
+                    <input class="hidden" type="text" formControlName="condidat_id"/>
+
+                    <input class="form-control" type="text" formControlName="num_liste"
+                        [ngClass]="{ 'is-invalid': submitted && f['num_liste'].errors }" />
+                    <div *ngIf="submitted && f['num_liste'].errors" class="invalid-feedback">
+                        <div *ngIf="f['num_liste'].errors['required']">num_liste est obligatoir</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field col-12">
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                    Numéro convocation </label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" formControlName="num_convocation"
+                        [ngClass]="{ 'is-invalid': submitted && f['num_convocation'].errors }" />
+                    <div *ngIf="submitted && f['num_convocation'].errors" class="invalid-feedback">
+                        <div *ngIf="f['num_convocation'].errors['required']">num_convocation est obligatoir</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="field col-12">
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                    Date examen</label>
+                <div class="col-sm-6" [ngClass]="{ 'is-invalid': submitted && f['date_examen'].errors }">
+                    <p-calendar formControlName="date_examen" dateFormat="yy-mm-dd" [showIcon]="false"
+                        [showButtonBar]="true" showTime="true" [hourFormat]="24">
+                    </p-calendar>
+                </div>
+                <div *ngIf="submitted && f['date_examen'].errors" class="invalid-feedback">
+                    <div *ngIf="f['date_examen'].errors['required']">date_examen est obligatoir</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field col-12">
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span> Centre
+                    d'examen</label>
+                <div class="col-sm-6">
+                    <select class="form-select" formControlName="centre_examen"
+                        [ngClass]="{ 'is-invalid': submitted && f['centre_examen'].errors }">
+                        <option *ngFor="let centre_examen of centre_examens" [ngValue]="centre_examen.libelle">
+                            {{ centre_examen.libelle}}
+                        </option>
+                    </select>
+                    <div *ngIf="submitted && f['centre_examen'].errors" class="invalid-feedback">
+                        <div *ngIf="f['centre_examen'].errors['required']">centre_examen est obligatoir</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>Type
+                Examen</label>
+            <div class="col-sm-6">
+                <div class="grid">
+                    <div class="col-12 md:col-4">
+                        <div class="field-radiobutton mb-0">
+                            <p-radioButton value="Code" formControlName="type_examen" [(ngModel)]="type_examenRadio"
+                                [value]="false"></p-radioButton>
+                            <label>Code</label>
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-4">
+                        <div class="field-radiobutton">
+                            <p-radioButton value="Conduite" formControlName="type_examen" [(ngModel)]="type_examenRadio"
+                                [value]="true"></p-radioButton>
+                            <label>Conduite</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row" *ngIf="!type_examenRadio">
+            <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span
+                    class="text-danger">*</span>Prestation Code</label>
+            <div class="col-sm-6">
+                <div class="grid">
+                    <div class="col-12">
+                        <div class="field-radiobutton mb-0">
+                            <p-radioButton value="Gratuite" formControlName="prestation"></p-radioButton>
+                            <label>Gratuite</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="field-radiobutton mb-0">
+                            <p-radioButton value="Frais Dossier" formControlName="prestation"></p-radioButton>
+                            <label>Frais Dossier</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="field-radiobutton mb-0">
+                            <p-radioButton value="Réinscription Code" formControlName="prestation"></p-radioButton>
+                            <label>Réinscription Code</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row" *ngIf="type_examenRadio">
+            <div class="field col-12">
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                        Pièces fournies </label>
+                    <div class="col-sm-6">
+                        <div class="grid">
+                            <div *ngFor="let prestation of pieces" class="field-checkbox">
+                                <p-checkbox name="group2" [value]="prestation" [inputId]="prestation"
+                                    [formControl]="formaddexamen.controls['prestation_cond']" ></p-checkbox>
+                                <label [for]="prestation">{{prestation}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field col-12">
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span> Bureau</label>
+                <div class="col-sm-6">
+                    <select class="form-select" formControlName="bureau"
+                        [ngClass]="{ 'is-invalid': submitted && f['bureau'].errors }">
+                        <option *ngFor="let bureau of bureaux" [ngValue]="bureau.nom">
+                            {{ bureau.nom}}
+                        </option>
+
+                    </select>
+                    <div *ngIf="submitted && f['bureau'].errors" class="invalid-feedback">
+                        <div *ngIf="f['bureau'].errors['required']">bureau est obligatoir</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+<div class="modal-footer">
+    <div *ngIf=" list[0].operation == 'add' ">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="onSubmit()"></button>
+    </div>
+
+    <div *ngIf=" list[0].operation == 'update' ">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+            (click)="onUpdate(list[0].examen.id)"></button>
+    </div>
+</div>
+
