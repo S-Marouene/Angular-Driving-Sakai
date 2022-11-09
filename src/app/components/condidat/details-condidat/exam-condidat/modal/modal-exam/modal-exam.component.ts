@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, Validators,FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -13,6 +13,7 @@ import { ExamenService } from 'src/app/service/examen/examen.service';
     selector: 'app-modal-exam',
     templateUrl: './modal-exam.component.html',
 })
+
 export class ModalExamComponent implements OnInit {
     formaddexamen;
     submitted: boolean = false;

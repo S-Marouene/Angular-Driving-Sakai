@@ -80,4 +80,15 @@ export const API = {
     'getExamenByID':'http://172.21.11.196/Driving/backend/api/auth/examen/',
     'updateExamen':'http://172.21.11.196/Driving/backend/api/auth/examen/',
     'updateResultExamen':'http://172.21.11.196/Driving/backend/api/auth/examen/update_resulat/',
+    'getExamenByCondidat':'http://172.21.11.196/Driving/backend/api/auth/examen/getExamenByCondidat/',
+
+
+    /**conduite API*/
+    'add_conduite' : 'http://172.21.11.196/Driving/backend/api/auth/conduite',
+    'Listconduite' : 'http://172.21.11.196/Driving/backend/api/auth/conduite',
+    'Deleteconduite' : 'http://172.21.11.196/Driving/backend/api/auth/conduite/',
+    'getconduiteByID':'http://172.21.11.196/Driving/backend/api/auth/conduite/',
+    'updateconduite':'http://172.21.11.196/Driving/backend/api/auth/conduite/',
+    'ListconduiteCondidat':'http://172.21.11.196/Driving/backend/api/auth/conduite/getconduiteCondidat/',
+
 }

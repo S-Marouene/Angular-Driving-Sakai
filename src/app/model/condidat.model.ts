@@ -1,4 +1,5 @@
 export interface Condidat {
+    label?: string;
     id?: string;
     nom?: string;
     prenom?: string;

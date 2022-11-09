@@ -14,6 +14,10 @@ export class ExamenService {
     getExamens(): Observable<Examen[]> {
         return this.http.get<Examen[]>(API.ListExamen)
     }
+    getExamenByCondidat(id): Observable<Examen[]> {
+        return this.http.get<Examen[]>(API.getExamenByCondidat + id)
+    }
+
 
     getExamensByID(id: number): Observable<Examen> {
         return this.http.get<Examen>(API.getExamenByID + id)

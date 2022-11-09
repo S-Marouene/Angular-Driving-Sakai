@@ -8,12 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction';
-
-
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-
-
 import { StyleClassModule } from 'primeng/styleclass';
 import { AccordionModule } from 'primeng/accordion';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -96,7 +92,6 @@ import { TreeSelectModule } from 'primeng/treeselect';
 import { TreeTableModule } from 'primeng/treetable';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { BlockViewer } from './components/blockviewer/blockviewer.component';
-
 import { AppCodeModule } from './components/app-code/app.code.component';
 import { AppComponent } from './app.component';
 import { AppMainComponent } from './app.main.component';
@@ -105,7 +100,6 @@ import { AppFooterComponent } from './app.footer.component';
 import { AppConfigComponent } from './app.config.component';
 import { AppMenuComponent } from './app.menu.component';
 import { AppMenuitemComponent } from './app.menuitem.component';
-
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormLayoutComponent } from './components/formlayout/formlayout.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -134,7 +128,6 @@ import { ConfirmationComponent } from './components/menus/confirmation.component
 import { PersonalComponent } from './components/menus/personal.component';
 import { SeatComponent } from './components/menus/seat.component';
 import { LandingComponent } from './components/landing/landing.component';
-
 import { CountryService } from './service/countryservice';
 import { CustomerService } from './service/customerservice';
 import { EventService } from './service/eventservice';
@@ -163,7 +156,7 @@ import { CardCondidatComponent } from './components/condidat/details-condidat/ca
 import { ExamcondidatComponent } from './components/condidat/details-condidat/exam-condidat/examcondidat.component';
 import { RenseingementCondidatComponent } from './components/condidat/details-condidat/renseignement-condidat/renseingement-condidat/renseingement-condidat.component';
 import { PaiementCondidatComponent } from './components/condidat/details-condidat/paiement-condidat/paiement-condidat/paiement-condidat.component';
-import { ConduiteCondidatComponent } from './components/condidat/details-condidat/conduite-condidat/conduite-condidat/conduite-condidat.component';
+import { ConduiteCondidatComponent } from './components/condidat/details-condidat/conduite-condidat/conduite-condidat.component';
 import { CodeCondidatComponent } from './components/condidat/details-condidat/code-condidat/code-condidat/code-condidat.component';
 import { ParametreComponent } from './components/parametre/parametre.component';
 import { VehiculeComponent } from './components/parametre/vehicule/vehicule.component';
@@ -192,6 +185,8 @@ import { ModalCentreExamenComponent } from './components/parametre/centre-examen
 import { ModalExamComponent } from './components/condidat/details-condidat/exam-condidat/modal/modal-exam/modal-exam.component';
 import { ItemExamenComponent } from './components/condidat/details-condidat/exam-condidat/item-examen/item-examen.component';
 import { ModalResultatComponent } from './components/condidat/details-condidat/exam-condidat/modal/modal-resultat/modal-resultat.component';
+import { ModalAddConduiteComponent } from './components/calendrier/modal-add-conduite/modal-add-conduite.component';
+import { ModalAddCondCondidatComponent } from './components/condidat/details-condidat/conduite-condidat/modal-add-cond-condidat/modal-add-cond-condidat.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -376,6 +371,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         ModalExamComponent,
         ItemExamenComponent,
         ModalResultatComponent,
+        ModalAddConduiteComponent,
+        ModalAddCondCondidatComponent,
+
 
     ],
     providers: [

@@ -1,29 +1,38 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import {
+    Component,
+    HostListener,
+    Input,
+    OnInit,
+    ViewChild,
+} from '@angular/core';
 import {
     CalendarOptions,
     DateSelectArg,
-    EventClickArg,
     EventApi,
+    EventClickArg,
     EventInput,
+    FullCalendarComponent,
 } from '@fullcalendar/angular';
-import { INITIAL_EVENTS, createEventId } from './event-utils';
-import frLocale from '@fullcalendar/core/locales/fr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { ModalAddConduiteComponent } from './modal-add-conduite/modal-add-conduite.component';
-import { ConduiteService } from 'src/app/service/conduite/conduite.service';
 import { Conduite } from 'src/app/model/conduite.model';
+import frLocale from '@fullcalendar/core/locales/fr';
+import { ConduiteService } from 'src/app/service/conduite/conduite.service';
+import { Condidat } from 'src/app/model/condidat.model';
+import { ActivatedRoute } from '@angular/router';
+import { ModalAddCondCondidatComponent } from './modal-add-cond-condidat/modal-add-cond-condidat.component';
 
 @Component({
-    selector: 'app-test-component',
-    templateUrl: './test-component.component.html',
-    styleUrls: ['./test-component.component.scss'],
+    selector: 'app-conduite-condidat',
+    templateUrl: './conduite-condidat.component.html',
+    styleUrls: ['./conduite-condidat.component.scss'],
 })
-export class TestComponentComponent {
+export class ConduiteCondidatComponent implements OnInit {
+    @Input() condidat: Condidat;
     public innerWidth: any;
     bsModalRef: BsModalRef;
     currentEvents: EventApi[] = [];
     conduites: Conduite[] = [];
-    conduite:Conduite;
+    conduite: Conduite;
     INITIAL_CONDUITES: any = [];
     TODAY_STR = new Date().toISOString().replace(/T.*$/, '');
     myEvents: EventInput[] = [];
@@ -55,20 +64,25 @@ export class TestComponentComponent {
             day: '2-digit',
             weekday: 'short',
         },
-        eventTimeFormat: { // like '14:30:00'
+
+        eventTimeFormat: {
+            // like '14:30:00'
             hour: 'numeric',
             hour12: false,
             minute: '2-digit',
             meridiem: false,
-          }
+        },
     };
 
     constructor(
         private modalService: BsModalService,
-        private conduiteService: ConduiteService
+        private conduiteService: ConduiteService,
+        private activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
+        this.condidat = {};
+
         this.innerWidth = window.innerWidth;
         if (this.innerWidth < 450) {
             this.calendarOptions = {
@@ -82,29 +96,36 @@ export class TestComponentComponent {
         }
 
         const newEvents = [];
-        this.conduiteService.getConduites().subscribe({
-            next: (ListConduite) => {
-                this.conduites = ListConduite['data'];
-                for (const value of this.conduites) {
-                    newEvents.push({
-                        start: value.date_deb.toString().replace(' ', 'T'),
-                        end: value.date_fin.toString().replace(' ', 'T') || '',
-                        allDay: false,
-                        title: value.condidat_prenom +' '+value.condidat_nom,
-                        conduite_id:value.id,
-                        conduite_moniteur:value.moniteur,
-                        conduite_vehicule:value.vehicule,
-                        nbr_heure:value.nbr_heure
-                        //color: value.color
-                    });
-                }
-                this.myEvents = newEvents;
-            },
-            error: () => {
-                console.log(
-                    `Problème au niveau du serveur, attention les données sont fake `
-                );
-            },
+        this.activatedRoute.params.subscribe((params) => {
+            this.conduiteService.getConduitesCondidat(params.id).subscribe({
+                next: (ListConduite) => {
+                    this.conduites = ListConduite['data'];
+                    for (const value of this.conduites) {
+                        newEvents.push({
+                            start: value.date_deb.toString().replace(' ', 'T'),
+                            end:
+                                value.date_fin.toString().replace(' ', 'T') ||
+                                '',
+                            allDay: false,
+                            title:
+                                value.condidat_prenom +
+                                ' ' +
+                                value.condidat_nom,
+                            conduite_id: value.id,
+                            conduite_moniteur: value.moniteur,
+                            conduite_vehicule: value.vehicule,
+                            nbr_heure: value.nbr_heure,
+                            //color: value.color
+                        });
+                    }
+                    this.myEvents = newEvents;
+                },
+                error: () => {
+                    console.log(
+                        `Problème au niveau du serveur, attention les données sont fake `
+                    );
+                },
+            });
         });
 
         setTimeout(() => {
@@ -112,7 +133,7 @@ export class TestComponentComponent {
                 ...this.calendarOptions,
                 events: this.myEvents,
             };
-        }, 2500);
+        }, 1500);
     }
 
     handleCalendarToggle() {
@@ -131,12 +152,15 @@ export class TestComponentComponent {
                     operation: 'Ajout',
                     start: selectInfo.startStr,
                     end: selectInfo.endStr,
-                    selectInfo:selectInfo,
-                    nbr_heure:'2'
+                    selectInfo: selectInfo,
+                    nbr_heure: '2',
+                    condidat_id: this.condidat.id ,
+                    condidat_nom: this.condidat.nom ,
+                    condidat_prenom: this.condidat.prenom ,
                 },
             ],
         };
-        this.bsModalRef = this.modalService.show(ModalAddConduiteComponent, {
+        this.bsModalRef = this.modalService.show(ModalAddCondCondidatComponent, {
             initialState,
         });
         this.bsModalRef.content.closeBtnName = 'Close';
@@ -152,14 +176,14 @@ export class TestComponentComponent {
                     start: clickInfo.event.startStr,
                     end: clickInfo.event.endStr,
                     title: clickInfo.event._def.title,
-                    moniteur:clickInfo.event.extendedProps.conduite_moniteur,
-                    vehicule:clickInfo.event.extendedProps.conduite_vehicule,
-                    nbr_heure:clickInfo.event.extendedProps.nbr_heure,
-                    clickInfo:clickInfo
+                    moniteur: clickInfo.event.extendedProps.conduite_moniteur,
+                    vehicule: clickInfo.event.extendedProps.conduite_vehicule,
+                    nbr_heure: clickInfo.event.extendedProps.nbr_heure,
+                    clickInfo: clickInfo,
                 },
             ],
         };
-        this.bsModalRef = this.modalService.show(ModalAddConduiteComponent, {
+        this.bsModalRef = this.modalService.show(ModalAddCondCondidatComponent, {
             initialState,
         });
         this.bsModalRef.content.closeBtnName = 'Close';
