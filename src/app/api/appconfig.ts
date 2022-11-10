@@ -98,4 +98,16 @@ export const API = {
     'getcodeByID':'http://172.21.11.196/Driving/backend/api/auth/code/',
     'updatecode':'http://172.21.11.196/Driving/backend/api/auth/code/',
 
+    /**paiement API*/
+    'add_paiement' : 'http://172.21.11.196/Driving/backend/api/auth/paiement',
+    'Listpaiement' : 'http://172.21.11.196/Driving/backend/api/auth/paiement',
+    'Deletepaiement' : 'http://172.21.11.196/Driving/backend/api/auth/paiement/',
+    'getpaiementByID':'http://172.21.11.196/Driving/backend/api/auth/paiement/',
+    'updatepaiement':'http://172.21.11.196/Driving/backend/api/auth/paiement/',
+
+    'getpaiementByCondidat':'http://172.21.11.196/Driving/backend/api/auth/paiement/getpaiementByCondidat/',
+
+
+
+
 }

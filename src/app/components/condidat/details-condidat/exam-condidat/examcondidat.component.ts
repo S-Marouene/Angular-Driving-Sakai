@@ -67,16 +67,21 @@ export class ExamcondidatComponent implements OnInit {
     }
 
     getListexamen() {
-        this.examenService.getExamens().subscribe({
-            next: (ListExamen) => {
-                this.examens = ListExamen['data'];
-                console.log(this.examens);
-            },
-            error: () => {
-                console.log(
-                    `Problème au niveau du serveur, attention les données sont fake `
-                );
-            },
-        });
+        this.activatedRoute.params.subscribe((params) => {
+
+
+            this.examenService.getExamenByCondidat(params.id).subscribe({
+                next: (ListExamen) => {
+                    this.examens = ListExamen['data'];
+                    console.log(this.examens);
+                },
+                error: () => {
+                    console.log(
+                        `Problème au niveau du serveur, attention les données sont fake `
+                    );
+                },
+            });
+
+        })
     }
 }

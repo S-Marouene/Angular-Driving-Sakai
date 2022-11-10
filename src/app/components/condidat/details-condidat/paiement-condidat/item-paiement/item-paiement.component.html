@@ -1,0 +1,37 @@
+
+<td style="min-width: 4rem;">
+    <span class="image-text ml-2">{{paiement.caisse}}</span>
+</td>
+<td style="min-width: 4rem;">
+    <span class="image-text ml-2">{{paiement.type}}</span>
+</td>
+
+<td style="min-width: 8rem;">
+    <span class="image-text ml-2">{{paiement.montant}}</span>
+</td>
+
+<td style="min-width: 10rem;">
+    {{paiement.mode_paiement}}
+</td>
+
+<td style="min-width: 8rem;">
+    <div class="flex">
+        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded btn-sm p-button-success mr-2"
+            (click)="openModalExam()"></button>
+        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+            (click)="deletepaiement(paiement)"></button>
+    </div>
+</td>
+
+
+<p-dialog [(visible)]="deletePaiementDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+    <div class="flex align-items-center justify-content-center">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+        <span *ngIf="paiement">Voulez vous vraiment supprimer cette paiement ?</span>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
+            (click)="deletePaiementDialog = false"></button>
+        <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+    </ng-template>
+</p-dialog>

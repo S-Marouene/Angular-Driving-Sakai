@@ -155,7 +155,7 @@ import { DetailsCondidatComponent } from './components/condidat/details-condidat
 import { CardCondidatComponent } from './components/condidat/details-condidat/card-condidat/card-condidat/card-condidat.component';
 import { ExamcondidatComponent } from './components/condidat/details-condidat/exam-condidat/examcondidat.component';
 import { RenseingementCondidatComponent } from './components/condidat/details-condidat/renseignement-condidat/renseingement-condidat/renseingement-condidat.component';
-import { PaiementCondidatComponent } from './components/condidat/details-condidat/paiement-condidat/paiement-condidat/paiement-condidat.component';
+import { PaiementCondidatComponent } from './components/condidat/details-condidat/paiement-condidat/paiement-condidat.component';
 import { ConduiteCondidatComponent } from './components/condidat/details-condidat/conduite-condidat/conduite-condidat.component';
 import { CodeCondidatComponent } from './components/condidat/details-condidat/code-condidat/code-condidat.component';
 import { ParametreComponent } from './components/parametre/parametre.component';
@@ -189,6 +189,8 @@ import { ModalAddConduiteComponent } from './components/calendrier/modal-add-con
 import { ModalAddCondCondidatComponent } from './components/condidat/details-condidat/conduite-condidat/modal-add-cond-condidat/modal-add-cond-condidat.component';
 import { ItemCodeComponent } from './components/condidat/details-condidat/code-condidat/item-code/item-code.component';
 import { ModalCodeComponent } from './components/condidat/details-condidat/code-condidat/modal-code/modal-code.component';
+import { ModalPaiementComponent } from './components/condidat/details-condidat/paiement-condidat/modal-paiement/modal-paiement.component';
+import { ItemPaiementComponent } from './components/condidat/details-condidat/paiement-condidat/item-paiement/item-paiement.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -376,7 +378,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         ModalAddConduiteComponent,
         ModalAddCondCondidatComponent,
         ItemCodeComponent,
-        ModalCodeComponent
+        ModalCodeComponent,
+        ModalPaiementComponent,
+        ItemPaiementComponent
 
     ],
     providers: [
