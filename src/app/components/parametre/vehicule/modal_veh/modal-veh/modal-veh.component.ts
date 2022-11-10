@@ -65,8 +65,7 @@ export class ModalVehComponent implements OnInit {
     onSubmit() {
         this.submitted = true;
         this.vehiculeService.register(this.formaddvehicule.value).subscribe(
-            (result) => {
-            },
+            (result) => {},
             (error) => {
                 this.errors = error.error;
             },
@@ -75,7 +74,7 @@ export class ModalVehComponent implements OnInit {
                 this.bsModalRef.hide();
                 this.vehicule = {};
                 this.toastr.info('Vehicule ajouter avec succée', 'Info');
-                this.modalService.setDismissReason("true");
+                this.modalService.setDismissReason('true');
             }
         );
     }
@@ -86,8 +85,7 @@ export class ModalVehComponent implements OnInit {
             this.vehiculeService
                 .update_veh(this.formaddvehicule.value, id)
                 .subscribe(
-                    (result) => {
-                    },
+                    (result) => {},
                     (error) => {
                         this.errors = error.error;
                     },
@@ -96,7 +94,7 @@ export class ModalVehComponent implements OnInit {
                         this.bsModalRef.hide();
                         this.vehicule = {};
                         this.toastr.info('Donnée Modifier avec succée', 'Info');
-                        this.modalService.setDismissReason("true");
+                        this.modalService.setDismissReason('true');
                     }
                 );
         }
@@ -106,5 +104,4 @@ export class ModalVehComponent implements OnInit {
         this.bsModalRef.hide();
         this.submitted = false;
     }
-
 }

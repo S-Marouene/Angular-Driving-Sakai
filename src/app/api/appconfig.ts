@@ -91,4 +91,11 @@ export const API = {
     'updateconduite':'http://172.21.11.196/Driving/backend/api/auth/conduite/',
     'ListconduiteCondidat':'http://172.21.11.196/Driving/backend/api/auth/conduite/getconduiteCondidat/',
 
+    /**code API*/
+    'add_code' : 'http://172.21.11.196/Driving/backend/api/auth/code',
+    'Listcode' : 'http://172.21.11.196/Driving/backend/api/auth/code',
+    'Deletecode' : 'http://172.21.11.196/Driving/backend/api/auth/code/',
+    'getcodeByID':'http://172.21.11.196/Driving/backend/api/auth/code/',
+    'updatecode':'http://172.21.11.196/Driving/backend/api/auth/code/',
+
 }

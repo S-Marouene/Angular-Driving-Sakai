@@ -157,7 +157,7 @@ import { ExamcondidatComponent } from './components/condidat/details-condidat/ex
 import { RenseingementCondidatComponent } from './components/condidat/details-condidat/renseignement-condidat/renseingement-condidat/renseingement-condidat.component';
 import { PaiementCondidatComponent } from './components/condidat/details-condidat/paiement-condidat/paiement-condidat/paiement-condidat.component';
 import { ConduiteCondidatComponent } from './components/condidat/details-condidat/conduite-condidat/conduite-condidat.component';
-import { CodeCondidatComponent } from './components/condidat/details-condidat/code-condidat/code-condidat/code-condidat.component';
+import { CodeCondidatComponent } from './components/condidat/details-condidat/code-condidat/code-condidat.component';
 import { ParametreComponent } from './components/parametre/parametre.component';
 import { VehiculeComponent } from './components/parametre/vehicule/vehicule.component';
 import { BureauxComponent } from './components/parametre/bureaux/bureaux.component';
@@ -187,6 +187,8 @@ import { ItemExamenComponent } from './components/condidat/details-condidat/exam
 import { ModalResultatComponent } from './components/condidat/details-condidat/exam-condidat/modal/modal-resultat/modal-resultat.component';
 import { ModalAddConduiteComponent } from './components/calendrier/modal-add-conduite/modal-add-conduite.component';
 import { ModalAddCondCondidatComponent } from './components/condidat/details-condidat/conduite-condidat/modal-add-cond-condidat/modal-add-cond-condidat.component';
+import { ItemCodeComponent } from './components/condidat/details-condidat/code-condidat/item-code/item-code.component';
+import { ModalCodeComponent } from './components/condidat/details-condidat/code-condidat/modal-code/modal-code.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -373,7 +375,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         ModalResultatComponent,
         ModalAddConduiteComponent,
         ModalAddCondCondidatComponent,
-
+        ItemCodeComponent,
+        ModalCodeComponent
 
     ],
     providers: [

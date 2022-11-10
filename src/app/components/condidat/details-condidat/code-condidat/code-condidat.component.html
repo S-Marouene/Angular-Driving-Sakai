@@ -1,0 +1,79 @@
+<hr>
+<h5>Planning Cours Code</h5>
+<hr>
+
+<p-table #dt1 [value]="codes" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
+    styleClass="p-datatable-gridlines" [paginator]="true"
+    [globalFilterFields]="['condidat_id','nbr_heure','date_deb','date_fin']" responsiveLayout="scroll">
+
+    <ng-template pTemplate="caption" class="text-right">
+        <div class="flex justify-content-between flex-column sm:flex-row">
+            <span class="p-input-icon-left mb-2">
+
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" #filter (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Recherche" class="w-full" />
+            </span>
+
+            <button pButton label="Nouveau" class="p-button-outlined mb-2" icon="pi pi-plus-circle"
+            (click)="openModalcode()"></button>
+
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Condidat
+                    <p-columnFilter type="text" field="condidat_id" display="menu" placeholder="Recherche par condidat_id">
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Nombre d'heure
+                    <p-columnFilter type="text" field="nbr_heure" display="menu" placeholder="Search by nbr_heure">
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Date début
+                    <p-columnFilter type="text" field="date_deb" display="menu" placeholder="Recherche ">
+                    </p-columnFilter>
+                </div>
+            </th>
+
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Date fin
+                    <p-columnFilter type="text" field="date_fin" display="menu" >
+                    </p-columnFilter>
+                </div>
+            </th>
+
+            <th style="width: 8rem">
+                <div class="flex justify-content-between align-items-center">
+                    Modification
+                    <p-columnFilter type="boolean" display="menu"></p-columnFilter>
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" ngFor let-actualcode [ngForOf]="codes">
+        <tr app-item-code [condidat]="this.condidat" [code]="actualcode" (refresh_list_evnt)="getListcode()"></tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="7">On à pas trouver des données.</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="loadingbody">
+        <tr>
+            <td colspan="7">Chargement des données , attendez SVP ! </td>
+        </tr>
+    </ng-template>
+</p-table>
