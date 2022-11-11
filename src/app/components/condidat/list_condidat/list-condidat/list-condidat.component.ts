@@ -10,6 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Table } from 'primeng/table';
 import { CONSTANTES } from 'src/app/constantes/constantes';
 import { Condidat } from 'src/app/model/condidat.model';
+import { BureauService } from 'src/app/service/bureau/bureau.service';
+import { CaisseService } from 'src/app/service/caisse/caisse.service';
 import { CondidatService } from 'src/app/service/condidat/condidat.service';
 
 @Component({
@@ -34,7 +36,8 @@ export class ListCondidatComponent implements OnInit {
         'D+E',
         'H',
     ];
-    public bureaux: any = ['Menzel temime', 'Nabeul', 'Kélibiya', 'Autres...'];
+    public bureaux: any = [];
+    public caisses: any = [];
     public pieces: any = [
         'Photos',
         'Certificat médical',
@@ -63,12 +66,37 @@ export class ListCondidatComponent implements OnInit {
         public fb: FormBuilder,
         private toastr: ToastrService,
         public datepipe: DatePipe,
-        private condidatservice: CondidatService
+        private condidatservice: CondidatService,
+        private bureauService:BureauService,
+        private caisseService:CaisseService,
     ) {}
 
     ngOnInit(): void {
         this.selected_t_c_code = true;
         this.selected_t_c_cond = true;
+
+        this.bureauService.getBureaux().subscribe({
+            next: (ListBureau) => {
+                this.bureaux = ListBureau['data'];
+            },
+            error: () => {
+                console.log(
+                    `Problème au niveau du serveur, attention les données sont fake `
+                );
+            },
+        });
+
+        this.caisseService.getCaisses().subscribe({
+            next: (ListCaisse) => {
+                this.caisses = ListCaisse['data'];
+                console.log(this.caisses);
+            },
+            error: () => {
+                console.log(
+                    `Problème au niveau du serveur, attention les données sont fake `
+                );
+            },
+        });
 
         this.form_condidat = this.fb.group({
             nom: ['', Validators.required],
@@ -232,14 +260,14 @@ export class ListCondidatComponent implements OnInit {
                 console.log(this.errors);
             },
             () => {
-                /* this.refreshListUser();*/
+               /*  this.refreshListUser(); */
 
-                /* this.imageSrc = null;
+                this.imageSrc = null;
                 this.form_condidat.reset();
                 this.CondidatDialog = false;
                 this.condidat = {};
                 this.toastr.info('Condidat ajouter avec succée', 'Info');
-                this.getListCondidat(); */
+                this.getListCondidat();
             }
         );
     }

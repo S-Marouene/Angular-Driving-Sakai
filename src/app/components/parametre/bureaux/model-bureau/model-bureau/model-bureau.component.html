@@ -6,7 +6,7 @@
     <form [formGroup]="formaddbureau">
 
         <div class="field">
-            <label><span class="text-danger">*</span>nom</label>
+            <label><span class="text-danger">*</span>Nom du bureau</label>
             <input class="form-control" type="text" formControlName="nom"
                 [ngClass]="{ 'is-invalid': submitted && f['nom'].errors }" />
             <div *ngIf="submitted && f['nom'].errors" class="invalid-feedback">
@@ -15,7 +15,7 @@
         </div>
 
         <div class="field">
-            <label><span class="text-danger">*</span>sequence </label>
+            <label><span class="text-danger">*</span>Séquence </label>
             <input class="form-control" type="text" formControlName="sequence"
                 [ngClass]="{ 'is-invalid': submitted && f['sequence'].errors }" />
 
@@ -25,7 +25,7 @@
         </div>
 
         <div class="field">
-            <label><span class="text-danger">*</span>mat_fiscal</label>
+            <label><span class="text-danger">*</span>Matricule fiscal</label>
             <input type="text" formControlName="mat_fiscal" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['mat_fiscal'].errors }" />
             <div *ngIf="submitted && f['mat_fiscal'].errors" class="invalid-feedback">
@@ -34,7 +34,7 @@
         </div>
 
         <div class="field">
-            <label><span class="text-danger">*</span>adresse</label>
+            <label><span class="text-danger">*</span>Adresse</label>
             <input type="text" formControlName="adresse" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['adresse'].errors }" />
             <div *ngIf="submitted && f['adresse'].errors" class="invalid-feedback">
@@ -43,7 +43,7 @@
         </div>
 
         <div class="field">
-            <label><span class="text-danger">*</span>nom_comercial</label>
+            <label><span class="text-danger">*</span>Nom comercial</label>
             <input type="text" formControlName="nom_comercial" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['nom_comercial'].errors }" />
             <div *ngIf="submitted && f['nom_comercial'].errors" class="invalid-feedback">

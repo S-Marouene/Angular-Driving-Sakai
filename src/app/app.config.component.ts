@@ -12,9 +12,9 @@ import { ConfigService } from './service/app.config.service';
 })
 export class AppConfigComponent implements OnInit, OnDestroy {
 
-    scale: number = 14;
+    scale: number = 12;
 
-    scales: any[] = [12, 13, 14, 15, 16];
+    scales: any[] = [10, 11, 12, 13, 14];
 
     config: AppConfig;
 
@@ -26,10 +26,19 @@ export class AppConfigComponent implements OnInit, OnDestroy {
         this.config = this.configService.config;
         this.subscription = this.configService.configUpdate$.subscribe(config => {
             this.config = config;
-            this.scale = 14;
+
+            if(this.isMobile()==true){
+                this.scale = 11;
+            }else{
+                this.scale = 14;
+            }
 
             this.applyScale();
         });
+    }
+
+    isMobile(){
+        return window.innerWidth < 1024;
     }
 
     onConfigButtonClick(event) {

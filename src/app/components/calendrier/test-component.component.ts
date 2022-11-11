@@ -34,6 +34,7 @@ export class TestComponentComponent {
             center: 'title',
             right: 'listWeek dayGridMonth,timeGridWeek,timeGridDay',
         },
+        height: 550,
         allDaySlot: false,
         locales: [frLocale],
         initialView: 'timeGridWeek',

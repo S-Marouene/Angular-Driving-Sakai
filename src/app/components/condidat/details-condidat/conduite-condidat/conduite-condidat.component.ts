@@ -43,6 +43,7 @@ export class ConduiteCondidatComponent implements OnInit {
             center: 'title',
             right: 'listWeek dayGridMonth,timeGridWeek,timeGridDay',
         },
+        height: 650,
         allDaySlot: false,
         locales: [frLocale],
         initialView: 'timeGridWeek',

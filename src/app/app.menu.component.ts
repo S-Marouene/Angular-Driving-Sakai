@@ -76,11 +76,12 @@ export class AppMenuComponent implements OnInit {
                 label: 'Auto-Ecole',
                 items: [
                     /* {label: 'Mon profil', icon: 'pi pi-fw pi-user-edit', routerLink: ['/uikit/profile']}, */
-                    {label: 'Calendrier', icon: 'pi pi-fw pi-calendar', routerLink: ['/calendar'],visible :this.Check_Menu(this.ListPermission,'calendrier')},
+                    {label: 'Calendrier Conduite', icon: 'pi pi-fw pi-calendar', routerLink: ['/calendar'],visible :this.Check_Menu(this.ListPermission,'calendrier')},
                     {label: 'Utilisateur', icon: 'pi pi-fw pi-id-card', routerLink: ['/listusers'],visible : this.Check_Menu(this.ListPermission,'user')},
                     {label: 'Liste des écoles', icon: 'pi pi-fw pi-list', routerLink: ['/listSchool'],visible : this.Check_Menu(this.ListPermission,'liste_ecole')},
                     {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/condidat'],visible : this.Check_Menu(this.ListPermission,'condidat')},
                     {label: 'Paramètres', icon: 'pi pi-cog', routerLink: ['/parametre']},
+                    {label: 'Code', icon: 'pi pi-book', routerLink: ['/parametre']},
 
                 ]
             },

@@ -33,6 +33,17 @@ export class AppComponent {
         });
 
         this.primengConfig.ripple = true;
-        document.documentElement.style.fontSize = '14px';
+
+        if(this.isMobile()==true){
+            document.documentElement.style.fontSize = '11px';
+        }else{
+            document.documentElement.style.fontSize = '14px';
+        }
+
     }
+
+    isMobile(){
+        return window.innerWidth < 1024;
+    }
+
 }

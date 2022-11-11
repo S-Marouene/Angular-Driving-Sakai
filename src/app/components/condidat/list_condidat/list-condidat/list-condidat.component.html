@@ -2,7 +2,7 @@
 
 <p-table #dt1 [value]="condidats" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
     styleClass="p-datatable-gridlines" [paginator]="true"
-    [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll">
+    [globalFilterFields]="['nom','prenom','num_tel','status']" responsiveLayout="scroll">
 
     <ng-template pTemplate="caption" class="text-right">
         <div class="flex justify-content-between flex-column sm:flex-row">
@@ -70,7 +70,7 @@
             <th>
                 <div class="flex justify-content-between align-items-center">
                     Examen
-                    <p-columnFilter type="numeric" field="balance" display="menu" currency="USD">
+                    <p-columnFilter type="numeric" field="examen" display="menu">
                     </p-columnFilter>
                 </div>
             </th>
@@ -220,8 +220,8 @@
                                         Bureau </label>
                                     <div class="col-sm-6">
                                         <select class="form-select" formControlName="bureau" [ngClass]="{ 'is-invalid': submitted && f['bureau'].errors }">
-                                            <option *ngFor="let bureau of bureaux" [ngValue]="bureau">
-                                                {{ bureau }}
+                                            <option *ngFor="let bureau of bureaux" [ngValue]="bureau.nom">
+                                                {{ bureau.nom }}
                                             </option>
                                         </select>
                                         <div *ngIf="submitted && f['bureau'].errors" class="invalid-feedback">
@@ -569,8 +569,8 @@
                                                 class="text-danger">*</span> Caisse</label>
                                         <div class="col-sm-6">
                                             <select class="form-select" formControlName="hist_caisse" [ngClass]="{ 'is-invalid': submitted && f['hist_caisse'].errors }">
-                                                <option *ngFor="let bureau of bureaux" [ngValue]="bureau">
-                                                    {{ bureau }}
+                                                <option *ngFor="let caisse of caisses" [ngValue]="caisse.caisse">
+                                                    {{ caisse.caisse }}
                                                 </option>
                                             </select>
                                             <div *ngIf="submitted && f['hist_caisse'].errors" class="invalid-feedback">
