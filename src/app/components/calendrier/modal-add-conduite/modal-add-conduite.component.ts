@@ -74,7 +74,6 @@ export class ModalAddConduiteComponent implements OnInit {
                 this.condidats.forEach(
                     (item) => (item.label = item.prenom + ' ' + item.nom)
                 );
-                console.log(this.condidats);
             },
             error: () => {
                 console.log(
@@ -142,8 +141,6 @@ export class ModalAddConduiteComponent implements OnInit {
     }
 
     onDelete(clickInfo: EventClickArg){
-        console.log(clickInfo.event._def.extendedProps['conduite_id']);
-
         this.conduiteService.destroy(clickInfo.event._def.extendedProps['conduite_id']).subscribe((data) => {
             this.toastr.info('Donnée supprimer avec succèes !', 'Suppression');
             clickInfo.event.remove();

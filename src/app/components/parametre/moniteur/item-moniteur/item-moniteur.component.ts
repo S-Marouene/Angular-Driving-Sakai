@@ -36,8 +36,6 @@ export class ItemMoniteurComponent implements OnInit {
     deletemoniteur(moniteur: Moniteur) {
         this.deleteMoniteurDialog = true;
         this.moniteur = {...moniteur};
-        console.log(this.moniteur);
-
     }
 
     confirmDelete() {

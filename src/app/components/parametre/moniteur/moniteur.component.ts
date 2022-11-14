@@ -23,7 +23,6 @@ export class MoniteurComponent implements OnInit {
             this.moniteurService.getMoniteurs().subscribe({
                 next: (ListBureau) => {
                     this.moniteurs = ListBureau['data'];
-                    console.log(this.moniteurs);
                 },
                 error: () => {
                     console.log(
@@ -50,7 +49,6 @@ export class MoniteurComponent implements OnInit {
             this.moniteurService.getMoniteurs().subscribe({
                 next: (ListBureau) => {
                     this.moniteurs = ListBureau['data'];
-                    console.log(this.moniteurs);
                 },
                 error: () => {
                     console.log(

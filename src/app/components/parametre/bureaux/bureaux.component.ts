@@ -26,7 +26,6 @@ export class BureauxComponent implements OnInit {
         this.bureauService.getBureaux().subscribe({
             next: (ListBureau) => {
                 this.bureaux = ListBureau['data'];
-                console.log(this.bureaux);
             },
             error: () => {
                 console.log(
@@ -53,7 +52,6 @@ export class BureauxComponent implements OnInit {
         this.bureauService.getBureaux().subscribe({
             next: (ListBureau) => {
                 this.bureaux = ListBureau['data'];
-                console.log(this.bureaux);
             },
             error: () => {
                 console.log(

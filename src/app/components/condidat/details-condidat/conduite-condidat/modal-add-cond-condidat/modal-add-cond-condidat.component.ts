@@ -150,8 +150,6 @@ export class ModalAddCondCondidatComponent implements OnInit {
     }
 
     onDelete(clickInfo: EventClickArg){
-        console.log(clickInfo.event._def.extendedProps['conduite_id']);
-
         this.conduiteService.destroy(clickInfo.event._def.extendedProps['conduite_id']).subscribe((data) => {
             this.toastr.info('Donnée supprimer avec succèes !', 'Suppression');
             clickInfo.event.remove();

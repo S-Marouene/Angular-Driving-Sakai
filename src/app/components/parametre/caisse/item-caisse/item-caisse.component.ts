@@ -35,8 +35,6 @@ export class ItemCaisseComponent implements OnInit {
     deletecaisse(caisse: Caisse) {
         this.deleteCaisseDialog = true;
         this.caisse = {...caisse};
-        console.log(this.caisse);
-
     }
 
     confirmDelete() {

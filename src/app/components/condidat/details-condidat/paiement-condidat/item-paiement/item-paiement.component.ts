@@ -43,7 +43,6 @@ export class ItemPaiementComponent implements OnInit {
         deletepaiement(paiement: Paiement) {
             this.deletePaiementDialog = true;
             this.paiement = {...paiement};
-            console.log(this.paiement);
 
         }
 

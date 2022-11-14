@@ -102,7 +102,6 @@ export class ProfileComponent implements OnInit {
 
         this.userService.updateUserPhoto(formData).subscribe(
             (result) => {
-              console.log(result);
             },
             (error) => {
               this.errors = error.error;

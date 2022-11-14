@@ -35,7 +35,6 @@ export class ItemCentreExamenComponent implements OnInit {
     deletecentreExam(centreExam: CentreExam) {
         this.deleteCentreExamDialog = true;
         this.centreExam = { ...centreExam };
-        console.log(this.centreExam);
     }
 
     confirmDelete() {

@@ -26,7 +26,6 @@ export class CentreExamenComponent implements OnInit {
         this.centreExamService.getCentreExams().subscribe({
             next: (ListCentreExam) => {
                 this.centreExams = ListCentreExam['data'];
-                console.log(this.centreExams);
             },
             error: () => {
                 console.log(
@@ -58,7 +57,6 @@ export class CentreExamenComponent implements OnInit {
         this.centreExamService.getCentreExams().subscribe({
             next: (ListCentreExam) => {
                 this.centreExams = ListCentreExam['data'];
-                console.log(this.centreExams);
             },
             error: () => {
                 console.log(

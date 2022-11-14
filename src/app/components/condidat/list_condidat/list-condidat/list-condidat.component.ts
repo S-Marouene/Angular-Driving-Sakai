@@ -89,7 +89,6 @@ export class ListCondidatComponent implements OnInit {
         this.caisseService.getCaisses().subscribe({
             next: (ListCaisse) => {
                 this.caisses = ListCaisse['data'];
-                console.log(this.caisses);
             },
             error: () => {
                 console.log(
@@ -253,7 +252,6 @@ export class ListCondidatComponent implements OnInit {
 
         this.condidatservice.register(formData).subscribe(
             (result) => {
-                console.log(result);
             },
             (error) => {
                 this.errors = error.error;
@@ -311,8 +309,6 @@ export class ListCondidatComponent implements OnInit {
         this.condidatservice.getCondidats().subscribe({
             next: (ListCondidat) => {
                 this.condidats = ListCondidat;
-                console.log(ListCondidat);
-
             },
             error: () => {
                 console.log(

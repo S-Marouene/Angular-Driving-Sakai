@@ -25,7 +25,6 @@ export class ExaminateurComponent implements OnInit {
             this.examinateurService.getExaminateurs().subscribe({
                 next: (ListExaminateur) => {
                     this.examinateurs = ListExaminateur['data'];
-                    console.log(this.examinateurs);
                 },
                 error: () => {
                     console.log(
@@ -52,7 +51,6 @@ export class ExaminateurComponent implements OnInit {
             this.examinateurService.getExaminateurs().subscribe({
                 next: (ListExaminateur) => {
                     this.examinateurs = ListExaminateur['data'];
-                    console.log(this.examinateurs);
                 },
                 error: () => {
                     console.log(

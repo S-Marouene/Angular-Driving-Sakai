@@ -35,6 +35,7 @@ import { UserGuard } from './shared-auth/guard/user.guard';
 import { CondidatComponent } from './components/condidat/condidat.component';
 import { DetailsCondidatComponent } from './components/condidat/details-condidat/details-condidat.component';
 import { ParametreComponent } from './components/parametre/parametre.component';
+import { CodeComponent } from './components/code/code.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { ParametreComponent } from './components/parametre/parametre.component';
                     {path: 'condidat/:id', component:  DetailsCondidatComponent },
                     {path: 'listSchool', component: ListComponent},
                     {path: 'parametre', component: ParametreComponent},
+                    {path: 'code', component: CodeComponent},
 
                     {path: 'calendar', component: TestComponentComponent,canActivate: [AuthGuard] },
                     {path: 'profile', component: ProfileComponent,canActivate: [AuthGuard] },

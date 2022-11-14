@@ -35,8 +35,6 @@ export class ItemBureauComponent implements OnInit {
     deletebureau(bureau: Bureau) {
         this.deleteBureauDialog = true;
         this.bureau = {...bureau};
-        console.log(this.bureau);
-
     }
 
     confirmDelete() {

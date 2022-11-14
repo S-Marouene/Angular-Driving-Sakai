@@ -39,8 +39,6 @@ export class ItemExamenComponent implements OnInit {
         deleteexamen(examen: Examen) {
             this.deleteExamenDialog = true;
             this.examen = {...examen};
-            console.log(this.examen);
-
         }
 
         confirmDelete() {

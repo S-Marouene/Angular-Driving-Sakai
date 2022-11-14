@@ -35,7 +35,6 @@ export class ItemExaminateurComponent implements OnInit {
     deleteexaminateur(examinateur: Examinateur) {
         this.deleteExaminateurDialog = true;
         this.examinateur = { ...examinateur };
-        console.log(this.examinateur);
     }
 
     confirmDelete() {

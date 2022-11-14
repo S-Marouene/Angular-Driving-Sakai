@@ -50,7 +50,6 @@ export class ModalPaiementComponent implements OnInit {
             this.caisseService.getCaisses().subscribe({
                 next: (ListCaisse) => {
                     this.caisses = ListCaisse['data'];
-                    console.log(this.caisses);
                 },
                 error: () => {
                     console.log(
@@ -83,8 +82,6 @@ export class ModalPaiementComponent implements OnInit {
 
         onSubmit() {
             this.submitted = true;
-           console.log(this.formaddpaiement.value);
-
             this.paiementService.register(this.formaddpaiement.value).subscribe(
                 (result) => {},
                 (error) => {

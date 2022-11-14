@@ -73,7 +73,6 @@ export class ExamcondidatComponent implements OnInit {
             this.examenService.getExamenByCondidat(params.id).subscribe({
                 next: (ListExamen) => {
                     this.examens = ListExamen['data'];
-                    console.log(this.examens);
                 },
                 error: () => {
                     console.log(

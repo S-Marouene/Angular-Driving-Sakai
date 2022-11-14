@@ -37,8 +37,6 @@ export class ItemCodeComponent implements OnInit {
     deletecode(code: Code) {
         this.deleteCodeDialog = true;
         this.code = {...code};
-        console.log(this.code);
-
     }
 
     confirmDelete() {

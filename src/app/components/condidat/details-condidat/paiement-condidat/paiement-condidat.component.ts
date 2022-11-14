@@ -31,8 +31,6 @@ export class PaiementCondidatComponent implements OnInit {
                 this.paiementService.getpaiementByCondidat(params.id).subscribe({
                     next: (ListPaiement) => {
                         this.paiements = ListPaiement['data'];
-                        console.log("aaaaaaaaaaaaaaaaaaaaaaa"+this.paiements);
-
                     },
                     error: () => {
                         console.log(
@@ -73,7 +71,6 @@ export class PaiementCondidatComponent implements OnInit {
                 this.paiementService.getpaiementByCondidat(params.id).subscribe({
                     next: (ListPaiement) => {
                         this.paiements = ListPaiement['data'];
-                        console.log(this.paiements);
                     },
                     error: () => {
                         console.log(

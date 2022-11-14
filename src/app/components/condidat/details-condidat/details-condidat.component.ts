@@ -21,7 +21,6 @@ export class DetailsCondidatComponent implements OnInit {
     fnt(e){
         var index = e.index;
         if( index == 1){
-           console.log("okokokookok");
 
         }
        /*  setTimeout(() => {

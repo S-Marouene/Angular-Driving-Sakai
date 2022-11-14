@@ -5,14 +5,13 @@ import { filter, take } from 'rxjs';
 import { Code } from 'src/app/model/code.model';
 import { Condidat } from 'src/app/model/condidat.model';
 import { CodeService } from 'src/app/service/code/code.service';
-import { ModalCodeComponent } from './modal-code/modal-code.component';
+import { ModalFullCodeComponent } from './modal-full-code/modal-full-code.component';
 
 @Component({
-  selector: 'app-code-condidat',
-  templateUrl: './code-condidat.component.html'
+  selector: 'app-code',
+  templateUrl: './code.component.html'
 })
-export class CodeCondidatComponent implements OnInit {
-
+export class CodeComponent implements OnInit {
     codes: Code[] = [];
     code: Code;
     loading: boolean;
@@ -45,13 +44,13 @@ export class CodeCondidatComponent implements OnInit {
             const initialState = {
                 list: [
                     {
-                        operation: 'add',
+                        operation: 'Ajout',
                         value: 'Ajout',
-                        condidat_id: this.condidat.id,
+                        code:null
                     },
                 ],
             };
-        this.bsModalRef = this.modalService.show(ModalCodeComponent, {
+        this.bsModalRef = this.modalService.show(ModalFullCodeComponent, {
             initialState
         });
         this.bsModalRef.content.closeBtnName = 'Close';

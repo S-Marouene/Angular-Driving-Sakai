@@ -25,7 +25,6 @@ export class CaisseComponent implements OnInit {
         this.caisseService.getCaisses().subscribe({
             next: (ListCaisse) => {
                 this.caisses = ListCaisse['data'];
-                console.log(this.caisses);
             },
             error: () => {
                 console.log(
@@ -52,7 +51,6 @@ export class CaisseComponent implements OnInit {
         this.caisseService.getCaisses().subscribe({
             next: (ListCaisse) => {
                 this.caisses = ListCaisse['data'];
-                console.log(this.caisses);
             },
             error: () => {
                 console.log(

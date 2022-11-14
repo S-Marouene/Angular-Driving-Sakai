@@ -191,6 +191,9 @@ import { ItemCodeComponent } from './components/condidat/details-condidat/code-c
 import { ModalCodeComponent } from './components/condidat/details-condidat/code-condidat/modal-code/modal-code.component';
 import { ModalPaiementComponent } from './components/condidat/details-condidat/paiement-condidat/modal-paiement/modal-paiement.component';
 import { ItemPaiementComponent } from './components/condidat/details-condidat/paiement-condidat/item-paiement/item-paiement.component';
+import { CodeComponent } from './components/code/code.component';
+import { ListCodeComponent } from './components/code/list-code/list-code.component';
+import { ModalFullCodeComponent } from './components/code/modal-full-code/modal-full-code.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -380,7 +383,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         ItemCodeComponent,
         ModalCodeComponent,
         ModalPaiementComponent,
-        ItemPaiementComponent
+        ItemPaiementComponent,
+        CodeComponent,
+        ListCodeComponent,
+        ModalFullCodeComponent
 
     ],
     providers: [
