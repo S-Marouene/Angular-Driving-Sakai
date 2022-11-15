@@ -11,28 +11,23 @@
         <td style="min-width: 8rem;">
             <span class="image-text ml-2">{{condidat.type_c_code}}</span>
         </td>
-        <td style="min-width: 5rem;">
-            0
-        </td>
-        <td style="min-width: 10rem;">
-            dd/mm/aaaa
-        </td>
         <td style="min-width: 10rem;">
             {{condidat.type_c_cond}}
         </td>
+        <td style="min-width: 5rem;">
+            {{  condidat.nbr_heur_total[0]?.nb_heur_total || '_' }}
+        </td>
         <td style="min-width: 8rem;">
-            00
+            {{  condidat.nbr_heur_affecter[0]?.nb_heur_affecter || '_' }}
+        </td>
+        <td style="min-width: 10rem;">
+            {{  condidat.detail_examen?.type_examen || '_' }}
         </td>
         <td style="min-width: 12rem;">
-            dd/mm/aaaa
+            {{  condidat.detail_examen?.date_examen || '_' }}
         </td>
         <td style="min-width: 8rem;">
-            --
-        </td>
-        <td style="min-width: 8rem;">
-            <button [routerLink]="['/condidat', condidat.id]" class="btn btn-dark">
+            <button [routerLink]="['/condidat', condidat.id]" class="btn btn-warning">
                 Détails
             </button>
         </td>
-
-

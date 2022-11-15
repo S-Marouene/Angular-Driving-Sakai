@@ -62,20 +62,6 @@
             </th>
             <th>
                 <div class="flex justify-content-between align-items-center">
-                    Nb H Programmé
-                    <p-columnFilter type="date" field="date" display="menu" placeholder="mm/dd/yyyy">
-                    </p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="flex justify-content-between align-items-center">
-                    Examen
-                    <p-columnFilter type="numeric" field="examen" display="menu">
-                    </p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="flex justify-content-between align-items-center">
                     Contrat Conduite
                     <p-columnFilter field="status" matchMode="equals" display="menu">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
@@ -91,7 +77,14 @@
             </th>
             <th>
                 <div class="flex justify-content-between align-items-center">
-                    Nb H Effect
+                    Nb H Programmé
+                    <p-columnFilter type="date" field="date" display="menu" placeholder="mm/dd/yyyy">
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Nb H Effecter
                     <p-columnFilter field="activity" matchMode="between" display="menu" [showMatchModes]="false"
                         [showOperator]="false" [showAddButton]="false">
                         <ng-template pTemplate="filter" let-filter="filterCallback">
@@ -105,6 +98,13 @@
                     </p-columnFilter>
                 </div>
             </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Examen
+                    <p-columnFilter type="numeric" field="examen" display="menu">
+                    </p-columnFilter>
+                </div>
+            </th>
             <th style="width: 8rem">
                 <div class="flex justify-content-between align-items-center">
                     Date Examen
@@ -113,13 +113,7 @@
             </th>
             <th style="width: 8rem">
                 <div class="flex justify-content-between align-items-center">
-                    Dû Aujout
-                    <p-columnFilter type="boolean" field="verified" display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th style="width: 8rem">
-                <div class="flex justify-content-between align-items-center">
-                    Dû Global
+                    Config
                     <p-columnFilter type="boolean" field="verified" display="menu"></p-columnFilter>
                 </div>
             </th>

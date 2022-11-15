@@ -32,6 +32,9 @@ export interface Condidat {
     cin?:string;
     prix_frf_code?:string;
     prix_frf_cond?:string;
+    nbr_heur_affecter?:any;
+    nbr_heur_total?:any;
+    detail_examen?:any;
 
 }
 

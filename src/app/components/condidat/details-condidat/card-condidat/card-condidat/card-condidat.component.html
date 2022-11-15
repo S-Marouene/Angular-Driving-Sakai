@@ -31,27 +31,6 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="fw-bold">Nb H programmé :</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="font-italic text-left">en cours...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p class="fw-bold">Examen :</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="font-italic text-left">{{condidat?.examen}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
                             <p class="fw-bold">Contrat Conduite :</p>
                         </div>
                         <div class="col-md-6">
@@ -59,14 +38,7 @@
                             <p class="font-italic text-left" *ngIf="condidat?.type_c_cond == 'Par heure'">{{condidat?.type_c_cond}} : {{condidat?.prix_frf_cond}} dt</p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p class="fw-bold">Nb H Effect :</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="font-italic text-left">En cours...</p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
 
@@ -74,10 +46,18 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="fw-bold">Date Examen :</p>
+                            <p class="fw-bold">Nb H programmé :</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="font-italic text-left">en cours...</p>
+                            <p class="font-italic text-left">{{ condidat?.nbr_heur_total[0]?.nb_heur_total || '_'}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="fw-bold">Nb H Effect :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="font-italic text-left">{{  condidat?.nbr_heur_affecter[0]?.nb_heur_affecter || '_' }}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -88,12 +68,28 @@
                             <p class="font-italic text-left">en cours...</p>
                         </div>
                     </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="fw-bold">Du Global :</p>
+                            <p class="fw-bold">Examen :</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="font-italic text-left">en cours...</p>
+                            <p class="font-italic text-left">{{  condidat?.detail_examen?.type_examen || '_' }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="fw-bold">Date Examen :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="font-italic text-left">{{  condidat?.detail_examen?.date_examen || '_' }}</p>
                         </div>
                     </div>
                 </div>

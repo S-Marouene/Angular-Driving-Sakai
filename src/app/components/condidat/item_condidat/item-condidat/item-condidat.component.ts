@@ -13,6 +13,8 @@ export class ItemCondidatComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+
   }
 
 }

@@ -18,26 +18,15 @@ export class DetailsCondidatComponent implements OnInit {
         private router: Router
     ){}
 
-    fnt(e){
-        var index = e.index;
-        if( index == 1){
 
-        }
-       /*  setTimeout(() => {
-
-        }, 1500); */
-        if( index == 2){
-
-
-        }
-
-    }
   ngOnInit(): void {
 
     this.activatedRoute.params.subscribe((params) => {
         this.condidatService.getCondidatsByID(params.id).subscribe({
             next: (condidat) => {
                 this.condidat = condidat;
+                console.log(this.condidat);
+
             },
             error: (e) => {this.router.navigate(['condidat']);}
         });

@@ -31,6 +31,8 @@ export class CondidatComponent implements OnInit {
         this.condidatservice.getCondidats().subscribe({
             next: (ListCondidat) => {
                 this.condidats = ListCondidat;
+                console.log(ListCondidat[0]);
+
             },
             error: () => {
                 console.log(

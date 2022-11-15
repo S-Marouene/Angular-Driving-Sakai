@@ -14,8 +14,7 @@
 
 <div class="content-section documentation">
 
-    <p-tabView (onChange)="fnt($event)" >
-
+    <p-tabView>
         <p-tabPanel header="Conduite"  leftIcon="pi pi-car" >
             <app-conduite-condidat [condidat]="condidat"></app-conduite-condidat>
         </p-tabPanel>
@@ -31,11 +30,9 @@
         <p-tabPanel header="Code" leftIcon="pi pi-book">
             <app-code-condidat [condidat]="condidat"></app-code-condidat>
         </p-tabPanel>
-
         <p-tabPanel header="Paiement" leftIcon="pi pi-euro">
             <app-paiement-condidat [condidat]="condidat" ></app-paiement-condidat>
         </p-tabPanel>
-
     </p-tabView>
 </div>
 

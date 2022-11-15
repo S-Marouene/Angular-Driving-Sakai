@@ -85,7 +85,7 @@ export class AppMenuComponent implements OnInit {
 
                 ]
             },
-            {
+            /*{
                 label:'Autres ...................',
                 items:[
                     {label: 'Code', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
@@ -104,14 +104,14 @@ export class AppMenuComponent implements OnInit {
                     {label: 'File', icon: 'pi pi-fw pi-file', routerLink: ['/uikit/file']},
                     {label: 'Chart', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/uikit/charts']},
                     {label: 'Misc', icon: 'pi pi-fw pi-circle', routerLink: ['/uikit/misc']},
-                   /*  {label: 'Free Blocks', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks'], badge: 'NEW'}, */
-                    /* {label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank'}, */
+                     {label: 'Free Blocks', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks'], badge: 'NEW'},
+                     {label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank'},
                 ]
             },
             {label:'Utilities',
                 items:[
                     {label: 'PrimeIcons', icon: 'pi pi-fw pi-prime', routerLink: ['/icons']},
-                   /*  {label: 'PrimeFlex', icon: 'pi pi-fw pi-desktop', url: ['https://www.primefaces.org/primeflex/'], target: '_blank'}, */
+                     {label: 'PrimeFlex', icon: 'pi pi-fw pi-desktop', url: ['https://www.primefaces.org/primeflex/'], target: '_blank'},
                 ]
             },
             {
@@ -119,7 +119,7 @@ export class AppMenuComponent implements OnInit {
                 items: [
 
                     {label: 'Timeline', icon: 'pi pi-fw pi-calendar', routerLink: ['/pages/timeline']},
-                    /* {label: 'Landing', icon: 'pi pi-fw pi-globe', routerLink: ['pages/landing']}, */
+                    {label: 'Landing', icon: 'pi pi-fw pi-globe', routerLink: ['pages/landing']},
                     {label: 'Login', icon: 'pi pi-fw pi-sign-in', routerLink: ['pages/login']},
                     {label: 'Error', icon: 'pi pi-fw pi-times-circle', routerLink: ['pages/error']},
                     {label: 'Not Found', icon: 'pi pi-fw pi-exclamation-circle', routerLink: ['pages/notfound']},
@@ -168,7 +168,7 @@ export class AppMenuComponent implements OnInit {
                         ]
                     }
                 ]
-            }
+            }*/
         ];
     }
 
