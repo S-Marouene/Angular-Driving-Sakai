@@ -70,22 +70,6 @@ export class ModalAddCondCondidatComponent implements OnInit {
             },
         });
 
-        /* this.activatedRoute.params.subscribe((params) => {
-            this.condidatservice.getCondidatsByID(params.id).subscribe({
-                next: (ListCondidat) => {
-                    this.condidats = ListCondidat.prenom + ' ' + ListCondidat.nom
-
-                    console.log(this.condidats);
-                },
-                error: () => {
-                    console.log(
-                        `Problème au niveau du serveur, attention les données sont fake `
-                    );
-                },
-            });
-        }) */
-
-
         this.formaddexamen = this.fb.group({
             date_deb: ['', [Validators.required]],
             date_fin: ['', [Validators.required]],

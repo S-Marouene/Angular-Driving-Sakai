@@ -25,8 +25,6 @@ export class DetailsCondidatComponent implements OnInit {
         this.condidatService.getCondidatsByID(params.id).subscribe({
             next: (condidat) => {
                 this.condidat = condidat;
-                console.log(this.condidat);
-
             },
             error: (e) => {this.router.navigate(['condidat']);}
         });

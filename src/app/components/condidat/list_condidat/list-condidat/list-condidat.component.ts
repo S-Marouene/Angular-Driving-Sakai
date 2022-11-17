@@ -246,9 +246,6 @@ export class ListCondidatComponent implements OnInit {
             this.form_condidat.value.hist_nb_droit_exam
         );
 
-       // console.log(form);
-
-
         this.condidatservice.register(formData).subscribe(
             (result) => {
             },
@@ -257,8 +254,6 @@ export class ListCondidatComponent implements OnInit {
                 console.log(this.errors);
             },
             () => {
-               /*  this.refreshListUser(); */
-
                 this.imageSrc = null;
                 this.form_condidat.reset();
                 this.CondidatDialog = false;
