@@ -89,9 +89,9 @@ export class LoginComponent implements OnInit, OnDestroy {
                     this.responseHandler(data);
                     this.authState.setAuthState(true);
                     this.loginForm.reset();
-                    this.toastr.info(
+                    /* this.toastr.info(
                         "Bienvenu !"
-                    );
+                    ); */
                     this.router.navigate(['dashboard']);
                 } else if (data.user['status'] == 'inactive'){
                     this.toastr.warning(
