@@ -1,6 +1,7 @@
 import { isNull } from '@angular/compiler/src/output/output_ast';
 import { Pipe, PipeTransform } from '@angular/core';
-import { CONSTANTES } from '../constantes/constantes';
+import { CONSTANTES } from 'src/environments/environment';
+
 
 @Pipe({
   name: 'defaultProfileUser'

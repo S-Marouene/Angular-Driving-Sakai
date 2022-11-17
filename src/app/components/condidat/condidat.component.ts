@@ -7,7 +7,7 @@ import { Table } from 'primeng/table';
 import { map } from 'rxjs';
 import { Customer, Representative } from 'src/app/api/customer';
 import { Product } from 'src/app/api/product';
-import { CONSTANTES } from 'src/app/constantes/constantes';
+
 import { Condidat } from 'src/app/model/condidat.model';
 import { CondidatService } from 'src/app/service/condidat/condidat.service';
 import { CustomerService } from 'src/app/service/customerservice';

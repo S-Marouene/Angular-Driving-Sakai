@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, Subject } from 'rxjs';
-import { API } from 'src/app/api/appconfig';
+import { API } from 'src/environments/environment';
 import { User } from '../model/users.model';
 import { TokenService } from './token.service';
 

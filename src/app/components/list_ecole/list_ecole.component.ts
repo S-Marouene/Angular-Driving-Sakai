@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { SelectItem } from 'primeng/api';
-import { CONSTANTES } from 'src/app/constantes/constantes';
 import { School } from 'src/app/model/schools.model';
 import { SchoolService } from 'src/app/service/school/school.service';
+import { CONSTANTES } from 'src/environments/environment';
 import { Product } from '../../api/product';
 import { ProductService } from '../../service/productservice';
 

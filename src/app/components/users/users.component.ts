@@ -11,10 +11,10 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Validation from 'src/app/utils/validation';
-import { CONSTANTES } from 'src/app/constantes/constantes';
 import { ToastrService } from 'ngx-toastr';
 import { SchoolService } from 'src/app/service/school/school.service';
 import { School } from 'src/app/model/schools.model';
+import { CONSTANTES } from 'src/environments/environment';
 
 @Component({
     templateUrl: './users.component.html',

@@ -390,7 +390,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 
     ],
     providers: [
-
+        {provide: LocationStrategy, useClass: HashLocationStrategy},
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, MenuService, ConfigService,UserService,DatePipe,BsModalService,
         {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor,multi: true},

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { API } from '../api/appconfig';
+import { API } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,5 @@ export class TokenService {
   isLoggedIn() {
     return this.isValidToken();
   }
- 
+
 }

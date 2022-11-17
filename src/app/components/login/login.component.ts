@@ -112,7 +112,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         if (this.authState.userState.value === true) {
             this.router.navigate(['dashboard']);
         } else {
-            this.router.navigate(['']);
+            this.router.navigate(['pages/login']);
         }
 
         this.config = this.configService.config;

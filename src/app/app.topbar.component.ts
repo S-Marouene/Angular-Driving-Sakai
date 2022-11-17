@@ -7,9 +7,9 @@ import { AuthStateService } from './shared-auth/auth-state.service';
 import { TokenService } from './shared-auth/token.service';
 import { AuthService} from './shared-auth/auth.service';
 import { User } from './model/users.model';
-import { CONSTANTES } from './constantes/constantes';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { CONSTANTES } from 'src/environments/environment';
 
 @Component({
     selector: 'app-topbar',

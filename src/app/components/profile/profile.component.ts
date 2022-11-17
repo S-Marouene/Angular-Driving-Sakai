@@ -2,10 +2,10 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { CONSTANTES } from 'src/app/constantes/constantes';
 import { User } from 'src/app/model/users.model';
 import { UserService } from 'src/app/service/users.service';
 import { AuthService } from 'src/app/shared-auth/auth.service';
+import { CONSTANTES } from 'src/environments/environment';
 import { CountryService } from '../../service/countryservice';
 
 @Component({

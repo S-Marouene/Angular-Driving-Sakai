@@ -1,7 +1,9 @@
 import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { retry } from 'rxjs';
 import { AppMainComponent } from './app.main.component';
+import { AuthStateService } from './shared-auth/auth-state.service';
 import { AuthService } from './shared-auth/auth.service';
 import { TokenService } from './shared-auth/token.service';
 
@@ -35,7 +37,9 @@ export class AppMenuComponent implements OnInit {
 
     constructor(public appMain: AppMainComponent,
         public authService: AuthService,
-        public tokenService:TokenService) { }
+        public tokenService:TokenService,
+        private auth: AuthStateService,
+        public router: Router) { }
 
     ngOnInit() {
 
@@ -64,6 +68,12 @@ export class AppMenuComponent implements OnInit {
         }
     }
 
+    signOut() {
+        this.auth.setAuthState(false);
+        localStorage.clear();
+        this.router.navigate(['pages/login']);
+    }
+
     GenerateMenu(){
         this.model = [
             {
@@ -75,14 +85,23 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Auto-Ecole',
                 items: [
-                    /* {label: 'Mon profil', icon: 'pi pi-fw pi-user-edit', routerLink: ['/uikit/profile']}, */
                     {label: 'Calendrier Conduite', icon: 'pi pi-fw pi-calendar', routerLink: ['/calendar'],visible :this.Check_Menu(this.ListPermission,'calendrier')},
+                    {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/condidat'],visible : this.Check_Menu(this.ListPermission,'condidat')},
+                    {label: 'Code', icon: 'pi pi-book', routerLink: ['/code']},
+                    {label: 'Paramètres', icon: 'pi pi-cog', routerLink: ['/parametre']},
                     {label: 'Utilisateur', icon: 'pi pi-fw pi-id-card', routerLink: ['/listusers'],visible : this.Check_Menu(this.ListPermission,'user')},
                     {label: 'Liste des écoles', icon: 'pi pi-fw pi-list', routerLink: ['/listSchool'],visible : this.Check_Menu(this.ListPermission,'liste_ecole')},
-                    {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/condidat'],visible : this.Check_Menu(this.ListPermission,'condidat')},
-                    {label: 'Paramètres', icon: 'pi pi-cog', routerLink: ['/parametre']},
-                    {label: 'Code', icon: 'pi pi-book', routerLink: ['/code']},
 
+                ]
+            },
+            {
+                label: 'Mon profil',
+                items: [
+                    {label: 'Donnée personnel', icon: 'pi pi-user', routerLink:['/profile']},/*
+                    {label: 'Mot de passe', icon: 'pi pi-unlock', routerLink: ['/listusers']}, */
+                    {label: 'Déconexion', icon: 'pi pi-sign-out',command: (click) => {
+                        this.signOut()
+                    }},
                 ]
             },
             /*{

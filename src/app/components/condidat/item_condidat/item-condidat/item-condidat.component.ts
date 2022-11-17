@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CONSTANTES } from 'src/app/constantes/constantes';
 import { Condidat } from 'src/app/model/condidat.model';
+import { CONSTANTES } from 'src/environments/environment';
 
 @Component({
   selector: 'tr[app-item-condidat]',

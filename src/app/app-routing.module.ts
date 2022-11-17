@@ -48,20 +48,17 @@ import { CodeComponent } from './components/code/code.component';
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
                     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
                     {path: 'testcrud', component:  CrudComponent, canActivate: [UserGuard]},
-                    {path: 'listusers', component:  UsersComponent ,canActivate: [AuthGuard] },
+                    {path: 'listusers', component:  UsersComponent ,canActivate: [AuthGuard,UserGuard] },
                     {path: 'condidat', component:  CondidatComponent ,canActivate: [AuthGuard] },
-                    {path: 'condidat/:id', component:  DetailsCondidatComponent },
-                    {path: 'listSchool', component: ListComponent},
-                    {path: 'parametre', component: ParametreComponent},
-                    {path: 'code', component: CodeComponent},
-
+                    {path: 'condidat/:id', component:  DetailsCondidatComponent,canActivate: [AuthGuard]  },
+                    {path: 'listSchool', component: ListComponent,canActivate: [AuthGuard,UserGuard] },
+                    {path: 'parametre', component: ParametreComponent,canActivate: [AuthGuard] },
+                    {path: 'code', component: CodeComponent,canActivate: [AuthGuard] },
                     {path: 'calendar', component: TestComponentComponent,canActivate: [AuthGuard] },
                     {path: 'profile', component: ProfileComponent,canActivate: [AuthGuard] },
 
-
-
                     /***Autresss for testing */
-                    {path: 'uikit/input', component: InputComponent},
+                    /* {path: 'uikit/input', component: InputComponent},
                     {path: 'uikit/invalidstate', component: InvalidStateComponent},
                     {path: 'uikit/button', component: ButtonComponent},
                     {path: 'uikit/table', component: TableComponent},
@@ -79,7 +76,7 @@ import { CodeComponent } from './components/code/code.component';
                     {path: 'pages/empty', component: EmptyComponent},
                     {path: 'icons', component: IconsComponent},
                     {path: 'blocks', component: BlocksComponent},
-                    {path: 'documentation', component: DocumentationComponent}
+                    {path: 'documentation', component: DocumentationComponent} */
                 ],
             },
             {path:'pages/landing', component: LandingComponent},

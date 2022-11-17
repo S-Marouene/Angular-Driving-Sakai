@@ -14,23 +14,21 @@
     </a>
 
     <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
-        <!--  <span class="badge bg-primary" style="margin:auto; font-size: larger;">{{UserProfile?.name}} {{UserProfile?.fname}} : {{UserProfile?.role}}</span> -->
         <a [routerLink]="['/calendar']" class="p-link layout-topbar-button">
             <i class="pi pi-calendar"></i>
-            <span>Calendar</span>
+            <span>Calendrier Conduite</span>
         </a>
         <a class="p-link layout-topbar-button" (click)="show_ch_pass()">
-            <i class="pi pi-cog"></i>
-            <span>Settings</span>
+            <i class="pi pi-unlock"></i>
+            <span>Changer mdp</span>
         </a>
         <a [routerLink]="['/profile']" class="p-link layout-topbar-button">
             <i class="pi pi-user"></i>
-            <span>Profile</span>
+            <span>Mon profile</span>
         </a>
-        <!--  <img class="rounded-circle" src="{{URLcondidatPic+ (UserProfile.path | defaultProfileUser)}}" width="30" style="vertical-align: middle" /> -->
         <a class="p-link layout-topbar-button" (click)="signOut()">
             <i class="pi pi-sign-out"></i>
-            <span>Deconexion</span>
+            <span>Déconexion</span>
         </a>
     </div>
 </div>
