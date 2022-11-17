@@ -10,5 +10,6 @@ export interface Conduite {
     vehicule?: string;
     condidat_nom?: string;
     condidat_prenom?: string;
+    couleur?:string;
 }
 

@@ -12,6 +12,8 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ModalAddConduiteComponent } from './modal-add-conduite/modal-add-conduite.component';
 import { ConduiteService } from 'src/app/service/conduite/conduite.service';
 import { Conduite } from 'src/app/model/conduite.model';
+import { ExamenService } from 'src/app/service/examen/examen.service';
+import { Examen } from 'src/app/model/examen.model';
 
 @Component({
     selector: 'app-test-component',
@@ -23,11 +25,16 @@ export class TestComponentComponent {
     bsModalRef: BsModalRef;
     currentEvents: EventApi[] = [];
     conduites: Conduite[] = [];
-    conduite:Conduite;
+    examens: Examen[] = [];
+    conduite: Conduite;
     INITIAL_CONDUITES: any = [];
     TODAY_STR = new Date().toISOString().replace(/T.*$/, '');
     myEvents: EventInput[] = [];
     calendarVisible = true;
+
+    Mylist:any;
+
+
     calendarOptions: CalendarOptions = {
         headerToolbar: {
             left: 'prev,next today',
@@ -43,7 +50,7 @@ export class TestComponentComponent {
         selectable: true,
         selectMirror: false,
         dayMaxEvents: false,
-        //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+        displayEventTime: false,
         select: this.handleDateSelect.bind(this),
         eventClick: this.handleEventClick.bind(this),
         eventsSet: this.handleEvents.bind(this),
@@ -56,17 +63,18 @@ export class TestComponentComponent {
             day: '2-digit',
             weekday: 'short',
         },
-        eventTimeFormat: { // like '14:30:00'
+        eventTimeFormat: {
             hour: 'numeric',
             hour12: false,
             minute: '2-digit',
             meridiem: false,
-          }
+        },
     };
 
     constructor(
         private modalService: BsModalService,
-        private conduiteService: ConduiteService
+        private conduiteService: ConduiteService,
+        private examenService:ExamenService,
     ) {}
 
     ngOnInit() {
@@ -91,12 +99,34 @@ export class TestComponentComponent {
                         start: value.date_deb.toString().replace(' ', 'T'),
                         end: value.date_fin.toString().replace(' ', 'T') || '',
                         allDay: false,
-                        title: value.condidat_prenom +' '+value.condidat_nom,
-                        conduite_id:value.id,
-                        conduite_moniteur:value.moniteur,
-                        conduite_vehicule:value.vehicule,
-                        nbr_heure:value.nbr_heure
-                        //color: value.color
+                        title: value.condidat_prenom + ' ' + value.condidat_nom,
+                        conduite_id: value.id,
+                        conduite_moniteur: value.moniteur,
+                        conduite_vehicule: value.vehicule,
+                        nbr_heure: value.nbr_heure,
+                        couleur: value.couleur,
+                        color: this.ChargeColorEvent(value.couleur),
+                    });
+                }
+
+            },
+            error: () => {
+                console.log(
+                    `Problème au niveau du serveur, attention les données sont fake `
+                );
+            },
+        });
+
+        this.examenService.getExamensCalendar().subscribe({
+            next: (ListExamens) => {
+                this.examens = ListExamens['data'];
+
+                for (const value of this.examens) {
+                    newEvents.push({
+                        start: value.date_examen.toString().replace(' ', 'T'),
+                        title: value.condidat['prenom'] +' '+ value.condidat['nom'] + ' Examen Conduite',
+                        conduite_id: 0,
+                        color: '#f39c12',
                     });
                 }
                 this.myEvents = newEvents;
@@ -116,6 +146,33 @@ export class TestComponentComponent {
         }, 2500);
     }
 
+    ChargeColorEvent(color: string) {
+        switch (color) {
+            case 'Rouge':
+                return 'rgb(193 61 61)';
+                break;
+            case 'Bleu':
+                return '#4244cc';
+                break;
+            case 'Vert':
+                return '#26a771';
+                break;
+            case 'Jaune':
+                return 'rgb(175 186 31)';
+                break;
+            case 'Noir':
+                return '#212121';
+                break;
+            case 'Blanc':
+                return '#E0E0E0';
+                break;
+
+            default:
+                return '#888afa';
+                break;
+        }
+    }
+
     handleCalendarToggle() {
         this.calendarVisible = !this.calendarVisible;
     }
@@ -129,11 +186,11 @@ export class TestComponentComponent {
         const initialState = {
             list: [
                 {
-                    operation: 'Ajout',
+                    operation: 'Ajout planing',
                     start: selectInfo.startStr,
                     end: selectInfo.endStr,
-                    selectInfo:selectInfo,
-                    nbr_heure:'2'
+                    selectInfo: selectInfo,
+                    nbr_heure: '2',
                 },
             ],
         };
@@ -146,20 +203,40 @@ export class TestComponentComponent {
     }
 
     handleEventClick(clickInfo: EventClickArg) {
+
+        if (clickInfo.event.extendedProps.conduite_id==0) {
+            this.Mylist={
+                operation: 'Examen',
+                start: clickInfo.event.startStr,
+                end: clickInfo.event.endStr,
+                title: clickInfo.event._def.title,
+                moniteur: clickInfo.event.extendedProps.conduite_moniteur,
+                vehicule: clickInfo.event.extendedProps.conduite_vehicule,
+                couleur: clickInfo.event.extendedProps.couleur,
+                nbr_heure: clickInfo.event.extendedProps.nbr_heure,
+                clickInfo: clickInfo,
+            }
+        }else{
+            this.Mylist={
+                operation: 'Update planing',
+                start: clickInfo.event.startStr,
+                end: clickInfo.event.endStr,
+                title: clickInfo.event._def.title,
+                moniteur: clickInfo.event.extendedProps.conduite_moniteur,
+                vehicule: clickInfo.event.extendedProps.conduite_vehicule,
+                couleur: clickInfo.event.extendedProps.couleur,
+                nbr_heure: clickInfo.event.extendedProps.nbr_heure,
+                clickInfo: clickInfo,
+            }
+        }
+
         const initialState = {
             list: [
-                {
-                    operation: 'Update',
-                    start: clickInfo.event.startStr,
-                    end: clickInfo.event.endStr,
-                    title: clickInfo.event._def.title,
-                    moniteur:clickInfo.event.extendedProps.conduite_moniteur,
-                    vehicule:clickInfo.event.extendedProps.conduite_vehicule,
-                    nbr_heure:clickInfo.event.extendedProps.nbr_heure,
-                    clickInfo:clickInfo
-                },
+                this.Mylist
             ],
         };
+
+
         this.bsModalRef = this.modalService.show(ModalAddConduiteComponent, {
             initialState,
         });

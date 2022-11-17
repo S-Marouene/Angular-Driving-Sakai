@@ -32,6 +32,14 @@ export class ModalVehComponent implements OnInit {
     titleModal: any;
     list: any[] = [];
     vehicules: Vehicule[] = [];
+    public couleurs: any = [
+        'Rouge',
+        'Bleu',
+        'Vert',
+        'Jaune',
+        'Noir',
+        'Blanc',
+    ];
 
     constructor(
         public fb: FormBuilder,

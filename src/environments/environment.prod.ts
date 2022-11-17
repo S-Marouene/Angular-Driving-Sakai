@@ -64,6 +64,7 @@ export const API = {
 
     'add_Examen' : 'https://smdev.tn/api/auth/examen',
     'ListExamen' : 'https://smdev.tn/api/auth/examen',
+    'ListExamenCalendar' : 'https://smdev.tn/api/auth/examen/examencalndr/getForCalndr',
     'DeleteExamen' : 'https://smdev.tn/api/auth/examen/',
     'getExamenByID':'https://smdev.tn/api/auth/examen/',
     'updateExamen':'https://smdev.tn/api/auth/examen/',

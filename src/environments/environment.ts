@@ -68,6 +68,7 @@ export const API = {
 
     'add_Examen' : 'http://172.21.11.196/Driving/backend/api/auth/examen',
     'ListExamen' : 'http://172.21.11.196/Driving/backend/api/auth/examen',
+    'ListExamenCalendar' : 'http://172.21.11.196/Driving/backend/api/auth/examen/examencalndr/getForCalndr',
     'DeleteExamen' : 'http://172.21.11.196/Driving/backend/api/auth/examen/',
     'getExamenByID':'http://172.21.11.196/Driving/backend/api/auth/examen/',
     'updateExamen':'http://172.21.11.196/Driving/backend/api/auth/examen/',

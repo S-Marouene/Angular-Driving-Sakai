@@ -95,8 +95,8 @@
                 <div class="col-sm-6">
                     <select class="form-select" formControlName="vehicule"
                         [ngClass]="{ 'is-invalid': submitted && f['vehicule'].errors }">
-                        <option *ngFor="let vehicule of vehicules" [ngValue]="vehicule.num_imm">
-                            {{ vehicule.num_imm}}
+                        <option *ngFor="let vehicule of vehicules" [ngValue]="vehicule.num_imm+' : '+vehicule.couleur" >
+                            {{vehicule.num_imm+' : '+vehicule.couleur}}
                         </option>
                     </select>
                     <div *ngIf="submitted && f['vehicule'].errors" class="invalid-feedback">

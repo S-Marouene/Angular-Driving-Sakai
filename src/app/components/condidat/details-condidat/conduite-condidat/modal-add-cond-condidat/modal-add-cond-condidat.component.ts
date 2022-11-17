@@ -77,6 +77,7 @@ export class ModalAddCondCondidatComponent implements OnInit {
             vehicule: ['', [Validators.required]],
             condidat: ['', [Validators.required]],
             nbr_heure: ['', [Validators.required]],
+            couleur: ['', [Validators.required]],
         });
 
         this.date1 = new Date(this.list[0].start);
@@ -90,11 +91,12 @@ export class ModalAddCondCondidatComponent implements OnInit {
                 ) || '',
             date_fin:
                 this.datepipe.transform(this.date1, 'yyyy-MM-dd H:mm') || '',
-
             moniteur: this.list[0].moniteur || '',
-            vehicule: this.list[0].vehicule || '',
             condidat: this.list[0].condidat || '',
             nbr_heure: this.list[0].nbr_heure || 2,
+            vehicule: this.list[0].vehicule +' : '+ this.list[0].couleur || '',
+            couleur: this.list[0].couleur || '',
+
         });
     }
 
@@ -104,6 +106,8 @@ export class ModalAddCondCondidatComponent implements OnInit {
         this.submitted = true;
         this.formaddexamen.patchValue({
             condidat:{'id':this.list[0].condidat_id,'nom':this.list[0].condidat_nom,'prenom':this.list[0].condidat_prenom},
+            vehicule: (this.formaddexamen.get('vehicule').value).split(" : ")[0],
+            couleur: (this.formaddexamen.get('vehicule').value).split(" : ")[1],
         });
 
 
@@ -123,6 +127,8 @@ export class ModalAddCondCondidatComponent implements OnInit {
                     conduite_vehicule:data['data']['vehicule'],
                     nbr_heure:data['data']['nbr_heure'],
                     conduite_id:data['data']['id'],
+                    couleur:data['data']['couleur'],
+                    color:this.ChargeColorEvent(data['data']['couleur'])
                 })
 
             },
@@ -148,7 +154,9 @@ export class ModalAddCondCondidatComponent implements OnInit {
         const date_fin = this.datepipe.transform(this.formaddexamen.get('date_fin').value, 'yyyy-MM-dd HH:mm').toString().replace(' ', 'T')
         this.formaddexamen.patchValue({
             date_deb: date_deb,
-            date_fin:date_fin
+            date_fin:date_fin,
+            vehicule: (this.formaddexamen.get('vehicule').value).split(" : ")[0],
+            couleur: (this.formaddexamen.get('vehicule').value).split(" : ")[1],
           });
 
         this.conduiteService
@@ -169,6 +177,8 @@ export class ModalAddCondCondidatComponent implements OnInit {
                         conduite_vehicule:data['data']['vehicule'],
                         nbr_heure:data['data']['nbr_heure'],
                         conduite_id:data['data']['id'],
+                        couleur:data['data']['couleur'],
+                        color:this.ChargeColorEvent(data['data']['couleur'])
                     })
                 },
                 (error) => {
@@ -201,4 +211,33 @@ export class ModalAddCondCondidatComponent implements OnInit {
     get f(): { [key: string]: AbstractControl } {
         return this.formaddexamen.controls;
     }
+
+    ChargeColorEvent(color: string) {
+        switch (color) {
+            case 'Rouge':
+                return 'rgb(193 61 61)';
+                break;
+            case 'Bleu':
+                return '#4244cc';
+                break;
+            case 'Vert':
+                return '#26a771';
+                break;
+            case 'Jaune':
+                return 'rgb(175 186 31)';
+                break;
+            case 'Noir':
+                return '#212121';
+                break;
+            case 'Blanc':
+                return '#E0E0E0';
+                break;
+
+            default:
+                return '#888afa';
+
+                break;
+        }
+    }
+
 }

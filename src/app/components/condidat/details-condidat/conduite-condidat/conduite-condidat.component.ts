@@ -116,7 +116,8 @@ export class ConduiteCondidatComponent implements OnInit {
                             conduite_moniteur: value.moniteur,
                             conduite_vehicule: value.vehicule,
                             nbr_heure: value.nbr_heure,
-                            //color: value.color
+                            couleur: value.couleur,
+                            color: this.ChargeColorEvent(value.couleur),
                         });
                     }
                     this.myEvents = newEvents;
@@ -135,6 +136,34 @@ export class ConduiteCondidatComponent implements OnInit {
                 events: this.myEvents,
             };
         }, 1500);
+    }
+
+    ChargeColorEvent(color: string) {
+        switch (color) {
+            case 'Rouge':
+                return 'rgb(193 61 61)';
+                break;
+            case 'Bleu':
+                return '#4244cc';
+                break;
+            case 'Vert':
+                return '#26a771';
+                break;
+            case 'Jaune':
+                return 'rgb(175 186 31)';
+                break;
+            case 'Noir':
+                return '#212121';
+                break;
+            case 'Blanc':
+                return '#E0E0E0';
+                break;
+
+            default:
+                return '#888afa';
+
+                break;
+        }
     }
 
     handleCalendarToggle() {
@@ -181,6 +210,7 @@ export class ConduiteCondidatComponent implements OnInit {
                     vehicule: clickInfo.event.extendedProps.conduite_vehicule,
                     nbr_heure: clickInfo.event.extendedProps.nbr_heure,
                     clickInfo: clickInfo,
+                    couleur: clickInfo.event.extendedProps.couleur,
                 },
             ],
         };

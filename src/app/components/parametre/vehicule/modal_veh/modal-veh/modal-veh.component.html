@@ -41,14 +41,34 @@
             </div>
         </div>
 
-        <div class="field">
+        <!-- <div class="field">
             <label><span class="text-danger">*</span>Couleur</label>
             <input type="text" formControlName="couleur" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['couleur'].errors }" />
             <div *ngIf="submitted && f['couleur'].errors" class="invalid-feedback">
                 <div *ngIf="f['couleur'].errors['required']">couleur est obligatoir</div>
             </div>
+        </div> -->
+        <div class="field">
+            <div class="field col-12">
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span
+                            class="text-danger">*</span> Couleur</label>
+                    <div class="col-sm-6">
+                        <select class="form-select" formControlName="couleur" [ngClass]="{ 'is-invalid': submitted && f['couleur'].errors }">
+                            <option *ngFor="let couleur of couleurs" [ngValue]="couleur">
+                                {{ couleur }}
+                            </option>
+                        </select>
+                        <div *ngIf="submitted && f['couleur'].errors" class="invalid-feedback">
+                            <div *ngIf="f['couleur'].errors['required']">couleur est obligatoir
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
 
         <div *ngIf=" list[0].operation == 'add' ">
             <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"

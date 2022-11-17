@@ -12,4 +12,5 @@ export interface Examen {
     bureau?: string;
     resultat?: string;
     examinateur?: string;
+    condidat?:string;
 }
