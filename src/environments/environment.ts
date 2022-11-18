@@ -82,6 +82,10 @@ export const API = {
     'updateconduite':'http://172.21.11.196/Driving/backend/api/auth/conduite/',
     'ListconduiteCondidat':'http://172.21.11.196/Driving/backend/api/auth/conduite/getconduiteCondidat/',
 
+    'getConduitesFrCalendar':'http://172.21.11.196/Driving/backend/api/auth/conduite/conduitecalndr/getForCalndr',
+
+
+
     'add_code' : 'http://172.21.11.196/Driving/backend/api/auth/code',
     'Listcode' : 'http://172.21.11.196/Driving/backend/api/auth/code',
     'Deletecode' : 'http://172.21.11.196/Driving/backend/api/auth/code/',

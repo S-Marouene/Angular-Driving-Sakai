@@ -91,7 +91,7 @@ export class TestComponentComponent {
         }
 
         const newEvents = [];
-        this.conduiteService.getConduites().subscribe({
+        this.conduiteService.getConduitesCalendar().subscribe({
             next: (ListConduite) => {
                 this.conduites = ListConduite['data'];
                 for (const value of this.conduites) {
@@ -99,12 +99,15 @@ export class TestComponentComponent {
                         start: value.date_deb.toString().replace(' ', 'T'),
                         end: value.date_fin.toString().replace(' ', 'T') || '',
                         allDay: false,
-                        title: value.condidat_prenom + ' ' + value.condidat_nom,
+                        title: value.condidat['prenom'] + ' ' + value.condidat['nom'],
                         conduite_id: value.id,
                         conduite_moniteur: value.moniteur,
                         conduite_vehicule: value.vehicule,
                         nbr_heure: value.nbr_heure,
                         couleur: value.couleur,
+                        photo:value.condidat['photo'],
+                        /* nom:value.condidat['nom'],
+                        prenom:value.condidat['prenom'], */
                         color: this.ChargeColorEvent(value.couleur),
                     });
                 }
@@ -120,11 +123,10 @@ export class TestComponentComponent {
         this.examenService.getExamensCalendar().subscribe({
             next: (ListExamens) => {
                 this.examens = ListExamens['data'];
-
                 for (const value of this.examens) {
                     newEvents.push({
                         start: value.date_examen.toString().replace(' ', 'T'),
-                        title: value.condidat['prenom'] +' '+ value.condidat['nom'] + ' Examen Conduite',
+                        title: value.condidat['prenom'] +' '+ value.condidat['nom'] + ' Examen ' + value.type_examen,
                         conduite_id: 0,
                         color: '#f39c12',
                     });
@@ -226,6 +228,7 @@ export class TestComponentComponent {
                 vehicule: clickInfo.event.extendedProps.conduite_vehicule,
                 couleur: clickInfo.event.extendedProps.couleur,
                 nbr_heure: clickInfo.event.extendedProps.nbr_heure,
+                photo: clickInfo.event.extendedProps.photo,
                 clickInfo: clickInfo,
             }
         }

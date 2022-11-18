@@ -108,15 +108,13 @@ export class ConduiteCondidatComponent implements OnInit {
                                 value.date_fin.toString().replace(' ', 'T') ||
                                 '',
                             allDay: false,
-                            title:
-                                value.condidat_prenom +
-                                ' ' +
-                                value.condidat_nom,
+                            title: value.condidat['prenom'] + ' ' + value.condidat['nom'],
                             conduite_id: value.id,
                             conduite_moniteur: value.moniteur,
                             conduite_vehicule: value.vehicule,
                             nbr_heure: value.nbr_heure,
                             couleur: value.couleur,
+                            photo:value.condidat['photo'],
                             color: this.ChargeColorEvent(value.couleur),
                         });
                     }
@@ -176,6 +174,8 @@ export class ConduiteCondidatComponent implements OnInit {
     }
 
     handleDateSelect(selectInfo: DateSelectArg) {
+        console.log(this.condidat);
+
         const initialState = {
             list: [
                 {
@@ -187,6 +187,7 @@ export class ConduiteCondidatComponent implements OnInit {
                     condidat_id: this.condidat.id ,
                     condidat_nom: this.condidat.nom ,
                     condidat_prenom: this.condidat.prenom ,
+                    photo: this.condidat.photo ,
                 },
             ],
         };
@@ -211,6 +212,7 @@ export class ConduiteCondidatComponent implements OnInit {
                     nbr_heure: clickInfo.event.extendedProps.nbr_heure,
                     clickInfo: clickInfo,
                     couleur: clickInfo.event.extendedProps.couleur,
+                    photo: clickInfo.event.extendedProps.photo,
                 },
             ],
         };

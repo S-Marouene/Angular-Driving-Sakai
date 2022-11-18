@@ -23,8 +23,10 @@
 
         <div class="field col-12" *ngIf="list[0].operation == 'Update planing' ">
             <div class="form-group row">
-                <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
-                    Condidat</label>
+                <div class="col-sm-5">
+                    <img src="{{URLcondidatPic+ (list[0].photo | defaultProfileUser)}}" [alt]="list[0].title" class="shadow-4" width="30%"/>
+                </div>
+                <div class="col-sm-1"></div>
                 <div class="col-sm-6">
                     <label class="col-sm-6 col-form-label fw-bold">{{list[0].title}}</label>
                 </div>

@@ -11,5 +11,6 @@ export interface Conduite {
     condidat_nom?: string;
     condidat_prenom?: string;
     couleur?:string;
+    condidat?:Array<string>;
 }
 

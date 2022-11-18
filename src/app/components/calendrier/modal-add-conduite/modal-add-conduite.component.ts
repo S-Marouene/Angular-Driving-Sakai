@@ -13,6 +13,7 @@ import { CondidatService } from 'src/app/service/condidat/condidat.service';
 import { ConduiteService } from 'src/app/service/conduite/conduite.service';
 import { MoniteurService } from 'src/app/service/moniteur/moniteur.service';
 import { VehiculeService } from 'src/app/service/vehicule/vehicule.service';
+import { CONSTANTES } from 'src/environments/environment';
 
 @Component({
     selector: 'app-modal-add-conduite',
@@ -31,6 +32,7 @@ export class ModalAddConduiteComponent implements OnInit {
     nbr_heure: any;
     heurs: any = ['1', '2', '3', '4'];
     errors;
+    URLcondidatPic = CONSTANTES.URLcondidatPic;
 
 
     constructor(
@@ -68,6 +70,7 @@ export class ModalAddConduiteComponent implements OnInit {
             },
         });
 
+        /**get only conidiat who dont succuss in exam after !!! */
         this.condidatservice.getCondidats().subscribe({
             next: (ListCondidat) => {
                 this.condidats = ListCondidat;
@@ -121,6 +124,7 @@ export class ModalAddConduiteComponent implements OnInit {
             couleur: (this.formaddexamen.get('vehicule').value).split(" : ")[1],
         });
 
+
         this.conduiteService.register(this.formaddexamen.value).subscribe(
             (data) => {
                 this.bsModalRef.hide();
@@ -138,7 +142,8 @@ export class ModalAddConduiteComponent implements OnInit {
                     nbr_heure:data['data']['nbr_heure'],
                     conduite_id:data['data']['id'],
                     couleur:data['data']['couleur'],
-                    color:this.ChargeColorEvent(data['data']['couleur'])
+                    color:this.ChargeColorEvent(data['data']['couleur']),
+                    photo: this.formaddexamen.value['condidat']['photo'],
                 })
 
             },
@@ -182,13 +187,14 @@ export class ModalAddConduiteComponent implements OnInit {
                         start: date_deb,
                         end: date_fin,
                         allDay: false,
-                        title: data['data']['condidat_prenom'] + ' ' + data['data']['condidat_nom'],
+                        title: this.list[0].title,
                         conduite_moniteur:data['data']['moniteur'],
                         conduite_vehicule:data['data']['vehicule'],
                         nbr_heure:data['data']['nbr_heure'],
                         conduite_id:data['data']['id'],
                         couleur:data['data']['couleur'],
-                        color:this.ChargeColorEvent(data['data']['couleur'])
+                        color:this.ChargeColorEvent(data['data']['couleur']),
+                        photo: clickInfo.event._def.extendedProps['photo'],
                     })
                 },
                 (error) => {

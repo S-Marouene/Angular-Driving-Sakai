@@ -77,6 +77,7 @@ export const API = {
     'getconduiteByID':'https://smdev.tn/api/auth/conduite/',
     'updateconduite':'https://smdev.tn/api/auth/conduite/',
     'ListconduiteCondidat':'https://smdev.tn/api/auth/conduite/getconduiteCondidat/',
+    'getConduitesFrCalendar':'https://smdev.tn/api/auth/conduite/conduitecalndr/getForCalndr',
 
     'add_code' : 'https://smdev.tn/api/auth/code',
     'Listcode' : 'https://smdev.tn/api/auth/code',

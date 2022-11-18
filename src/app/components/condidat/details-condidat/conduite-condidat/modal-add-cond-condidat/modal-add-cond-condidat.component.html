@@ -7,21 +7,22 @@
     <form [formGroup]="formaddexamen">
         <div class="field col-12" *ngIf="list[0].operation == 'Ajout' ">
             <div class="form-group row">
-                <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
-                    Condidat</label>
+                <div class="col-sm-5">
+                    <img src="{{URLcondidatPic+ (list[0].photo | defaultProfileUser)}}" [alt]="list[0].nom" class="shadow-4" width="30%"/>
+                </div>
+                <div class="col-sm-1"></div>
                 <div class="col-sm-6">
-                        <label class="col-sm-6 col-form-label fw-bold">{{list[0].condidat_prenom +' '+ list[0].condidat_nom}}</label>
-                    <div *ngIf="submitted && f['condidat'].errors" class="invalid-feedback">
-                        <div *ngIf="f['condidat'].errors['required']">Auto école est obligatoir</div>
-                    </div>
+                    <label class="col-sm-6 col-form-label fw-bold">{{list[0].condidat_nom +' '+ list[0].condidat_prenom}}</label>
                 </div>
             </div>
         </div>
 
         <div class="field col-12" *ngIf="list[0].operation == 'Update' ">
             <div class="form-group row">
-                <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
-                    Condidat</label>
+                <div class="col-sm-5">
+                    <img src="{{URLcondidatPic+ (list[0].photo | defaultProfileUser)}}" [alt]="list[0].title" class="shadow-4" width="30%"/>
+                </div>
+                <div class="col-sm-1"></div>
                 <div class="col-sm-6">
                     <label class="col-sm-6 col-form-label fw-bold">{{list[0].title}}</label>
                 </div>
