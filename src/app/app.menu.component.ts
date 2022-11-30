@@ -79,7 +79,8 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Accueil',
                 items:[
-                    {label: 'Tableau de bord',icon: 'pi pi-fw pi-home', routerLink: ['dashboard']}
+                    {label: 'Accueil', icon: 'pi pi-fw pi-calendar', routerLink: ['/dashboard'],visible :this.Check_Menu(this.ListPermission,'calendrier')},
+                    /* {label: 'Tableau de bord',icon: 'pi pi-fw pi-home', routerLink: ['dashboard_old']} */
                 ]
             },
             {
@@ -87,6 +88,7 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     {label: 'Calendrier Conduite', icon: 'pi pi-fw pi-calendar', routerLink: ['/calendar'],visible :this.Check_Menu(this.ListPermission,'calendrier')},
                     {label: 'Condidat', icon: 'pi pi-fw pi-id-card', routerLink: ['/condidat'],visible : this.Check_Menu(this.ListPermission,'condidat')},
+                    {label: 'Archive', icon: 'pi pi-fw pi-id-card', routerLink: ['/archive'],visible : this.Check_Menu(this.ListPermission,'condidat')},
                     {label: 'Code', icon: 'pi pi-book', routerLink: ['/code']},
                     {label: 'Paramètres', icon: 'pi pi-cog', routerLink: ['/parametre']},
                     {label: 'Utilisateur', icon: 'pi pi-fw pi-id-card', routerLink: ['/listusers'],visible : this.Check_Menu(this.ListPermission,'user')},
@@ -104,7 +106,7 @@ export class AppMenuComponent implements OnInit {
                     }},
                 ]
             },
-            /*{
+            /* {
                 label:'Autres ...................',
                 items:[
                     {label: 'Code', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
@@ -187,7 +189,7 @@ export class AppMenuComponent implements OnInit {
                         ]
                     }
                 ]
-            }*/
+            } */
         ];
     }
 

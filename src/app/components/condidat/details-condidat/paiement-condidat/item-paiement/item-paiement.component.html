@@ -14,10 +14,14 @@
     {{paiement.mode_paiement}}
 </td>
 
+<td style="min-width: 10rem;">
+    {{paiement.date_paiement}}
+</td>
+
 <td style="min-width: 8rem;">
     <div class="flex">
         <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded btn-sm p-button-success mr-2"
-            (click)="openModalExam()"></button>
+            (click)="openModalExam(id)"></button>
         <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
             (click)="deletepaiement(paiement)"></button>
     </div>

@@ -138,12 +138,11 @@
                     </div>
 
                     <div class="field">
-                        <label>E-mail</label>
+                        <label>User name</label>
                         <input type="text" formControlName="email" class="form-control"
                             [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
                         <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                            <div *ngIf="f['email'].errors['required']">Email est obligatoir</div>
-                            <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+                            <div *ngIf="f['email'].errors['required']">User name est obligatoir</div>
                         </div>
                     </div>
 

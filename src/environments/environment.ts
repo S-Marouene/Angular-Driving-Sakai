@@ -26,6 +26,8 @@ export const API = {
 
     'add_condidat' : 'http://172.21.11.196/Driving/backend/api/auth/CreateCondidat',
     'ListCondidat' : 'http://172.21.11.196/Driving/backend/api/auth/allCondidats',
+    'ListCondidatArchive' : 'http://172.21.11.196/Driving/backend/api/auth/allCondidats_arch',
+
     'DeleteCondidat' : 'http://172.21.11.196/Driving/backend/api/auth/delete-condidat/',
     'getCondidatByID':'http://172.21.11.196/Driving/backend/api/auth/GetCondByID/',
     'updateCondidat':'http://172.21.11.196/Driving/backend/api/auth/update_condidat',
@@ -83,6 +85,8 @@ export const API = {
     'ListconduiteCondidat':'http://172.21.11.196/Driving/backend/api/auth/conduite/getconduiteCondidat/',
 
     'getConduitesFrCalendar':'http://172.21.11.196/Driving/backend/api/auth/conduite/conduitecalndr/getForCalndr',
+    'GetConduiteAcc':'http://172.21.11.196/Driving/backend/api/auth/conduite/conduitecalndr/GetConduiteAcc',
+
 
 
 

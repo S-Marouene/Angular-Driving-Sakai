@@ -141,6 +141,8 @@ export class RenseingementCondidatComponent implements OnInit {
         formData.append('bureau', this.condidat.bureau);
         formData.append('examen', this.condidat.examen);
 
+        formData.append('etat', this.condidat.etat);
+
         formData.append('type_c_code',this.condidat.type_c_code);
         formData.append('prix_frf_code',this.condidat.prix_frf_code);
         formData.append('prix_hr_code',this.condidat.prix_hr_code);

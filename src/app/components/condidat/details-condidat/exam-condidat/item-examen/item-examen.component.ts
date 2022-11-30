@@ -23,7 +23,8 @@ export class ItemExamenComponent implements OnInit {
         deleteExamenDialog: boolean = false;
         updatevehDialog: boolean;
         submitted: boolean = false;
-        id: any;
+        @Input() id: string | null = null;
+        //id: any;
         titleModal: any;
         bsModalRef: BsModalRef;
 
@@ -49,14 +50,21 @@ export class ItemExamenComponent implements OnInit {
             });
         }
 
-        openModalExam() {
+        openModalExam(id) {
+            if(id){
+                id=id
+            }
+            else{
+                id=this.condidat.id;
+            }
+
             const initialState = {
                 list: [
                     {
                         operation: 'update',
                         value: 'Modification',
                         examen: this.examen,
-                        condidat_id:this.condidat.id
+                        condidat_id:id
                     },
                 ],
             };
@@ -79,14 +87,20 @@ export class ItemExamenComponent implements OnInit {
             return this.editForm.controls;
         }
 
-        OpenModalResult(){
+        OpenModalResult(id){
+            if(id){
+                id=id
+            }
+            else{
+                id=this.condidat.id;
+            }
             const initialState = {
                 list: [
                     {
                         operation: 'update',
                         value: 'Résultat',
                         examen: this.examen,
-                        condidat_id:this.condidat.id
+                        condidat_id:id
                     },
                 ],
             };

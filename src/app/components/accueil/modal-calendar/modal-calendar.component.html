@@ -1,0 +1,111 @@
+<div class="modal-header bg-primary">
+    <h5 class="modal-title" icon="pi pi-times"><i class="pi pi-pencil"></i> {{list[0].operation}} :</h5>
+    <button pButton pRipple icon="pi pi-times" (click)="hideDialog()"></button>
+</div>
+<div class="modal-body">
+
+    <form [formGroup]="formaddexamen">
+
+        <div class="field col-12">
+            <div class="form-group row">
+                <div class="col-sm-5">
+                    <img src="{{URLcondidatPic+ (list[0].extendedProps.photo | defaultProfileUser)}}"
+                        [alt]="list[0].title" class="shadow-4" width="40%" />
+                </div>
+                <div class="col-sm-7">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xd-4">
+                                <p class="fw-bold">Condidat :</p>
+                            </div>
+
+                            <div class="col-md-8"  *ngIf="list[0].operation == 'Fiche Condidat' ">
+                                <p class="font-italic text-left">{{list[0].title }}</p>
+                            </div>
+
+                            <div class="col-md-8"  *ngIf="list[0].operation == 'Examen' ">
+                                <p class="font-italic text-left">{{list[0].extendedProps?.nom_pren }}</p>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-xd-4">
+                                <p class="fw-bold">Contact :</p>
+                            </div>
+                            <div class="col-xd-8">
+                                <p class="font-italic text-left">{{list[0].extendedProps?.num_tel }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field col-12">
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="fw-bold">Examen :</p>
+                        </div>
+                        <div class="col-md-6" *ngIf="list[0].extendedProps.detail_examen?.type_examen !== '' ">
+                            <p class="font-italic text-left">{{list[0].extendedProps.detail_examen?.type_examen }}</p>
+                        </div>
+                        <div class="col-md-6" *ngIf="list[0].extendedProps.detail_examen?.type_examen == null ">
+                            <p class="font-italic text-left text-danger">Non Inscrit</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="font-italic text-left text-danger">
+                                {{list[0].extendedProps.detail_examen?.date_examen }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="fw-bold">Nb Examens :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="font-italic text-left">{{list[0].extendedProps.nbr_ex[0]?.nb_exam || 0}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="fw-bold text-primary">Nb H Prog :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="font-italic text-left text-primary">{{
+                                list[0].extendedProps?.nbr_heur_total[0]?.nb_heur_total || 0}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="fw-bold text-success">Nb H Efect :</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="font-italic text-left text-success">{{
+                                list[0].extendedProps.nbr_heur_affecter[0]?.nb_heur_affecter || 0}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<div class="modal-footer " *ngIf="list[0].operation == 'Fiche Condidat' ">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="paiement" icon="pi pi-dollar" class=""
+        (click)="ShowPaiementModal(this.list[0].clickInfo)"></button>
+</div>
+
+<div class="modal-footer " *ngIf="list[0].operation == 'Examen' ">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="paiement" icon="pi pi-dollar" class=""
+        (click)="ShowPaiementModal(this.list[0].clickInfo)"></button>
+    <button pButton pRipple label="Résultat" icon="pi pi-check-circle" class=""
+        (click)="ShowResultModal(this.list[0].clickInfo)"></button>
+</div>

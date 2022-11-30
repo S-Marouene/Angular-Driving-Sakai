@@ -19,6 +19,10 @@ export class ConduiteService {
         return this.http.get<Conduite[]>(API.getConduitesFrCalendar)
     }
 
+    GetConduiteAcc(): Observable<Conduite[]>{
+        return this.http.get<Conduite[]>(API.GetConduiteAcc)
+    }
+
     getConduites(): Observable<Conduite[]> {
         return this.http.get<Conduite[]>(API.Listconduite)
     }

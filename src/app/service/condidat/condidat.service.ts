@@ -15,6 +15,10 @@ export class CondidatService {
         return this.http.get<Condidat[]>(API.ListCondidat)
     }
 
+    getCondidatsArchive(): Observable<Condidat[]> {
+        return this.http.get<Condidat[]>(API.ListCondidatArchive)
+    }
+
     getCondidatsByID(id: number): Observable<Condidat> {
         return this.http.get<Condidat>(API.getCondidatByID + id)
     }

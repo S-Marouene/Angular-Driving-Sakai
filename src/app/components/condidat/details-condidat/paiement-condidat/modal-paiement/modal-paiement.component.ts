@@ -15,8 +15,6 @@ import { PaiementService } from 'src/app/service/paiement/paiement.service';
   templateUrl: './modal-paiement.component.html'
 })
 export class ModalPaiementComponent implements OnInit {
-
-
         formaddpaiement;
         submitted: boolean = false;
         errors: any;
@@ -27,6 +25,7 @@ export class ModalPaiementComponent implements OnInit {
         caisses: Caisse[] = [];
         public centre_paiements: any = [];
         public caissex:any = [];
+
         type_paiementRadio:boolean=false;
         public pieces: any = [
             'Droit Paiement Conduite',
@@ -64,14 +63,16 @@ export class ModalPaiementComponent implements OnInit {
                 montant: ['', [Validators.required]],
                 condidat_id: ['', [Validators.required]],
                 type: ['', [Validators.required]],
+                date_paiement: ['', [Validators.required]],
             });
 
             this.formaddpaiement.setValue({
-                mode_paiement: this.list[0].paiement?.mode_paiement || '',
+                mode_paiement: this.list[0].paiement?.mode_paiement || 'Espece',
                 caisse: this.list[0].paiement?.caisse || '',
                 montant: this.list[0].paiement?.montant || '',
                 condidat_id:this.list[0].condidat_id,
-                type: this.list[0].paiement?.type || '',
+                type: this.list[0].paiement?.type || 'Paiement',
+                date_paiement:this.list[0].paiement?.date_paiement || '',
             });
 
         }
@@ -82,6 +83,11 @@ export class ModalPaiementComponent implements OnInit {
 
         onSubmit() {
             this.submitted = true;
+            this.formaddpaiement.value.date_paiement=this.datepipe.transform(
+                this.formaddpaiement.value.date_paiement,
+                'yyyy-MM-dd'
+            )
+
             this.paiementService.register(this.formaddpaiement.value).subscribe(
                 (result) => {},
                 (error) => {
@@ -102,19 +108,9 @@ export class ModalPaiementComponent implements OnInit {
 
             this.formaddpaiement.value.date_paiement=this.datepipe.transform(
                 this.formaddpaiement.value.date_paiement,
-                'yyyy-MM-dd H:mm'
+                'yyyy-MM-dd'
             )
-            if (this.formaddpaiement.value.type_paiement == true) {
-                this.formaddpaiement.value.type_paiement = 'Conduite';
-                this.formaddpaiement.value.prestation=''
-                this.formaddpaiement.value.prestation = this.formaddpaiement.value.prestation?.toString() || this.formaddpaiement.value.prestation_cond.toString()
 
-            } else {
-                this.formaddpaiement.value.type_paiement = 'Code';
-                this.formaddpaiement.value.prestation_cond=''
-                this.formaddpaiement.value.prestation =  this.formaddpaiement.value.prestation?.toString() || this.formaddpaiement.value.prestation_cond.toString()
-
-            }
 
             if (this.formaddpaiement.valid) {
                 this.paiementService

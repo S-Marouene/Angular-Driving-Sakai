@@ -12,5 +12,9 @@ export interface Conduite {
     condidat_prenom?: string;
     couleur?:string;
     condidat?:Array<string>;
+    detail_examen?:Array<string>;
+    nbr_heur_affecter?:string;
+    nbr_heur_total?:string;
+    nbr_exam?:string;
 }
 

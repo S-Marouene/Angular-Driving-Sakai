@@ -1,10 +1,29 @@
-<td style="min-width: 8rem;">
+<td style="min-width: 9rem;">
     <div class="flex">
-        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded btn-sm p-button-success mr-2"
-            (click)="openModalExam()"></button>
-        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+        <button pButton pRipple icon="pi pi-check-circle" class="p-button-rounded btn-sm p-button-info mr-1"
+            (click)="OpenModalResult(id)"></button>
+
+        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded btn-sm p-button-success mr-1"
+            (click)="openModalExam(id)"></button>
+
+        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-1"
             (click)="deleteexamen(examen)"></button>
     </div>
+</td>
+<td style="min-width: 10rem;">
+    <span [class]="'examen-badge status-proposal'" *ngIf="examen.type_examen=='Code'">{{examen.type_examen}}</span>
+    <span [class]="'examen-badge status-renewal'" *ngIf="examen.type_examen=='Conduite'">{{examen.type_examen}}</span>
+</td>
+
+<td style="min-width: 10rem;">
+    <span [class]="'examen-badge status-qualified'" *ngIf="examen.resultat=='Réussi'">{{examen.resultat}}</span>
+    <span [class]="'examen-badge status-new'" *ngIf="examen.resultat=='En cours'">{{examen.resultat}}</span>
+    <span [class]="'examen-badge status-unqualified'" *ngIf="examen.resultat=='Ajourné'">{{examen.resultat}}</span>
+    <span [class]="'examen-badge status-unqualified'" *ngIf="examen.resultat=='Excusé'">{{examen.resultat}}</span>
+</td>
+
+<td style="min-width: 10rem;">
+    {{examen.date_examen}}
 </td>
 
 <td style="min-width: 4rem;">
@@ -18,29 +37,12 @@
     <span class="image-text ml-2">{{examen.centre_examen}}</span>
 </td>
 
-<td style="min-width: 10rem;">
-    <span [class]="'examen-badge status-proposal'" *ngIf="examen.type_examen=='Code'">{{examen.type_examen}}</span>
-    <span [class]="'examen-badge status-renewal'" *ngIf="examen.type_examen=='Conduite'">{{examen.type_examen}}</span>
-</td>
-<td style="min-width: 10rem;">
-    <span [class]="'examen-badge status-qualified'" *ngIf="examen.resultat=='Réussi'">{{examen.resultat}}</span>
-    <span [class]="'examen-badge status-new'" *ngIf="examen.resultat=='En cours'">{{examen.resultat}}</span>
-    <span [class]="'examen-badge status-unqualified'" *ngIf="examen.resultat=='Ajourné'">{{examen.resultat}}</span>
-    <span [class]="'examen-badge status-unqualified'" *ngIf="examen.resultat=='Excusé'">{{examen.resultat}}</span>
-</td>
+
+
 <td style="min-width: 10rem;">
     {{examen.examinateur}}
 </td>
-<td style="min-width: 10rem;">
-    {{examen.date_examen}}
-</td>
 
-<td style="min-width: 2rem;">
-    <div class="text-center">
-        <button pButton pRipple icon="pi pi-cog" class="p-button-rounded btn-sm p-button-info mr-1"
-        (click)="OpenModalResult()"  ></button>
-    </div>
-</td>
 
 <td style="min-width: 10rem;">
     {{examen.prestation}}

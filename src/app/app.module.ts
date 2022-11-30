@@ -194,6 +194,14 @@ import { ItemPaiementComponent } from './components/condidat/details-condidat/pa
 import { CodeComponent } from './components/code/code.component';
 import { ListCodeComponent } from './components/code/list-code/list-code.component';
 import { ModalFullCodeComponent } from './components/code/modal-full-code/modal-full-code.component';
+import { AccueilComponent } from './components/accueil/accueil.component';
+import { ModalCalendarComponent } from './components/accueil/modal-calendar/modal-calendar.component';
+import { ModalPaiementCaldrComponent } from './components/accueil/modal-paiement/modal-paiement.component';
+import { ModalResulCaldrComponent } from './components/accueil/modal-resul-caldr/modal-resul-caldr.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { ListCondidatArchiveComponent } from './components/archive/list-condidat-archive/list-condidat-archive.component';
+import { ItemCondidatArchiveComponent } from './components/archive/item-condidat-archive/item-condidat-archive.component';
+import { DetailsCondidatArchiveComponent } from './components/archive/details-condidat-archive/details-condidat-archive.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -288,6 +296,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         TooltipModule,
         TreeModule,
         TreeSelectModule,
+        
         TreeTableModule,
         VirtualScrollerModule,
         AppCodeModule,
@@ -386,7 +395,15 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
         ItemPaiementComponent,
         CodeComponent,
         ListCodeComponent,
-        ModalFullCodeComponent
+        ModalFullCodeComponent,
+        AccueilComponent,
+        ModalCalendarComponent,
+        ModalPaiementCaldrComponent,
+        ModalResulCaldrComponent,
+        ArchiveComponent,
+        ListCondidatArchiveComponent,
+        ItemCondidatArchiveComponent,
+        DetailsCondidatArchiveComponent
 
     ],
     providers: [

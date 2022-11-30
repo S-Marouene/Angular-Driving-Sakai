@@ -1,8 +1,9 @@
 <div class="modal-header bg-primary">
-    <h5 class="modal-title">{{list[0].value}} paiement</h5>
+    <h5 class="modal-title" icon="pi pi-times"><i class="pi pi-dollar"></i> {{list[0].operation}} :</h5>
     <button pButton pRipple icon="pi pi-times" (click)="hideDialog()"></button>
 </div>
-<div class="modal-body modal-lg">
+<div class="modal-body">
+
     <form [formGroup]="formaddpaiement">
 
         <div class="field col-12">
@@ -82,6 +83,7 @@
             </div>
         </div>
 
+
         <div class="field col-12">
             <div class="form-group row">
                 <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
@@ -96,19 +98,103 @@
             </div>
         </div>
 
+
+
     </form>
 </div>
 
-
 <div class="modal-footer">
-    <div *ngIf=" list[0].operation == 'add' ">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="onSubmit()"></button>
-    </div>
-
-    <div *ngIf=" list[0].operation == 'update' ">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
-            (click)="onUpdate(list[0].paiement.id)"></button>
-    </div>
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="onSubmit()"></button>
 </div>
+<hr>
+
+<div class="col-12 md:col-12">
+    <h5>Liste Reglement</h5>
+    <p-panel header="Paiement" [toggleable]="true" class="line-height-3 m-0">
+        <p-table #dt1 [value]="paiements" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
+            styleClass="p-datatable-gridlines" [paginator]="true"
+            [globalFilterFields]="['caisse','type','montant','mode_paiement','date_paiement']" responsiveLayout="scroll">
+
+            <ng-template pTemplate="caption" class="text-right">
+                <div class="flex justify-content-between flex-column sm:flex-row">
+                    <span class="p-input-icon-left mb-2">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" #filter
+                            (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Recherche"
+                            class="w-full" />
+                    </span>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Caisse
+                            <p-columnFilter type="text" field="caisse" display="menu"
+                                placeholder="Recherche par caisse">
+                            </p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Type
+                            <p-columnFilter type="text" field="type" display="menu" placeholder="Search by type">
+                            </p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Montant
+                            <p-columnFilter type="text" field="montant" display="menu" placeholder="Recherche ">
+                            </p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Mode paiement
+                            <p-columnFilter type="text" field="mode_paiement" display="menu">
+                            </p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Date paiement
+                            <p-columnFilter type="text" field="date_paiement" display="menu" >
+                            </p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="width: 8rem">
+                        <div class="flex justify-content-between align-items-center">
+                            Modification
+                            <p-columnFilter type="boolean" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" ngFor let-actualpaiement [ngForOf]="paiements">
+                <tr app-item-paiement [condidat]="this.condidat" [id]="this.list[0].condidat_id" [paiement]="actualpaiement"
+                    (refresh_list_evnt)="getListpaiement()"></tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">On à pas trouver des données.</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="loadingbody">
+                <tr>
+                    <td colspan="7">Chargement des données , attendez SVP ! </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-panel>
+</div>
+
+
+

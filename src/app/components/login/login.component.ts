@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         ) {
             {
                 this.loginForm = this.fb.group({
-                    email: ['', [Validators.required, Validators.email]],
+                    email: ['', [Validators.required/* , Validators.email */]],
                     password: ['', [Validators.required, Validators.minLength(6)]],
                 });
             }
@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 if(data['status']){
                     this.toastr.error(
                         "Vérifier vos donnée !",
-                        'E-mail ou Mot de passe incorrect'
+                        'Utilisateur ou Mot de passe incorrect'
                     );
                 }else if (data.user['status'] == 'active') {
                     this.responseHandler(data);

@@ -1,0 +1,41 @@
+
+<div class="col-12 mt-5 text-left">
+    <i class="pi pi-fw pi-arrow-left text-blue-500 mr-2" style="vertical-align:left;"></i>
+    <a [routerLink]="['/archive']" class="text-blue-500">Liste Condidat Archivé</a>
+</div>
+
+<app-card-condidat [condidat]="condidat"></app-card-condidat>
+
+<div class="content-section introduction">
+    <div class="feature-intro">
+        <h3>Détails Condidat :</h3>
+    </div>
+</div>
+
+<div class="content-section documentation">
+
+    <p-tabView>
+        <p-tabPanel header="Conduite"  leftIcon="pi pi-car" >
+            <app-conduite-condidat [condidat]="condidat"></app-conduite-condidat>
+        </p-tabPanel>
+
+        <p-tabPanel header="Fiche Candidat" leftIcon="pi pi-user">
+            <app-renseingement-condidat [condidat]="condidat"></app-renseingement-condidat>
+        </p-tabPanel>
+
+        <p-tabPanel header="Examens" leftIcon="pi pi-calendar-minus">
+            <app-examcondidat [condidat]="condidat"></app-examcondidat>
+        </p-tabPanel>
+
+        <p-tabPanel header="Code" leftIcon="pi pi-book">
+            <app-code-condidat [condidat]="condidat"></app-code-condidat>
+        </p-tabPanel>
+        <p-tabPanel header="Paiement" leftIcon="pi pi-euro">
+            <app-paiement-condidat [condidat]="condidat" ></app-paiement-condidat>
+        </p-tabPanel>
+    </p-tabView>
+</div>
+
+
+
+

@@ -22,12 +22,13 @@ export class ItemPaiementComponent implements OnInit {
         @Input() paiement: Paiement | null = null;
         @Output() refresh_list_evnt = new EventEmitter<any>();
         @Input() condidat: Condidat;
+        @Input() id: string | null = null;
 
         editForm: FormGroup;
         deletePaiementDialog: boolean = false;
         updatevehDialog: boolean;
         submitted: boolean = false;
-        id: any;
+        //id: any;
         titleModal: any;
         bsModalRef: BsModalRef;
 
@@ -54,14 +55,20 @@ export class ItemPaiementComponent implements OnInit {
             });
         }
 
-        openModalExam() {
+        openModalExam(id) {
+            if(id){
+                id=id
+            }
+            else{
+                id=this.condidat.id;
+            }
             const initialState = {
                 list: [
                     {
                         operation: 'update',
                         value: 'Modification',
                         paiement: this.paiement,
-                        condidat_id:this.condidat.id
+                        condidat_id:id
                     },
                 ],
             };

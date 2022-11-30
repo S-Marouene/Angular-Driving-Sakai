@@ -2,25 +2,24 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import {
     CalendarOptions,
     DateSelectArg,
-    EventClickArg,
     EventApi,
+    EventClickArg,
     EventInput,
 } from '@fullcalendar/angular';
-import { INITIAL_EVENTS, createEventId } from './event-utils';
-import frLocale from '@fullcalendar/core/locales/fr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { ModalAddConduiteComponent } from './modal-add-conduite/modal-add-conduite.component';
-import { ConduiteService } from 'src/app/service/conduite/conduite.service';
+import frLocale from '@fullcalendar/core/locales/fr';
 import { Conduite } from 'src/app/model/conduite.model';
-import { ExamenService } from 'src/app/service/examen/examen.service';
 import { Examen } from 'src/app/model/examen.model';
+import { ConduiteService } from 'src/app/service/conduite/conduite.service';
+import { ExamenService } from 'src/app/service/examen/examen.service';
+import { ModalCalendarComponent } from './modal-calendar/modal-calendar.component';
 
 @Component({
-    selector: 'app-test-component',
-    templateUrl: './test-component.component.html',
-    styleUrls: ['./test-component.component.scss'],
+    selector: 'app-accueil',
+    templateUrl: './accueil.component.html',
+    styleUrls: ['./accueil.component.scss'],
 })
-export class TestComponentComponent {
+export class AccueilComponent implements OnInit {
     public innerWidth: any;
     bsModalRef: BsModalRef;
     currentEvents: EventApi[] = [];
@@ -31,9 +30,7 @@ export class TestComponentComponent {
     TODAY_STR = new Date().toISOString().replace(/T.*$/, '');
     myEvents: EventInput[] = [];
     calendarVisible = true;
-
-    Mylist:any;
-
+    Mylist: any;
 
     calendarOptions: CalendarOptions = {
         headerToolbar: {
@@ -74,7 +71,7 @@ export class TestComponentComponent {
     constructor(
         private modalService: BsModalService,
         private conduiteService: ConduiteService,
-        private examenService:ExamenService,
+        private examenService: ExamenService
     ) {}
 
     ngOnInit() {
@@ -91,28 +88,63 @@ export class TestComponentComponent {
         }
 
         const newEvents = [];
-        this.conduiteService.getConduitesCalendar().subscribe({
+        this.conduiteService.GetConduiteAcc().subscribe({
             next: (ListConduite) => {
                 this.conduites = ListConduite['data'];
                 for (const value of this.conduites) {
                     newEvents.push({
                         start: value.date_deb.toString().replace(' ', 'T'),
                         end: value.date_fin.toString().replace(' ', 'T') || '',
-                        allDay: false,
-                        title: value.condidat['prenom'] + ' ' + value.condidat['nom'],
-                        conduite_id: value.id,
-                        conduite_moniteur: value.moniteur,
-                        conduite_vehicule: value.vehicule,
-                        nbr_heure: value.nbr_heure,
+                        title:
+                            value.condidat['prenom'] +
+                            ' ' +
+                            value.condidat['nom'],
                         couleur: value.couleur,
-                        photo:value.condidat['photo'],
-                        /* nom:value.condidat['nom'],
-                        prenom:value.condidat['prenom'], */
+                        photo: value.condidat['photo'],
+                        num_tel: value.condidat['num_tel'],
                         color: this.ChargeColorEvent(value.couleur),
+                        detail_examen: value.detail_examen,
+                        nbr_heur_total: value.nbr_heur_total,
+                        nbr_heur_affecter: value.nbr_heur_affecter,
+                        nbr_ex: value.nbr_exam,
+                        condidat_id: value.condidat_id,
+                    });
+                }
+            },
+            error: () => {
+                console.log(
+                    `Problème au niveau du serveur, attention les données sont fake `
+                );
+            },
+        });
+
+        this.examenService.getExamensCalendar().subscribe({
+            next: (ListExamens) => {
+                this.examens = ListExamens['data'];
+                for (const value of this.examens) {
+                    newEvents.push({
+                        start: value.date_examen.toString().replace(' ', 'T'),
+                        title:
+                            value.condidat['prenom'] +
+                            ' ' +
+                            value.condidat['nom'] +
+                            ' Exm ' +
+                            value.type_examen,
+                        conduite_id: 0,
+                        color: '#f39c12',
+                        nom_pren:value.condidat['prenom'] +
+                        ' ' +
+                        value.condidat['nom'],
+                        photo: value.condidat['photo'],
+                        num_tel: value.condidat['num_tel'],
+                        detail_examen: value.detail_examen,
+                        nbr_heur_total: value.nbr_heur_total,
+                        nbr_heur_affecter: value.nbr_heur_affecter,
+                        nbr_ex: value.nbr_exam,
+                        condidat_id: value.condidat_id,
                     });
                 }
                 this.myEvents = newEvents;
-
             },
             error: () => {
                 console.log(
@@ -165,48 +197,32 @@ export class TestComponentComponent {
         calendarOptions.weekends = !calendarOptions.weekends;
     }
 
-    handleDateSelect(selectInfo: DateSelectArg) {
-        const initialState = {
-            list: [
-                {
-                    operation: 'Ajout planing',
-                    start: selectInfo.startStr,
-                    end: selectInfo.endStr,
-                    selectInfo: selectInfo,
-                    nbr_heure: '2',
-                },
-            ],
-        };
-        this.bsModalRef = this.modalService.show(ModalAddConduiteComponent, {
-            initialState,
-        });
-        this.bsModalRef.content.closeBtnName = 'Close';
-        const calendarApi = selectInfo.view.calendar;
-        calendarApi.unselect(); // clear date selection
-    }
+    handleDateSelect(selectInfo: DateSelectArg) {}
 
     handleEventClick(clickInfo: EventClickArg) {
-            this.Mylist={
-                operation: 'Update planing',
+        if (clickInfo.event.extendedProps.conduite_id == 0) {
+            this.Mylist = {
+                operation: 'Examen',
                 start: clickInfo.event.startStr,
                 end: clickInfo.event.endStr,
                 title: clickInfo.event._def.title,
-                moniteur: clickInfo.event.extendedProps.conduite_moniteur,
-                vehicule: clickInfo.event.extendedProps.conduite_vehicule,
-                couleur: clickInfo.event.extendedProps.couleur,
-                nbr_heure: clickInfo.event.extendedProps.nbr_heure,
-                photo: clickInfo.event.extendedProps.photo,
-                clickInfo: clickInfo,
-            }
+                extendedProps: clickInfo.event.extendedProps,
+            };
+        } else {
+            this.Mylist = {
+                operation: 'Fiche Condidat',
+                start: clickInfo.event.startStr,
+                end: clickInfo.event.endStr,
+                title: clickInfo.event._def.title,
+                extendedProps: clickInfo.event.extendedProps,
+            };
+        }
 
         const initialState = {
-            list: [
-                this.Mylist
-            ],
+            list: [this.Mylist],
         };
 
-
-        this.bsModalRef = this.modalService.show(ModalAddConduiteComponent, {
+        this.bsModalRef = this.modalService.show(ModalCalendarComponent, {
             initialState,
         });
         this.bsModalRef.content.closeBtnName = 'Close';

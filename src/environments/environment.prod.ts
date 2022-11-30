@@ -22,6 +22,7 @@ export const API = {
 
     'add_condidat' : 'https://smdev.tn/api/auth/CreateCondidat',
     'ListCondidat' : 'https://smdev.tn/api/auth/allCondidats',
+    'ListCondidatArchive' : 'https://smdev.tn/api/auth/allCondidats_arch',
     'DeleteCondidat' : 'https://smdev.tn/api/auth/delete-condidat/',
     'getCondidatByID':'https://smdev.tn/api/auth/GetCondByID/',
     'updateCondidat':'https://smdev.tn/api/auth/update_condidat',
@@ -78,6 +79,7 @@ export const API = {
     'updateconduite':'https://smdev.tn/api/auth/conduite/',
     'ListconduiteCondidat':'https://smdev.tn/api/auth/conduite/getconduiteCondidat/',
     'getConduitesFrCalendar':'https://smdev.tn/api/auth/conduite/conduitecalndr/getForCalndr',
+    'GetConduiteAcc':'https://smdev.tn/api/auth/conduite/conduitecalndr/GetConduiteAcc',
 
     'add_code' : 'https://smdev.tn/api/auth/code',
     'Listcode' : 'https://smdev.tn/api/auth/code',

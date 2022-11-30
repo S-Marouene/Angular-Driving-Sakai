@@ -36,6 +36,9 @@ import { CondidatComponent } from './components/condidat/condidat.component';
 import { DetailsCondidatComponent } from './components/condidat/details-condidat/details-condidat.component';
 import { ParametreComponent } from './components/parametre/parametre.component';
 import { CodeComponent } from './components/code/code.component';
+import { AccueilComponent } from './components/accueil/accueil.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { DetailsCondidatArchiveComponent } from './components/archive/details-condidat-archive/details-condidat-archive.component';
 
 
 @NgModule({
@@ -45,12 +48,15 @@ import { CodeComponent } from './components/code/code.component';
             {
                 path: '', component: AppMainComponent,
                 children: [
-                    { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-                    {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+                    { path: '', redirectTo: 'testcrud', pathMatch: 'full'},
+                    {path: 'dashboard_old', component: DashboardComponent, canActivate: [AuthGuard] },
                     {path: 'testcrud', component:  CrudComponent, canActivate: [UserGuard]},
+                    {path: 'dashboard', component:  AccueilComponent, canActivate: [AuthGuard]},
                     {path: 'listusers', component:  UsersComponent ,canActivate: [AuthGuard,UserGuard] },
                     {path: 'condidat', component:  CondidatComponent ,canActivate: [AuthGuard] },
+                    {path: 'archive', component:  ArchiveComponent ,canActivate: [AuthGuard] },
                     {path: 'condidat/:id', component:  DetailsCondidatComponent,canActivate: [AuthGuard]  },
+                    {path: 'archive/:id', component:  DetailsCondidatArchiveComponent,canActivate: [AuthGuard]  },
                     {path: 'listSchool', component: ListComponent,canActivate: [AuthGuard,UserGuard] },
                     {path: 'parametre', component: ParametreComponent,canActivate: [AuthGuard] },
                     {path: 'code', component: CodeComponent,canActivate: [AuthGuard] },

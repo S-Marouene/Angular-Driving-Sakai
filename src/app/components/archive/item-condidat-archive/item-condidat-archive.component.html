@@ -1,0 +1,33 @@
+
+        <td style="min-width: 14rem;">
+            <img [alt]="condidat.nom" src="{{URLcondidatPic+ (condidat.photo | defaultProfileUser)}}" width="32"
+                style="vertical-align: middle" />
+            <span class="image-text ml-2"><a [routerLink]="['/archive', condidat.id]">{{condidat.nom}} {{condidat.prenom}}</a></span>
+        </td>
+
+        <td style="min-width: 8rem;">
+            <span class="image-text ml-2">{{condidat.num_tel}}</span>
+        </td>
+        <td style="min-width: 8rem;">
+            <span class="image-text ml-2">{{condidat.type_c_code}}</span>
+        </td>
+        <td style="min-width: 10rem;">
+            {{condidat.type_c_cond}}
+        </td>
+        <td style="min-width: 5rem;">
+            {{  condidat.nbr_heur_total[0]?.nb_heur_total || '_' }}
+        </td>
+        <td style="min-width: 8rem;">
+            {{  condidat.nbr_heur_affecter[0]?.nb_heur_affecter || '_' }}
+        </td>
+        <td style="min-width: 10rem;">
+            {{  condidat.detail_examen?.type_examen || '_' }}
+        </td>
+        <td style="min-width: 12rem;">
+            {{  condidat.detail_examen?.date_examen || '_' }}
+        </td>
+        <td style="min-width: 8rem;">
+            <button [routerLink]="['/archive', condidat.id]" class="btn btn-warning">
+                Détails
+            </button>
+        </td>

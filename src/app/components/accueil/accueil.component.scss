@@ -1,0 +1,29 @@
+
+h2 {
+    margin: 0;
+    font-size: 13px;
+  }
+
+  ul {
+    margin: 5;
+    padding: 0 0 0 1.5em;
+  }
+
+  li {
+    margin: 1.5em 0;
+    padding: 0;
+  }
+
+  b { /* used for event dates/times */
+    margin-right: 1px;
+  }
+
+
+  .fc { /* the calendar root */
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .fc-toolbar h2 {
+    font-size: 10px;
+  }

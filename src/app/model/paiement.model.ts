@@ -7,5 +7,6 @@ export interface Paiement {
     type?: string;
     montant?: string;
     mode_paiement?:string;
+    date_paiement?:string;
 }
 

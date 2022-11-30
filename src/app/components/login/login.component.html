@@ -17,15 +17,15 @@
                     <div class="w-full md:w-10 mx-auto">
 
                         <div class="field">
-                            <label  class="block text-900 text-xl font-medium mb-2" >Email</label>
-                            <input type="text"  placeholder="Votre Adresse E-mail" formControlName="email" class="form-control" style="padding:1rem;"
+                            <label  class="block text-900 text-xl font-medium mb-2" >Utilisateur</label>
+                            <input type="text"  placeholder="Votre nom d'utilisateur" formControlName="email" class="form-control" style="padding:1rem;"
                                 [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
                             <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                 <div *ngIf="f['email'].errors['required']">
-                                    Email est obligatoir
+                                    Utilisateur est obligatoir
                                 </div>
                                 <div *ngIf="f['email'].errors['email']">
-                                    Email n'est pas valide
+                                    Utilisateur n'est pas valide
                                 </div>
                             </div>
                         </div>

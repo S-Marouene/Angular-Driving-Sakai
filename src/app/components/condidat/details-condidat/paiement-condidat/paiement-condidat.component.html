@@ -4,7 +4,7 @@
 
 <p-table #dt1 [value]="paiements" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
     styleClass="p-datatable-gridlines" [paginator]="true"
-    [globalFilterFields]="['caisse','type','montant','mode_paiement']" responsiveLayout="scroll">
+    [globalFilterFields]="['caisse','type','montant','mode_paiement','date_paiement']" responsiveLayout="scroll">
 
     <ng-template pTemplate="caption" class="text-right">
         <div class="flex justify-content-between flex-column sm:flex-row">
@@ -25,21 +25,21 @@
         <tr>
             <th>
                 <div class="flex justify-content-between align-items-center">
-                    caisse
+                    Caisse
                     <p-columnFilter type="text" field="caisse" display="menu" placeholder="Recherche par caisse">
                     </p-columnFilter>
                 </div>
             </th>
             <th>
                 <div class="flex justify-content-between align-items-center">
-                    type
+                    Type
                     <p-columnFilter type="text" field="type" display="menu" placeholder="Search by type">
                     </p-columnFilter>
                 </div>
             </th>
             <th>
                 <div class="flex justify-content-between align-items-center">
-                    montant
+                    Montant
                     <p-columnFilter type="text" field="montant" display="menu" placeholder="Recherche ">
                     </p-columnFilter>
                 </div>
@@ -47,11 +47,20 @@
 
             <th>
                 <div class="flex justify-content-between align-items-center">
-                    mode_paiement
+                    Mode paiement
                     <p-columnFilter type="text" field="mode_paiement" display="menu" >
                     </p-columnFilter>
                 </div>
             </th>
+
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Date paiement
+                    <p-columnFilter type="text" field="date_paiement" display="menu" >
+                    </p-columnFilter>
+                </div>
+            </th>
+
 
             <th style="width: 8rem">
                 <div class="flex justify-content-between align-items-center">
