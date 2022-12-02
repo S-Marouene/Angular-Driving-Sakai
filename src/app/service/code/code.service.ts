@@ -19,6 +19,12 @@ export class CodeService {
         return this.http.get<Code>(API.getcodeByID + id)
     }
 
+    getCodeByCondidat(id): Observable<Code> {
+        return this.http.get<Code>(API.getCodeByCondidat + id)
+    }
+
+    
+
     register(Code): Observable<any> {
         return this.http.post(API.add_code, Code);
     }

@@ -50,7 +50,7 @@ export class TestComponentComponent {
         selectable: true,
         selectMirror: false,
         dayMaxEvents: false,
-        displayEventTime: false,
+        displayEventTime: true,
         select: this.handleDateSelect.bind(this),
         eventClick: this.handleEventClick.bind(this),
         eventsSet: this.handleEvents.bind(this),

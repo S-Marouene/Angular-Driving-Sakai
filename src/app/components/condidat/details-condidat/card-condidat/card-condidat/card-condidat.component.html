@@ -1,19 +1,94 @@
-<div class="col-12">
-    <div class="card mb-12">
+<div class="card">
+    <img src="{{URLcondidatPic+ (condidat?.photo | defaultProfileUser)}}" class="card-img-top" />
+    <div class="card-body">
         <h5 class="card-title">{{condidat?.nom}} {{condidat?.prenom}}</h5>
-        <div class="row no-gutters">
-            <div class="col-md-2">
-                <img [alt]="condidat?.nom" src="{{URLcondidatPic+ (condidat?.photo | defaultProfileUser)}}" class="img-fluid rounded"
-                    style="width: 150px;">
+
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                    <div class="row">
+                        <div>
+                            <span class="fw-bold">Télephone : </span>
+                            <span class="fst-italic text-right"> {{condidat?.num_tel}}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>
+                            <span class="fw-bold">Ct Code : </span>
+                            <span class="fst-italic text-right"  *ngIf="condidat?.type_c_code == 'Forfaitaire'"> {{condidat?.type_c_code}} : {{condidat?.prix_frf_code}} dt</span>
+                            <span class="fst-italic text-right"  *ngIf="condidat?.type_c_code == 'Par heure'"> {{condidat?.type_c_code}} : {{condidat?.prix_hr_code}} dt</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div>
+                            <span class="fw-bold">Ct Conduite : </span>
+                            <span class="fst-italic text-right"  *ngIf="condidat?.type_c_cond == 'Forfaitaire'">  {{condidat?.type_c_cond}} : {{condidat?.prix_frf_cond}} dt</span>
+                            <span class="fst-italic text-right"  *ngIf="condidat?.type_c_cond == 'Par heure'"> {{condidat?.type_c_cond}} : {{condidat?.prix_hr_cond}} dt</span>
+                        </div>
+                    </div>
+
             </div>
 
-            <div class="col-md-1">
+            <div class="col-md-4 col-xs-12">
+                <div class="row">
+                    <div>
+                        <span class="fw-bold text-primary">Nb H prog : </span>
+                        <span class="fst-italic text-right"> {{ nb_heur_total }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <span class="fw-bold text-primary">Nb H Eff : </span>
+                        <span class="fst-italic text-right"> {{ nb_heur_affecter }}</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4 col-xs-12">
+                <div class="row">
+                    <div>
+                        <span class="fw-bold text-primary">Examen : </span>
+                        <span class="fst-italic text-right">{{ condidat?.detail_examen?.type_examen || '_' }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <span class="fw-bold text-primary">Date : </span>
+                        <span class="fst-italic text-right">{{ condidat?.detail_examen?.date_examen || '_' }}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="card flex-row">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2" >
+                <img class="card-img-left example-card-img-responsive" src="{{URLcondidatPic+ (condidat?.photo | defaultProfileUser)}}" style="width: 80%;"/>
+                <h6 class="card-title text-center">{{condidat?.nom}} {{condidat?.prenom}}</h6>
+            </div>
+            <div class="col-md-3" >
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-2">
                             <p class="fw-bold">Télephone :</p>
                         </div>
                         <div class="col-md-6">
@@ -21,7 +96,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-2">
                             <p class="fw-bold">Contrat Code :</p>
                         </div>
                         <div class="col-md-6">
@@ -30,7 +105,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 mb-2">
                             <p class="fw-bold">Contrat Conduite :</p>
                         </div>
                         <div class="col-md-6">
@@ -42,7 +117,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 ">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -74,7 +149,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 ">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -94,7 +169,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-</div>
+  </div>
+ -->

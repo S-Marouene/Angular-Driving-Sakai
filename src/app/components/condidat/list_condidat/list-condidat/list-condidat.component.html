@@ -12,10 +12,8 @@
                 <input pInputText type="text" #filter (input)="dt1.filterGlobal($event.target.value, 'contains')"
                     placeholder="Recherche" class="w-full" />
             </span>
-
             <button pButton label="Nouveau Condidat" class="p-button-outlined mb-2" icon="pi pi-user-plus"
                 (click)="openNew()"></button>
-
         </div>
     </ng-template>
 
@@ -23,98 +21,52 @@
         <tr>
             <th>
                 <div class="flex justify-content-between align-items-center">
-                    Nom
-                    <p-columnFilter type="text" display="menu" placeholder="Recherche par nom">
-                    </p-columnFilter>
+                    Condidat
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Progression
                 </div>
             </th>
             <th>
                 <div class="flex justify-content-between align-items-center">
                     Télephone
-                    <p-columnFilter type="text" display="menu" placeholder="Search by country">
-                    </p-columnFilter>
                 </div>
             </th>
             <th>
                 <div class="flex justify-content-between align-items-center">
                     Contrat Code
-                    <p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false"
-                        [showOperator]="false" [showAddButton]="false">
-                        <ng-template pTemplate="header">
-                            <div class="px-3 pt-3 pb-0">
-                                <span class="font-bold">Agent Picker</span>
-                            </div>
-                        </ng-template>
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-multiSelect [ngModel]="value" [options]="representatives" placeholder="Any"
-                                (onChange)="filter($event.value)" optionLabel="name">
-                                <ng-template let-option pTemplate="item">
-                                    <div class="p-multiselect-representative-option">
-                                        <img [alt]="option.label" src="assets/demo/images/avatar/{{option.image}}"
-                                            width="32" style="vertical-align: middle" />
-                                        <span class="ml-2">{{option.name}}</span>
-                                    </div>
-                                </ng-template>
-                            </p-multiSelect>
-                        </ng-template>
-                    </p-columnFilter>
                 </div>
             </th>
             <th>
                 <div class="flex justify-content-between align-items-center">
                     Contrat Conduite
-                    <p-columnFilter field="status" matchMode="equals" display="menu">
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)"
-                                placeholder="Any" [style]="{'min-width': '12rem'}">
-                                <ng-template let-option pTemplate="item">
-                                    <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
-                                </ng-template>
-                            </p-dropdown>
-                        </ng-template>
-                    </p-columnFilter>
                 </div>
             </th>
             <th>
                 <div class="flex justify-content-between align-items-center">
-                    Nb H Programmé
-                    <p-columnFilter type="date" field="date" display="menu" placeholder="mm/dd/yyyy">
-                    </p-columnFilter>
+                    Hr Prg
                 </div>
             </th>
             <th>
                 <div class="flex justify-content-between align-items-center">
-                    Nb H Effecter
-                    <p-columnFilter field="activity" matchMode="between" display="menu" [showMatchModes]="false"
-                        [showOperator]="false" [showAddButton]="false">
-                        <ng-template pTemplate="filter" let-filter="filterCallback">
-                            <p-slider [ngModel]="activityValues" [range]="true" (onSlideEnd)="filter($event.values)"
-                                styleClass="m-3" [style]="{'min-width': '12rem'}"></p-slider>
-                            <div class="flex align-items-center justify-content-between px-2">
-                                <span>{{activityValues[0]}}</span>
-                                <span>{{activityValues[1]}}</span>
-                            </div>
-                        </ng-template>
-                    </p-columnFilter>
+                    Hr Eft
                 </div>
             </th>
             <th>
                 <div class="flex justify-content-between align-items-center">
                     Examen
-                    <p-columnFilter type="numeric" field="examen" display="menu">
-                    </p-columnFilter>
                 </div>
             </th>
-            <th style="width: 8rem">
+            <th >
                 <div class="flex justify-content-between align-items-center">
                     Date Examen
-                    <p-columnFilter type="boolean" field="verified" display="menu"></p-columnFilter>
                 </div>
             </th>
-            <th style="width: 8rem">
+            <th >
                 <div class="flex justify-content-between align-items-center">
-                    Config
-                    <p-columnFilter type="boolean" field="verified" display="menu"></p-columnFilter>
+                    Détails
                 </div>
             </th>
         </tr>
@@ -155,8 +107,8 @@
                                             class="text-danger">*</span> Catégorie</label>
                                     <div class="col-sm-6">
                                         <select class="form-select" formControlName="categorie"
-                                            [ngClass]="{ 'is-invalid': submitted && f['categorie'].errors }">
-                                            <option *ngFor="let categorie of categories" [ngValue]="categorie">
+                                            [ngClass]="{ 'is-invalid': submitted && f['categorie'].errors }" [(ngModel)]="categorie_selected">
+                                            <option *ngFor="let categorie of categories" [ngValue]="categorie" >
                                                 {{ categorie }}
                                             </option>
                                         </select>
@@ -257,21 +209,18 @@
                                         <div class="grid"  [ngClass]="{ 'is-invalid': submitted && f['exam'].errors }">
                                             <div class="col-12 md:col-4">
                                                 <div class="field-radiobutton mb-0">
-                                                    <p-radioButton name="exam" value="Conduite" formControlName="exam"
+                                                    <p-radioButton name="exam" value="Conduite" [value]="examForForm" formControlName="exam"
                                                        ></p-radioButton>
                                                     <label for="code3">Conduite</label>
                                                 </div>
                                             </div>
                                             <div class="col-12 md:col-4">
                                                 <div class="field-radiobutton mb-0">
-                                                    <p-radioButton name="exam" value="Code" formControlName="exam"
+                                                    <p-radioButton name="exam" value="Code" [value]="! examForForm" formControlName="exam"
                                                         ></p-radioButton>
                                                     <label for="code4">Code</label>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div *ngIf="submitted && f['exam'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['exam'].errors['required']">exam est obligatoir</div>
                                         </div>
                                     </div>
                                 </div>
@@ -315,20 +264,6 @@
                                         </div>
                                     </div>
 
-                                </div>
-                            </div>
-                            <div class="field col-12">
-                                <div class="form-group row">
-                                    <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
-                                        Email </label>
-                                    <div class="col-sm-6">
-                                        <input formControlName="email" pInputText
-                                            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
-                                        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                                            <div *ngIf="f['email'].errors['required']">Email est obligatoir</div>
-                                            <div *ngIf="f['email'].errors['email']">Email is invalid</div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 
@@ -481,11 +416,11 @@
 
                                 <div class="field col-12">
                                     <div class="form-group row">
-                                        <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                        <label class="col-sm-6 col-form-label fw-bold">
                                             Avant Le</label>
                                         <div class="col-sm-6" [ngClass]="{ 'is-invalid': submitted && f['hist_av_date'].errors }">
                                             <p-calendar formControlName="hist_av_date" dateFormat="yy-mm-dd" [showIcon]="true"
-                                                [showButtonBar]="true" ></p-calendar>
+                                                [showButtonBar]="true"  [ngModel]="calendarDate"></p-calendar>
                                         </div>
                                         <div *ngIf="submitted && f['hist_av_date'].errors" class="invalid-feedback">
                                             <div *ngIf="f['hist_av_date'].errors['required']">hist_av_date est obligatoir</div>
@@ -494,7 +429,7 @@
                                 </div>
                                 <div class="field col-12">
                                     <div class="form-group row">
-                                        <label class="col-sm-6 col-form-label fw-bold"><span class="text-danger">*</span>
+                                        <label class="col-sm-6 col-form-label fw-bold">
                                             Montant Total Payé </label>
                                         <div class="col-sm-6">
                                             <input formControlName="hist_montant_paye" pInputText [ngClass]="{ 'is-invalid': submitted && f['hist_montant_paye'].errors }"/>
@@ -559,8 +494,7 @@
 
                                 <div class="field col-12">
                                     <div class="form-group row">
-                                        <label class="col-sm-6 col-form-label fw-bold"><span
-                                                class="text-danger">*</span> Caisse</label>
+                                        <label class="col-sm-6 col-form-label fw-bold">Caisse</label>
                                         <div class="col-sm-6">
                                             <select class="form-select" formControlName="hist_caisse" [ngClass]="{ 'is-invalid': submitted && f['hist_caisse'].errors }">
                                                 <option *ngFor="let caisse of caisses" [ngValue]="caisse.caisse">

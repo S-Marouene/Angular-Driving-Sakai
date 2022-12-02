@@ -28,16 +28,7 @@ export class CodeCondidatComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-            this.codeService.getCodes().subscribe({
-                next: (ListCode) => {
-                    this.codes = ListCode['data'];
-                },
-                error: () => {
-                    console.log(
-                        `Problème au niveau du serveur, attention les données sont fake `
-                    );
-                },
-            });
+        this.getListcode();
     }
 
     openModalcode() {
@@ -66,15 +57,17 @@ export class CodeCondidatComponent implements OnInit {
     }
 
     getListcode() {
-        this.codeService.getCodes().subscribe({
-            next: (ListCode) => {
-                this.codes = ListCode['data'];
-            },
-            error: () => {
-                console.log(
-                    `Problème au niveau du serveur, attention les données sont fake `
-                );
-            },
+        this.activatedRoute.params.subscribe((params) => {
+            this.codeService.getCodeByCondidat(params.id).subscribe({
+                next: (ListCode) => {
+                    this.codes = ListCode['data'];
+                },
+                error: () => {
+                    console.log(
+                        `Problème au niveau du serveur, attention les données sont fake `
+                    );
+                },
+            });
         });
     }
 }

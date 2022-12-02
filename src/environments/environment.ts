@@ -94,6 +94,8 @@ export const API = {
     'Listcode' : 'http://172.21.11.196/Driving/backend/api/auth/code',
     'Deletecode' : 'http://172.21.11.196/Driving/backend/api/auth/code/',
     'getcodeByID':'http://172.21.11.196/Driving/backend/api/auth/code/',
+    'getCodeByCondidat':'http://172.21.11.196/Driving/backend/api/auth/code/getCodeByCondidat/',
+
     'updatecode':'http://172.21.11.196/Driving/backend/api/auth/code/',
 
     'add_paiement' : 'http://172.21.11.196/Driving/backend/api/auth/paiement',

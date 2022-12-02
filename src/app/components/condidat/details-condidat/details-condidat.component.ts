@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 import { Condidat } from 'src/app/model/condidat.model';
 import { CondidatService } from 'src/app/service/condidat/condidat.service';
+import { MenuItem } from 'primeng/api';
+
 
 @Component({
   selector: 'app-details-condidat',
@@ -11,6 +13,8 @@ import { CondidatService } from 'src/app/service/condidat/condidat.service';
 })
 export class DetailsCondidatComponent implements OnInit {
     condidat : Condidat | null=null;
+    breadcrumbItems: MenuItem[];
+    routeItems: MenuItem[];
 
     constructor(
         private condidatService :CondidatService,
@@ -29,5 +33,15 @@ export class DetailsCondidatComponent implements OnInit {
             error: (e) => {this.router.navigate(['condidat']);}
         });
     });
-  }
+
+
+
+    this.breadcrumbItems = [];
+        this.breadcrumbItems.push({ label: 'Liste Condidat' , routerLink:'/condidat'});
+        this.breadcrumbItems.push({ label: 'Détails Condidat'});
+        /* this.breadcrumbItems.push({ label: 'Notebook' });
+        this.breadcrumbItems.push({ label: 'Accessories' });
+        this.breadcrumbItems.push({ label: 'Backpacks' });
+        this.breadcrumbItems.push({ label: 'Item' }); */
+    }
 }

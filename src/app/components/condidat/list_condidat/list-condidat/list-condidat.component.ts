@@ -60,17 +60,24 @@ export class ListCondidatComponent implements OnInit {
     type_c_code: string = 'Par heure';
     type_c_cond: string = 'Par heure';
     condidat: Condidat;
+    categorie_selected: string = 'A1';
+    calendarDate: Date;
+
+    type_exam: string = 'Code';
+    activityValues: number[] = [0, 100];
+    examForForm: boolean = true;
 
     constructor(
         public fb: FormBuilder,
         private toastr: ToastrService,
         public datepipe: DatePipe,
         private condidatservice: CondidatService,
-        private bureauService:BureauService,
-        private caisseService:CaisseService,
+        private bureauService: BureauService,
+        private caisseService: CaisseService
     ) {}
 
     ngOnInit(): void {
+        this.calendarDate = new Date();
         this.selected_t_c_code = true;
         this.selected_t_c_cond = true;
 
@@ -101,7 +108,7 @@ export class ListCondidatComponent implements OnInit {
             phone: [
                 '',
                 [
-                    Validators.required,
+                    Validators.nullValidator,
                     Validators.minLength(8),
                     Validators.maxLength(12),
                 ],
@@ -115,27 +122,27 @@ export class ListCondidatComponent implements OnInit {
                 ],
             ],
 
-            email: ['', [Validators.required, Validators.email]],
+            //email: ['', [Validators.required, Validators.email]],
             bureau: ['', [Validators.required]],
             categorie: ['', Validators.required],
-            piece: ['', Validators.required],
+            piece: ['', Validators.nullValidator],
             exam: ['', Validators.required],
             prenom: ['', [Validators.required]],
-            date_naiss: ['', Validators.required],
-            address: ['', Validators.required],
+            date_naiss: ['', Validators.nullValidator],
+            address: ['', Validators.nullValidator],
             image: ['', Validators.nullValidator],
             type_c_code: ['', Validators.required],
             type_c_cond: ['', Validators.required],
-            prix_h_code: ['', Validators.required],
-            prix_forfaitaire_code: ['', Validators.required],
-            prix_h_cond: ['', Validators.required],
-            prix_forfaitaire_cond: ['', Validators.required],
-            hist_av_date: ['', Validators.required],
-            hist_montant_paye: ['', Validators.required],
+            prix_h_code: ['', Validators.nullValidator],
+            prix_forfaitaire_code: ['', Validators.nullValidator],
+            prix_h_cond: ['', Validators.nullValidator],
+            prix_forfaitaire_cond: ['', Validators.nullValidator],
+            hist_av_date: ['', Validators.nullValidator],
+            hist_montant_paye: ['', Validators.nullValidator],
             hist_nb_hr_code: ['', Validators.nullValidator],
             hist_nb_hr_cond: ['', Validators.nullValidator],
             hist_nb_reinsc_cond: ['', Validators.nullValidator],
-            hist_caisse: ['', Validators.required],
+            hist_caisse: ['', Validators.nullValidator],
             hist_nb_exam_code: ['', Validators.nullValidator],
             hist_nb_exam_cond: ['', Validators.nullValidator],
             hist_nb_reinsc_code: ['', Validators.nullValidator],
@@ -176,10 +183,15 @@ export class ListCondidatComponent implements OnInit {
             this.form_condidat.value.prix_h_cond = '';
         }
 
+        if (this.form_condidat.value.exam == true) {
+            this.type_exam = 'Conduite';
+        } else {
+            this.type_exam = 'Code';
+        }
+
         formData.append('nom', this.form_condidat.value.nom);
         formData.append('categorie', this.form_condidat.value.categorie);
         formData.append('cin', this.form_condidat.value.cin);
-        formData.append('email', this.form_condidat.value.email);
         formData.append('prenom', this.form_condidat.value.prenom);
         formData.append(
             'date_naiss',
@@ -188,22 +200,22 @@ export class ListCondidatComponent implements OnInit {
                 'yyyy-MM-dd'
             )
         );
-        formData.append('adresse', this.form_condidat.value.address);
-        formData.append('num_tel', this.form_condidat.value.phone);
+        formData.append('adresse', this.form_condidat.value.address || '');
+        formData.append('num_tel', this.form_condidat.value.phone || '');
         formData.append('piece_fournit', this.form_condidat.value.piece);
-        formData.append('bureau', this.form_condidat.value.bureau);
-        formData.append('examen', this.form_condidat.value.exam);
-        formData.append('type_c_code', this.type_c_code);
-        formData.append('type_c_cond', this.type_c_cond);
-        formData.append('prix_hr_code', this.form_condidat.value.prix_h_code);
+        formData.append('bureau', this.form_condidat.value.bureau || '');
+        formData.append('examen', this.type_exam || '');
+        formData.append('type_c_code', this.type_c_code || '');
+        formData.append('type_c_cond', this.type_c_cond || '');
+        formData.append('prix_hr_code', this.form_condidat.value.prix_h_code || '');
         formData.append(
             'prix_frf_code',
-            this.form_condidat.value.prix_forfaitaire_code
+            this.form_condidat.value.prix_forfaitaire_code || ''
         );
-        formData.append('prix_hr_cond', this.form_condidat.value.prix_h_cond);
+        formData.append('prix_hr_cond', this.form_condidat.value.prix_h_cond || '');
         formData.append(
             'prix_frf_cond',
-            this.form_condidat.value.prix_forfaitaire_cond
+            this.form_condidat.value.prix_forfaitaire_cond || ''
         );
         formData.append(
             'hist_av_date',
@@ -214,48 +226,52 @@ export class ListCondidatComponent implements OnInit {
         );
         formData.append(
             'hist_montant_paye',
-            this.form_condidat.value.hist_montant_paye
+            this.form_condidat.value.hist_montant_paye || ''
         );
         formData.append(
             'hist_nb_hr_code',
-            this.form_condidat.value.hist_nb_hr_code
+            this.form_condidat.value.hist_nb_hr_code || ''
         );
         formData.append(
             'hist_nb_hr_cond',
-            this.form_condidat.value.hist_nb_hr_cond
+            this.form_condidat.value.hist_nb_hr_cond || ''
         );
         formData.append(
             'hist_nb_reinsc_cond',
-            this.form_condidat.value.hist_nb_reinsc_cond
+            this.form_condidat.value.hist_nb_reinsc_cond || ''
         );
-        formData.append('hist_caisse', this.form_condidat.value.hist_caisse);
+        formData.append('hist_caisse', this.form_condidat.value.hist_caisse || '');
         formData.append(
             'hist_nb_exam_code',
-            this.form_condidat.value.hist_nb_exam_code
+            this.form_condidat.value.hist_nb_exam_code || ''
         );
         formData.append(
             'hist_nb_exam_cond',
-            this.form_condidat.value.hist_nb_exam_cond
+            this.form_condidat.value.hist_nb_exam_cond || ''
         );
         formData.append(
             'hist_nb_reinsc_code',
-            this.form_condidat.value.hist_nb_reinsc_code
+            this.form_condidat.value.hist_nb_reinsc_code || ''
         );
         formData.append(
             'hist_nb_droit_exam',
-            this.form_condidat.value.hist_nb_droit_exam
+            this.form_condidat.value.hist_nb_droit_exam || ''
         );
 
         this.condidatservice.register(formData).subscribe(
-            (result) => {
-            },
+            (result) => {},
             (error) => {
                 this.errors = error.error;
                 console.log(this.errors);
             },
             () => {
                 this.imageSrc = null;
+                this.files = null;
                 this.form_condidat.reset();
+                this.calendarDate = new Date();
+                this.categorie_selected = 'A1';
+                this.selected_t_c_code = true;
+                this.selected_t_c_cond = true;
                 this.CondidatDialog = false;
                 this.condidat = {};
                 this.toastr.info('Condidat ajouter avec succée', 'Info');
@@ -299,7 +315,7 @@ export class ListCondidatComponent implements OnInit {
         return this.form_condidat.controls;
     }
 
-    getListCondidat(){
+    getListCondidat() {
         this.condidatservice.getCondidats().subscribe({
             next: (ListCondidat) => {
                 this.condidats = ListCondidat;

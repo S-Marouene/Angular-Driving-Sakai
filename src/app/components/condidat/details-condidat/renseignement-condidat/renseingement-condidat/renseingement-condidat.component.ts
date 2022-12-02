@@ -4,6 +4,8 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Condidat } from 'src/app/model/condidat.model';
+import { BureauService } from 'src/app/service/bureau/bureau.service';
+import { CaisseService } from 'src/app/service/caisse/caisse.service';
 import { CondidatService } from 'src/app/service/condidat/condidat.service';
 
 @Component({
@@ -16,7 +18,9 @@ export class RenseingementCondidatComponent implements OnInit {
     constructor(private condidatservice : CondidatService,
         private toastr : ToastrService,
         public router: Router,
-        public datepipe: DatePipe
+        public datepipe: DatePipe,
+        private bureauService:BureauService,
+        private caisseService:CaisseService,
         ) {}
     public categories: any = [
         'B',
@@ -29,7 +33,10 @@ export class RenseingementCondidatComponent implements OnInit {
         'D+E',
         'H',
     ];
-    public bureaux: any = ['Menzel temime', 'Nabeul', 'Kélibiya', 'Autres...'];
+    //public bureaux: any = ['Menzel temime', 'Nabeul', 'Kélibiya', 'Autres...'];
+    public bureaux: any = [];
+    public caisses: any = [];
+
     valExamen: string;
     valTypeContrat: string;
     valTContratCond: string;
@@ -58,6 +65,29 @@ export class RenseingementCondidatComponent implements OnInit {
 
     ngOnInit(): void {
         this.condidat = {};
+
+        this.bureauService.getBureaux().subscribe({
+            next: (ListBureau) => {
+                this.bureaux = ListBureau['data'];
+            },
+            error: () => {
+                console.log(
+                    `Problème au niveau du serveur, attention les données sont fake `
+                );
+            },
+        });
+
+        this.caisseService.getCaisses().subscribe({
+            next: (ListCaisse) => {
+                this.caisses = ListCaisse['data'];
+            },
+            error: () => {
+                console.log(
+                    `Problème au niveau du serveur, attention les données sont fake `
+                );
+            },
+        });
+
     }
 
     onFileChange(event: any) {
@@ -127,7 +157,7 @@ export class RenseingementCondidatComponent implements OnInit {
         formData.append('prenom',this.condidat.prenom);
         formData.append('cin',this.condidat.cin);
         formData.append('categorie', this.condidat.categorie);
-        formData.append('email', this.condidat.email);
+        //formData.append('email', this.condidat.email);
         formData.append(
             'date_naiss',
             this.datepipe.transform(
@@ -135,20 +165,18 @@ export class RenseingementCondidatComponent implements OnInit {
                 'yyyy-MM-dd'
             )
         );
-        formData.append('adresse', this.condidat.adresse);
-        formData.append('num_tel', this.condidat.num_tel);
-        formData.append('piece_fournit', this.selectedpiece_fournit.toString());
+        formData.append('adresse', this.condidat?.adresse || '');
+        formData.append('num_tel', this.condidat?.num_tel || '');
+        formData.append('piece_fournit', this.selectedpiece_fournit?.toString() || '');
         formData.append('bureau', this.condidat.bureau);
         formData.append('examen', this.condidat.examen);
-
         formData.append('etat', this.condidat.etat);
-
         formData.append('type_c_code',this.condidat.type_c_code);
-        formData.append('prix_frf_code',this.condidat.prix_frf_code);
-        formData.append('prix_hr_code',this.condidat.prix_hr_code);
-        formData.append('type_c_cond',this.condidat.type_c_cond);
-        formData.append('prix_frf_cond', this.condidat.prix_frf_cond);
-        formData.append('prix_hr_cond', this.condidat.prix_hr_cond);
+        formData.append('prix_frf_code',this.condidat?.prix_frf_code || '');
+        formData.append('prix_hr_code',this.condidat?.prix_hr_code  || '');
+        formData.append('type_c_cond',this.condidat.type_c_cond );
+        formData.append('prix_frf_cond', this.condidat?.prix_frf_cond  || '');
+        formData.append('prix_hr_cond', this.condidat?.prix_hr_cond  || '');
 
         formData.append(
             'hist_av_date',
@@ -157,17 +185,18 @@ export class RenseingementCondidatComponent implements OnInit {
                 'yyyy-MM-dd'
             )
         );
-        formData.append('hist_montant_paye', this.condidat.hist_montant_paye);
-        formData.append('hist_nb_hr_code', this.condidat.hist_nb_hr_code);
-        formData.append('hist_nb_hr_cond', this.condidat.hist_nb_hr_cond);
-        formData.append('hist_nb_reinsc_cond', this.condidat.hist_nb_reinsc_cond);
-        formData.append('hist_caisse', this.condidat.hist_caisse);
-        formData.append('hist_nb_exam_code', this.condidat.hist_nb_exam_code);
-        formData.append('hist_nb_exam_cond', this.condidat.hist_nb_exam_cond);
-        formData.append('hist_nb_reinsc_code', this.condidat.hist_nb_reinsc_code);
-        formData.append('hist_nb_droit_exam', this.condidat.hist_nb_droit_exam);
+        formData.append('hist_montant_paye', this.condidat?.hist_montant_paye || '');
+        formData.append('hist_nb_hr_code', this.condidat?.hist_nb_hr_code || '');
+        formData.append('hist_nb_hr_cond', this.condidat?.hist_nb_hr_cond || '');
+        formData.append('hist_nb_reinsc_cond', this.condidat?.hist_nb_reinsc_cond || '');
+        formData.append('hist_caisse', this.condidat?.hist_caisse || '');
+        formData.append('hist_nb_exam_code', this.condidat?.hist_nb_exam_code || '');
+        formData.append('hist_nb_exam_cond', this.condidat?.hist_nb_exam_cond || '');
+        formData.append('hist_nb_reinsc_code', this.condidat?.hist_nb_reinsc_code || '');
+        formData.append('hist_nb_droit_exam', this.condidat?.hist_nb_droit_exam || '');
 
-        this.condidatservice.update_cond(formData).subscribe(
+
+       this.condidatservice.update_cond(formData).subscribe(
             data => {
                 this.router.navigate(['/']).then(() => {
                     this.router.navigate(['/condidat',  this.condidat.id]);

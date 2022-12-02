@@ -5,15 +5,13 @@ import { CONSTANTES } from 'src/environments/environment';
 @Component({
   selector: 'tr[app-item-condidat]',
   templateUrl: './item-condidat.component.html',
+  styleUrls: ['./style.scss'],
 })
 export class ItemCondidatComponent implements OnInit {
   URLcondidatPic = CONSTANTES.URLcondidatPic;
   @Input() condidat: Condidat | null = null;
-
   constructor() { }
-
   ngOnInit(): void {
-
 
   }
 

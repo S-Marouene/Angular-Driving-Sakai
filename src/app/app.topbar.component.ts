@@ -84,7 +84,6 @@ export class AppTopBarComponent implements OnInit  {
             }
         ];
 
-
         this.formChngPWD = this.fb.group(
             {
                 old_password: [

@@ -4,7 +4,10 @@
                 style="vertical-align: middle" />
             <span class="image-text ml-2"><a [routerLink]="['/condidat', condidat.id]">{{condidat.nom}} {{condidat.prenom}}</a></span>
         </td>
+        <td style="min-width: 8rem;">
+            <p-progressBar [value]="condidat.nbr_heur_affecter[0]?.nb_heur_affecter / condidat.nbr_heur_total[0]?.nb_heur_total * 100" [showValue]="false" ></p-progressBar>
 
+        </td>
         <td style="min-width: 8rem;">
             <span class="image-text ml-2">{{condidat.num_tel}}</span>
         </td>
@@ -17,17 +20,18 @@
         <td style="min-width: 5rem;">
             {{  condidat.nbr_heur_total[0]?.nb_heur_total || '_' }}
         </td>
-        <td style="min-width: 8rem;">
+        <td style="min-width: 5rem;">
             {{  condidat.nbr_heur_affecter[0]?.nb_heur_affecter || '_' }}
         </td>
-        <td style="min-width: 10rem;">
-            {{  condidat.detail_examen?.type_examen || '_' }}
+        <td style="min-width: 6rem;">
+            <span [class]="'examen-badge status-qualified'" *ngIf="condidat.detail_examen?.type_examen=='Conduite'"> {{  condidat.detail_examen?.type_examen }}</span>
+            <span [class]="'examen-badge status-new'" *ngIf="condidat.detail_examen?.type_examen=='Code'"> {{  condidat.detail_examen?.type_examen }}</span>
         </td>
         <td style="min-width: 12rem;">
-            {{  condidat.detail_examen?.date_examen || '_' }}
+            {{  condidat.detail_examen?.date_examen | date :'short' || '_' }}
         </td>
-        <td style="min-width: 8rem;">
-            <button [routerLink]="['/condidat', condidat.id]" class="btn btn-warning">
-                Détails
-            </button>
+        <td style="min-width: 2rem;">
+            <button [routerLink]="['/condidat', condidat.id]" type="button" icon="pi pi-search" class="p-element p-button p-component p-button-text p-button-icon-only">
+                <span class="p-button-icon pi pi-search" aria-hidden="true"></span>
+                <span aria-hidden="true" class="p-button-label">&nbsp;</span></button>
         </td>

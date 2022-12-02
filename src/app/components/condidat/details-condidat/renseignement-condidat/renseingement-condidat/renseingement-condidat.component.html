@@ -1,14 +1,16 @@
-<div class="card">
-    <h5>Renseignements Personnels</h5>
 
-    <div class="row">
-        <div class="col-6" style="padding-right: 2%;">
-            <div class="p-fluid p-formgrid grid">
+<app-card-condidat [condidat]="condidat"></app-card-condidat>
+<div class="row">
+    <div class="card">
+        <h5>Renseignements Personnels</h5>
+
+        <div class="row" style="padding-bottom: 0%;">
+            <div class="col-4">
                 <div class="field col-12">
                     <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span
+                        <label for="staticEmail" class="col-sm-4 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Catégorie</label>
-                        <div class="col-sm-6">
+                        <div class="col-sm-8">
 
 
                             <select class="form-select" [(ngModel)]="condidat.categorie">
@@ -20,180 +22,210 @@
                     </div>
                 </div>
 
-                <div class="field col-12">
-                    <div class="form-group row">
-                        <label   class="col-sm-6 col-form-label fw-bold"><span
-                                class="text-danger">*</span> Nom</label>
-                        <div class="col-sm-6">
-                            <input id="address" pInputText [(ngModel)]="condidat.nom"/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field col-12">
-                    <div class="form-group row">
-                        <label   class="col-sm-6 col-form-label fw-bold"><span
-                                class="text-danger">*</span> CIN</label>
-                        <div class="col-sm-6">
-                            <input id="address" pInputText [(ngModel)]="condidat.cin"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="field col-12">
-                    <div class="form-group row">
-                        <label   class="col-sm-6 col-form-label fw-bold"><span
-                                class="text-danger">*</span> Telephone </label>
-                        <div class="col-sm-6">
-                            <input id="address" pInputText [(ngModel)]="condidat.num_tel"/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field col-12">
-                    <div class="form-group row">
-                        <label   class="col-sm-6 col-form-label fw-bold"><span
-                                class="text-danger">*</span> Bureau </label>
-                        <div class="col-sm-6">
-                            <select class="form-select" [(ngModel)]="condidat.bureau">
-                                <option *ngFor="let bureau of bureaux" [ngValue]="bureau">
-                                    {{ bureau }}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field col-12">
-                    <div class="form-group row">
-                        <label   class="col-sm-6 col-form-label fw-bold"><span
-                                class="text-danger">*</span> Pièces fournies </label>
-                        <div class="col-sm-6">
-                            <div class="grid">
-
-                                <div class="col-12 md:col-4">
-                                    <div class="field-checkbox mb-0">
-                                        <p-checkbox name="group1" value="Photos" [(ngModel)]="selectedpiece_fournit">
-                                        </p-checkbox>
-                                        <label for="Photos">Photos</label>
-                                    </div>
-                                </div>
-                                <div class="col-12 md:col-4">
-                                    <div class="field-checkbox mb-0">
-                                        <p-checkbox name="group1" value="Certificat médical" [(ngModel)]="selectedpiece_fournit">
-                                        </p-checkbox>
-                                        <label for="CM">Certificat médical</label>
-                                    </div>
-                                </div>
-                                <div class="col-12 md:col-4">
-                                    <div class="field-checkbox mb-0">
-                                        <p-checkbox name="group1" value="Quittance Paiement" [(ngModel)]="selectedpiece_fournit">
-                                        </p-checkbox>
-                                        <label for="QP">Quittance Paiement</label>
-                                    </div>
-                                </div>
-                                <div class="col-12 md:col-4">
-                                    <div class="field-checkbox mb-0">
-                                        <p-checkbox name="group1" value="CIN" [(ngModel)]="selectedpiece_fournit"></p-checkbox>
-                                        <label for="CIN">CIN</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
             </div>
-        </div>
-
-        <div class="col-6" style="padding-left: 2%;">
-            <div class="p-fluid p-formgrid grid">
+            <div class="col-4">
                 <div class="field col-12">
                     <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span
+                        <label for="staticEmail" class="col-sm-4 col-form-label fw-bold"><span
                                 class="text-danger">*</span> Examen</label>
-                        <div class="col-sm-6">
+                        <div class="col-sm-8">
                             <div class="grid">
-                                <div class="col-12 md:col-4">
-                                    <div class="field-radiobutton mb-0">
+                                <div class="col-12">
+                                    <div class="field-radiobutton">
                                         <p-radioButton name="Conduite" value="Conduite" [(ngModel)]="condidat.examen" id="Conduite"></p-radioButton>
                                         <label for="Conduite">Conduite</label>
                                     </div>
-                                </div>
-                                <div class="col-12 md:col-4">
                                     <div class="field-radiobutton">
                                         <p-radioButton name="code" value="Code" [(ngModel)]="condidat.examen" id="code"></p-radioButton>
                                         <label for="code">Code</label>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-4">
 
                 <div class="field col-12">
-                    <div class="form-group row">
-                        <label   class="col-sm-6 col-form-label fw-bold"><span
-                                class="text-danger">*</span> Prénom</label>
-                        <div class="col-sm-6">
-                            <input id="address" pInputText [(ngModel)]="condidat.prenom" />
+                    <div class="row">
+                        <div class="col-12" style="padding-left: 2%;">
+                            <div class="p-fluid p-formgrid grid">
+                                <div class="field col-12">
+                                    <div class="form-group row">
+                                        <label for="staticEmail" class="col-sm-4 col-form-label fw-bold"><span
+                                                class="text-danger">*</span> Etat</label>
+                                        <div class="col-sm-8">
+                                            <div class="grid">
+                                                <div class="col-12">
+                                                    <div class="field-radiobutton">
+                                                        <p-radioButton name="En cours" value="En cours" [(ngModel)]="condidat.etat" id="En cours"></p-radioButton>
+                                                        <label for="En cours">En cours</label>
+                                                    </div>
+                                                    <div class="field-radiobutton">
+                                                        <p-radioButton name="Archivé" value="Archivé" [(ngModel)]="condidat.etat" id="Archivé"></p-radioButton>
+                                                        <label for="Archivé">Archivé</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
-
-                <div class="field col-12">
-                    <div class="form-group row">
-                        <label   class="col-sm-6 col-form-label fw-bold"><span
-                                class="text-danger">*</span> Date_naissance</label>
-                        <div class="col-sm-6">
-                            <p-calendar [showIcon]="true" [showButtonBar]="true" [(ngModel)]="condidat.date_naiss" dateFormat="yy-mm-dd"></p-calendar>
-                        </div>
-                    </div>
-                </div>
-                <div class="field col-12">
-                    <div class="form-group row">
-                        <label   class="col-sm-6 col-form-label fw-bold"><span
-                                class="text-danger">*</span> Adresse </label>
-                        <div class="col-sm-6">
-                            <input id="address" pInputText [(ngModel)]="condidat.adresse">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field col-12">
-                    <div class="form-group row">
-                        <label   class="col-sm-6 col-form-label fw-bold"><span
-                                class="text-danger">*</span> Email</label>
-                        <div class="col-sm-6">
-                            <input id="address" pInputText [(ngModel)]="condidat.email" />
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="field col-12">
-                    <div class="form-group row">
-                        <label   class="col-sm-6 col-form-label fw-bold"> Photo
-                            </label>
-                        <div class="col-sm-6">
-                        <input
-                        id="image"
-                        type="file"
-                        class="form-control"
-                        (change)="onFileChange($event)"
-                        >
-
-
-                    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width:150px">
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
-    </div>
 
+
+        <div class="row" style="padding-top: 0%;" >
+            <div class="col-6">
+                <div class="p-fluid p-formgrid grid">
+
+                    <div class="field col-12">
+                        <div class="form-group row">
+                            <label   class="col-sm-6 col-form-label fw-bold"><span
+                                    class="text-danger">*</span> Nom</label>
+                            <div class="col-sm-6">
+                                <input id="address" pInputText [(ngModel)]="condidat.nom"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field col-12">
+                        <div class="form-group row">
+                            <label   class="col-sm-6 col-form-label fw-bold"><span
+                                    class="text-danger">*</span> CIN</label>
+                            <div class="col-sm-6">
+                                <input id="address" pInputText [(ngModel)]="condidat.cin"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field col-12">
+                        <div class="form-group row">
+                            <label   class="col-sm-6 col-form-label fw-bold"><span
+                                    class="text-danger">*</span> Telephone </label>
+                            <div class="col-sm-6">
+                                <input id="address" pInputText [(ngModel)]="condidat.num_tel"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field col-12">
+                        <div class="form-group row">
+                            <label   class="col-sm-6 col-form-label fw-bold"><span
+                                    class="text-danger">*</span> Bureau </label>
+                            <div class="col-sm-6">
+                                <select class="form-select" [(ngModel)]="condidat.bureau">
+                                    <option *ngFor="let bureau of bureaux" [ngValue]="bureau.nom">
+                                        {{ bureau.nom }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field col-12">
+                        <div class="form-group row">
+                            <label   class="col-sm-6 col-form-label fw-bold"><span
+                                    class="text-danger">*</span> Pièces fournies </label>
+                            <div class="col-sm-6">
+                                <div class="grid">
+
+                                    <div class="col-12 md:col-4">
+                                        <div class="field-checkbox mb-0">
+                                            <p-checkbox name="group1" value="Photos" [(ngModel)]="selectedpiece_fournit">
+                                            </p-checkbox>
+                                            <label for="Photos">Photos</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 md:col-4">
+                                        <div class="field-checkbox mb-0">
+                                            <p-checkbox name="group1" value="Certificat médical" [(ngModel)]="selectedpiece_fournit">
+                                            </p-checkbox>
+                                            <label for="CM">Certificat médical</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 md:col-4">
+                                        <div class="field-checkbox mb-0">
+                                            <p-checkbox name="group1" value="Quittance Paiement" [(ngModel)]="selectedpiece_fournit">
+                                            </p-checkbox>
+                                            <label for="QP">Quittance Paiement</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 md:col-4">
+                                        <div class="field-checkbox mb-0">
+                                            <p-checkbox name="group1" value="CIN" [(ngModel)]="selectedpiece_fournit"></p-checkbox>
+                                            <label for="CIN">CIN</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-6" style="padding-left: 2%;">
+                <div class="p-fluid p-formgrid grid">
+
+
+                    <div class="field col-12">
+                        <div class="form-group row">
+                            <label   class="col-sm-6 col-form-label fw-bold"><span
+                                    class="text-danger">*</span> Prénom</label>
+                            <div class="col-sm-6">
+                                <input id="address" pInputText [(ngModel)]="condidat.prenom" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field col-12">
+                        <div class="form-group row">
+                            <label   class="col-sm-6 col-form-label fw-bold"><span
+                                    class="text-danger">*</span> Date_naissance</label>
+                            <div class="col-sm-6">
+                                <p-calendar [showIcon]="true" [showButtonBar]="true" [(ngModel)]="condidat.date_naiss" dateFormat="yy-mm-dd"></p-calendar>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field col-12">
+                        <div class="form-group row">
+                            <label   class="col-sm-6 col-form-label fw-bold"><span
+                                    class="text-danger">*</span> Adresse </label>
+                            <div class="col-sm-6">
+                                <input id="address" pInputText [(ngModel)]="condidat.adresse">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field col-12">
+                        <div class="form-group row">
+                            <label   class="col-sm-6 col-form-label fw-bold"> Photo
+                                </label>
+                            <div class="col-sm-6">
+                            <input
+                            id="image"
+                            type="file"
+                            class="form-control"
+                            (change)="onFileChange($event)"
+                            >
+
+
+                        <img [src]="imageSrc" *ngIf="imageSrc" style="height: 150px; width:150px">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <div class="row">
@@ -373,10 +405,14 @@
                             <label   class="col-sm-6 col-form-label fw-bold"><span
                                     class="text-danger">*</span> Caisse</label>
                             <div class="col-sm-6">
-                                <select class="form-select" [(ngModel)]="condidat.bureau">
-                                    <option *ngFor="let bureau of bureaux" [ngValue]="bureau">
+                                <select class="form-select" [(ngModel)]="condidat.hist_caisse">
+                                    <!-- <option *ngFor="let bureau of bureaux" [ngValue]="bureau">
                                         {{ bureau }}
+                                    </option> -->
+                                    <option *ngFor="let caisse of caisses" [ngValue]="caisse.caisse">
+                                        {{ caisse.caisse }}
                                     </option>
+
                                 </select>
                             </div>
                         </div>
@@ -419,49 +455,6 @@
                         </div>
                     </div>
 
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="row">
-    <div class="col-4">
-        <div class="card">
-            <h5>Etat</h5>
-            <div class="p-fluid p-formgrid grid">
-                <div class="field col-12">
-                    <div class="row">
-                        <div class="col-12" style="padding-left: 2%;">
-                            <div class="p-fluid p-formgrid grid">
-                                <div class="field col-12">
-                                    <div class="form-group row">
-                                        <label for="staticEmail" class="col-sm-6 col-form-label fw-bold"><span
-                                                class="text-danger">*</span> état condidiat</label>
-                                        <div class="col-sm-6">
-                                            <div class="grid">
-                                                <div class="col-12 md:col-4">
-                                                    <div class="field-radiobutton mb-0">
-                                                        <p-radioButton name="En cours" value="En cours" [(ngModel)]="condidat.etat" id="En cours"></p-radioButton>
-                                                        <label for="En cours">En cours</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 md:col-4">
-                                                    <div class="field-radiobutton">
-                                                        <p-radioButton name="Archivé" value="Archivé" [(ngModel)]="condidat.etat" id="Archivé"></p-radioButton>
-                                                        <label for="Archivé">Archivé</label>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div>

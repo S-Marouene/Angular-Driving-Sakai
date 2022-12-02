@@ -85,6 +85,7 @@ export const API = {
     'Listcode' : 'https://smdev.tn/api/auth/code',
     'Deletecode' : 'https://smdev.tn/api/auth/code/',
     'getcodeByID':'https://smdev.tn/api/auth/code/',
+    'getCodeByCondidat':'https://smdev.tn/api/auth/code/getCodeByCondidat/',
     'updatecode':'https://smdev.tn/api/auth/code/',
 
     'add_paiement' : 'https://smdev.tn/api/auth/paiement',

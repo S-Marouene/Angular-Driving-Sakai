@@ -5,7 +5,7 @@
 
             <p-table #dt1 [value]="codes" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
                 styleClass="p-datatable-gridlines" [paginator]="true"
-                [globalFilterFields]="['code.condidat.nom','nbr_heure','date_deb','date_fin']" responsiveLayout="scroll">
+                [globalFilterFields]="['condidat.prenom','condidat.nom','nbr_heure','date_deb','date_fin']" responsiveLayout="scroll">
 
                 <ng-template pTemplate="caption" class="text-right">
                     <div class="flex justify-content-between flex-column sm:flex-row">
@@ -27,12 +27,22 @@
                     <tr>
                         <th>
                             <div class="flex justify-content-between align-items-center">
-                                Condidat
-                                <p-columnFilter type="text" field="code.condidat.nom" display="menu"
-                                    placeholder="Recherche par condidat_id">
+                                Nom
+                                <p-columnFilter type="text" field="condidat.nom" display="menu"
+                                    placeholder="Recherche par condidat">
                                 </p-columnFilter>
                             </div>
                         </th>
+
+                        <th>
+                            <div class="flex justify-content-between align-items-center">
+                                Prenom
+                                <p-columnFilter type="text" field="condidat.prenom" display="menu"
+                                    placeholder="Recherche par condidat">
+                                </p-columnFilter>
+                            </div>
+                        </th>
+
                         <th>
                             <div class="flex justify-content-between align-items-center">
                                 Nombre d'heure

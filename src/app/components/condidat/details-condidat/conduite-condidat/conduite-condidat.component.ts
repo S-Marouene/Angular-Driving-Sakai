@@ -52,6 +52,7 @@ export class ConduiteCondidatComponent implements OnInit {
         selectable: true,
         selectMirror: false,
         dayMaxEvents: false,
+        displayEventTime: true,
         //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
         select: this.handleDateSelect.bind(this),
         eventClick: this.handleEventClick.bind(this),
@@ -59,20 +60,20 @@ export class ConduiteCondidatComponent implements OnInit {
         longPressDelay: 1,
         slotMinTime: '06:00:00',
         slotMaxTime: '22:00:00',
-        titleFormat: {
+       /*  titleFormat: {
             month: '2-digit',
             year: '2-digit',
             day: '2-digit',
             weekday: 'short',
         },
-
-        eventTimeFormat: {
+ */
+        /* eventTimeFormat: {
             // like '14:30:00'
             hour: 'numeric',
             hour12: false,
             minute: '2-digit',
             meridiem: false,
-        },
+        }, */
     };
 
     constructor(
@@ -83,7 +84,6 @@ export class ConduiteCondidatComponent implements OnInit {
 
     ngOnInit() {
         this.condidat = {};
-
         this.innerWidth = window.innerWidth;
         if (this.innerWidth < 450) {
             this.calendarOptions = {

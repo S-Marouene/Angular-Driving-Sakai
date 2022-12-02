@@ -6,6 +6,6 @@ export interface Code {
     nbr_heure?: string;
     date_deb?: string;
     date_fin?: string;
-    condidat?:Array<string>;
+    condidat?:any;
 }
 

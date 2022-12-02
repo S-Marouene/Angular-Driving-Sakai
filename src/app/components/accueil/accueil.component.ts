@@ -31,6 +31,7 @@ export class AccueilComponent implements OnInit {
     myEvents: EventInput[] = [];
     calendarVisible = true;
     Mylist: any;
+    MyschoolName:any;
 
     calendarOptions: CalendarOptions = {
         headerToolbar: {
@@ -47,7 +48,7 @@ export class AccueilComponent implements OnInit {
         selectable: true,
         selectMirror: false,
         dayMaxEvents: false,
-        displayEventTime: false,
+        displayEventTime: true,
         select: this.handleDateSelect.bind(this),
         eventClick: this.handleEventClick.bind(this),
         eventsSet: this.handleEvents.bind(this),
@@ -75,6 +76,7 @@ export class AccueilComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+
         this.innerWidth = window.innerWidth;
         if (this.innerWidth < 450) {
             this.calendarOptions = {
@@ -91,6 +93,8 @@ export class AccueilComponent implements OnInit {
         this.conduiteService.GetConduiteAcc().subscribe({
             next: (ListConduite) => {
                 this.conduites = ListConduite['data'];
+                this.MyschoolName=this.conduites[0].school_name
+
                 for (const value of this.conduites) {
                     newEvents.push({
                         start: value.date_deb.toString().replace(' ', 'T'),

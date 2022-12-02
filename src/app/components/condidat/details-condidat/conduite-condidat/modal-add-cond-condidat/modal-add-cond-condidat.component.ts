@@ -109,6 +109,7 @@ export class ModalAddCondCondidatComponent implements OnInit {
             condidat:{'id':this.list[0].condidat_id,'nom':this.list[0].condidat_nom,'prenom':this.list[0].condidat_prenom,'photo':this.list[0].photo},
             vehicule: (this.formaddexamen.get('vehicule').value).split(" : ")[0],
             couleur: (this.formaddexamen.get('vehicule').value).split(" : ")[1],
+            date_deb:this.datepipe.transform(this.formaddexamen.value.date_deb, 'yyyy-MM-dd H:mm') || ''
         });
 
         this.conduiteService.register(this.formaddexamen.value).subscribe(

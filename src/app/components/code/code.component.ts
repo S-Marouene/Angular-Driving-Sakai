@@ -28,8 +28,11 @@ export class CodeComponent implements OnInit {
 
     ngOnInit(): void {
             this.codeService.getCodes().subscribe({
+
+
                 next: (ListCode) => {
                     this.codes = ListCode['data'];
+                    console.log(this.codes);
                 },
                 error: () => {
                     console.log(

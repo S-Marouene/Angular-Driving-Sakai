@@ -122,8 +122,8 @@ export class ModalAddConduiteComponent implements OnInit {
         this.formaddexamen.patchValue({
             vehicule: (this.formaddexamen.get('vehicule').value).split(" : ")[0],
             couleur: (this.formaddexamen.get('vehicule').value).split(" : ")[1],
+            date_deb:this.datepipe.transform(this.formaddexamen.value.date_deb, 'yyyy-MM-dd H:mm') || ''
         });
-
 
         this.conduiteService.register(this.formaddexamen.value).subscribe(
             (data) => {
@@ -165,11 +165,12 @@ export class ModalAddConduiteComponent implements OnInit {
 
     onUpdate(clickInfo: EventClickArg){
         this.submitted = true;
-        const date_deb = this.datepipe.transform(this.formaddexamen.get('date_deb').value, 'yyyy-MM-dd HH:mm').toString().replace(' ', 'T')
+
+        const date_deb = this.datepipe.transform(this.formaddexamen.value.date_deb , 'yyyy-MM-dd HH:mm').toString().replace(' ', 'T')
         const date_fin = this.datepipe.transform(this.formaddexamen.get('date_fin').value, 'yyyy-MM-dd HH:mm').toString().replace(' ', 'T')
         this.formaddexamen.patchValue({
             date_deb: date_deb,
-            date_fin:date_fin,
+            date_fin: date_fin,
             vehicule: (this.formaddexamen.get('vehicule').value).split(" : ")[0],
             couleur: (this.formaddexamen.get('vehicule').value).split(" : ")[1],
           });
