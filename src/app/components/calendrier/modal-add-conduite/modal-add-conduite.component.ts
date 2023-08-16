@@ -125,6 +125,8 @@ export class ModalAddConduiteComponent implements OnInit {
             date_deb:this.datepipe.transform(this.formaddexamen.value.date_deb, 'yyyy-MM-dd H:mm') || ''
         });
 
+        console.log(this.formaddexamen.value);
+
         this.conduiteService.register(this.formaddexamen.value).subscribe(
             (data) => {
                 this.bsModalRef.hide();
