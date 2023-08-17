@@ -41,6 +41,15 @@ import { HttpErrorResponse } from '@angular/common/http';
                 margin-right: 1rem;
                 color: var(--primary-color) !important;
             }
+            .custom-button {
+                padding: 10px 20px;
+                font-size: 16px;
+                /* background-color: #cc397b; */
+                color: #fff;
+                border: none;
+                cursor: pointer;
+                width:100%;
+            }
         `,
     ],
 })
@@ -150,4 +159,15 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginForm.get("email").setValue("saidi.marouen@gmail.com1");
         this.loginForm.get("password").setValue("aaaaaa");
     }
+
+    downloadApk() {
+        const apkPath = 'assets/apk/app-release.apk';
+        const link = document.createElement('a');
+        link.href = apkPath;
+        link.download = 'driving.apk';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
 }
